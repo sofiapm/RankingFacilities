@@ -1,0 +1,30 @@
+<div class="register_login_window">
+	<h1 class="page-header">Log In</h1>
+
+	<div class="row">
+	  	<div class="col-xs-12 col-md-8 col-md-offset-2">
+			<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "well"}) do |f| %>
+
+			<fieldset>
+
+			  <div class="form_fancy"><%= f.label :email %><br />
+			  <%= f.email_field :email, autofocus: true, class: "form-control" %></div>
+
+			  <div class="form_fancy"><%= f.label :password %><br />
+			    <%= f.password_field :password, autocomplete: "off", class: "form-control" %></div>
+
+			  <% if devise_mapping.rememberable? -%>
+
+			  <div class="remember_me pull-right">
+			  	<div class="form_fancy"><%= f.label :remember_me %><%= f.check_box :remember_me, class: "checkbox_remember_me" %></div>
+			  	<div class="log_in pull-right Log_in_buttom"><%= f.submit "Log in", class: "btn btn-default" %></div>
+			  </div>
+			  <% end -%>
+
+
+			</fieldset>
+
+			<% end %>
+		</div>
+	</div>
+</div>

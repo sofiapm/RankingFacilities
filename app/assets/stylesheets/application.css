@@ -13,3 +13,50 @@
  *= require_tree .
  *= require_self
  */
+ .jum-top {
+    margin-top: 0px !important;
+    height: 100vh;
+
+ }
+
+.title_page {
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+
+.conteudo{
+    padding-top: 5%;
+    text-align: center;
+
+}
+
+.conteudo p {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 18px;
+}
+
+.form_fancy{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.register_login_window{
+    padding-top: 45px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.vertical-bar {
+	padding-top: 50px;
+	padding-right: 0px;
+	padding-left: 30px;
+}
+
+.body-container{
+    margin-top: 0px;
+}
+
+.vertical-title{
+	font-size: 150% !important;
+}
+

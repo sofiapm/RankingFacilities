@@ -1,0 +1,44 @@
+<div class="register_login_window">
+  <h1 class="page-header">Sign up</h1>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "well"}) do |f| %>
+        <%= devise_error_messages! %>
+
+        <fieldset>
+
+          <div class="form_fancy"><%= f.label :first_name %><br />
+          <%= f.text_field :first_name, :required => true, class: "form-control" %></div>
+
+          <div class="form_fancy"><%= f.label :last_name %><br />
+          <%= f.text_field :last_name, :required => true, class: "form-control" %></div>
+
+          <div class="form_fancy"><%= f.label :email %><br />
+          <%= f.email_field :email, :required => true, autofocus: true, class: "form-control" %></div>
+
+          <div class="form_fancy"><%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
+            <%= f.password_field :password, autocomplete: "off", :required => true, class: "form-control" %></div>
+
+          <div class="form_fancy"><%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off", :required => true, class: "form-control" %></div>
+
+         <!--  <%= f.hidden_field :roles, :value => [] %> -->
+         <div class="form_fancy"><%= f.label "Choose your Roles" %><br />
+  	        <% for role in User::ROLES %>
+  		        <% if role != "admin" %>
+  				  <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]"}%>
+  				  <%= label_tag "user_roles_#{role}", role.humanize %><br />
+  				<% end %>
+  			<% end %>
+  			<%= hidden_field_tag "user[roles][]", "" %>
+  		</div>
+
+          <div class="update_user pull-right">
+             <%= f.submit "Sign up", class: "btn btn-default" %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+</div>
