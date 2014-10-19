@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   	has_many :facilities  
 	has_many :measures, :through => :facility
 	has_one :address
+
+	
 	
 	ROLES = %w[admin occupant owner facility_manager service_operator]
 

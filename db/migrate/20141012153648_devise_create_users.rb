@@ -4,6 +4,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Database authenticatable
       t.string :first_name, null: false
       t.string :last_name, null: false
+      t.integer :nif, null: false, unique: true
       t.string :email,              null: false, unique: true
       t.string :encrypted_password, null: false
       t.integer :roles_mask, null: true
@@ -36,9 +37,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.timestamps
 
-      add_foreign_key(:addresses, :users, dependent: :delete) 
     end
-
+    
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
