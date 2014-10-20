@@ -51,10 +51,8 @@ ActiveRecord::Schema.define(version: 20141012155514) do
     t.string   "email",                              null: false
     t.string   "encrypted_password",                 null: false
     t.integer  "roles_mask"
-<<<<<<< HEAD
     t.integer  "address_id",                         null: false
-=======
->>>>>>> aa89705c01eb0f367142a46015abfef58d59100d
+
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

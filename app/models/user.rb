@@ -5,21 +5,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
     include RoleModel
-<<<<<<< HEAD
     
   	has_many :facilities, class_name: 'Facility', foreign_key: 'user_id', dependent: :destroy 
 	has_many :measures, :through => :facility
 	belongs_to :address, class_name: 'Address', foreign_key: 'address_id'
 
 	accepts_nested_attributes_for :address
-=======
-
-  	has_many :facilities  
-	has_many :measures, :through => :facility
-	has_one :address
-
-	
->>>>>>> aa89705c01eb0f367142a46015abfef58d59100d
 	
 	ROLES = %w[admin occupant owner facility_manager service_operator]
 
