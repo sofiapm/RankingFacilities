@@ -17,6 +17,7 @@
           <div class="form_fancy"><%= f.label :nif %><br />
           <%= f.text_field :nif, :required => true, class: "form-control" %></div>
 
+<<<<<<< HEAD
            <%= f.fields_for :address do |a| %>
               <div class="form_fancy"><%= a.label :location %><br />
               <%= a.text_field :location, :required => true, class: "form-control" %></div>
@@ -28,6 +29,8 @@
               <%= a.text_field :zip_code, :required => true, class: "form-control" %></div>
           <% end %>
 
+=======
+>>>>>>> aa89705c01eb0f367142a46015abfef58d59100d
           <div class="form_fancy"><%= f.label :email %><br />
           <%= f.email_field :email, :required => true, autofocus: true, class: "form-control" %></div>
 

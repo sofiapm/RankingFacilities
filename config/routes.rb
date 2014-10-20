@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   resources :addresses
 
+<<<<<<< HEAD
   devise_for :users, :controllers => {:registrations => "my_devise/registrations"}
+=======
+  devise_for :users
+>>>>>>> aa89705c01eb0f367142a46015abfef58d59100d
   root to: 'static_pages#home_page'
   
   # The priority is based upon order of creation: first created -> highest priority.

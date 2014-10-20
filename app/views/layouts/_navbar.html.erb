@@ -1,3 +1,57 @@
+<<<<<<< HEAD
+=======
+<% if user_signed_in? %>
+						
+	<div class="container-fluid col-md-3 vertical-bar affix">
+        <div class="marketing">  
+            <h4>Facility</h4> 
+                
+            <hr class="featurette-divider">     
+            <ul class="nav nav-list bs-docs-sidenav">
+                      
+                <li class=""><a href="#sites"><i class="icon-chevron-right"></i> Site 1</a></li>
+
+                    <li class=""><a href="#facilities"><i class="icon-chevron-right"></i> > Facility 1</a></li>
+                    <li class=""><a href="#facilities"><i class="icon-chevron-right"></i> > Facility 2</a></li>
+                    <li class=""><a href="#facilities"><i class="icon-chevron-right"></i> > Facility 3</a></li>
+
+                <li class=""><a href="#sites"><i class="icon-chevron-right"></i> Site 2</a></li>
+
+                    <li class=""><a href="#facilities"><i class="icon-chevron-right"></i> > Facility 1</a></li>
+                    <li class=""><a href="#facilities"><i class="icon-chevron-right"></i> > Facility 2</a></li>
+                    <li class=""><a href="#facilities"><i class="icon-chevron-right"></i> > Facility 3</a></li>
+
+                <li class=""><a href="#sites"><i class="icon-chevron-right"></i> Site 3</a></li>
+
+                    <li class=""><a href="#facilities"><i class="icon-chevron-right"></i> > Facility 1</a></li>
+                    <li class=""><a href="#facilities"><i class="icon-chevron-right"></i> > Facility 2</a></li>
+                    <li class=""><a href="#facilities"><i class="icon-chevron-right"></i> > Facility 3</a></li>
+                <hr class="featurette-divider"> 
+                <li><%= link_to "+ Add Facility", new_facility_path %></li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="container-fluid col-md-9 col-md-offset-3 body-container">
+
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+
+        <%= yield %>
+    </div>
+
+ <% else %>
+
+    <% if params['action'] == 'home_page' || 
+        (params['action'] == 'new' && params['controller'] == "devise/registrations") ||  
+        (params['action'] == 'new' && params['controller'] == "devise/sessions") %>
+        
+        <%= yield %>
+    <% end %>
+<% end %>
+
+
+>>>>>>> aa89705c01eb0f367142a46015abfef58d59100d
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/">UpRanking</a>

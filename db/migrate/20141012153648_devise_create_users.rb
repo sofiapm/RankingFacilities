@@ -8,7 +8,10 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :email,              null: false, unique: true
       t.string :encrypted_password, null: false
       t.integer :roles_mask, null: true
+<<<<<<< HEAD
       t.integer :address_id, null: false
+=======
+>>>>>>> aa89705c01eb0f367142a46015abfef58d59100d
 
       ## Recoverable
       t.string   :reset_password_token
