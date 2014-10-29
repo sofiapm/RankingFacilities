@@ -1,25 +1,41 @@
-<%= form_for(@facility) do |f| %>
-  <% if @facility.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@facility.errors.count, "error") %> prohibited this facility from being saved:</h2>
+<div class="form_facility">
+  <%= form_for(@facility, html: {class: "well"}) do |f| %>
+    <% if @facility.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@facility.errors.count, "error") %> prohibited this facility from being saved:</h2>
 
-      <ul>
-      <% @facility.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <ul>
+        <% @facility.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset>
+    <div class="form_fancy"><%= f.label "Facility Name" %><br />
+            <%= f.text_field :name, :required => true, class: "form-control" %></div>
+
+    <%= f.fields_for :address do |a| %>
+      <div class="form_fancy"><%= a.label :street %><br />
+      <%= a.text_field :street, :required => true, class: "form-control" %></div>
+      <div class="form_fancy"><%= a.label :city %><br />
+      <%= a.text_field :city, :required => true, class: "form-control" %></div>
+      <div class="form_fancy"><%= a.label :country %><br />
+      <%= a.text_field :country, :required => true, class: "form-control" %></div>
+      <div class="form_fancy"><%= a.label :zip_code %><br />
+      <%= a.text_field :zip_code, :required => true, class: "form-control" %></div>
+    <% end %>
+
+    
+    <%= f.hidden_field :role_id, :value => current_user.current_role %>
+    
+    <div class="update_user pull-right">
+      <%= f.submit "Save Facility", class: "btn btn-default" %>
+      <% if @action[:action] == 'edit' %>
+        <td><%= link_to 'Delete', @facility, class: "btn btn-default" , method: :delete, data: { confirm: 'Are you sure?'} %></td>
       <% end %>
-      </ul>
     </div>
+    </fieldset>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :sector %><br>
-    <%= f.text_field :sector %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

@@ -15,6 +15,7 @@ class FacilitiesController < ApplicationController
   # GET /facilities/new
   def new
     @facility = Facility.new
+    @facility.build_address
   end
 
   # GET /facilities/1/edit
@@ -29,7 +30,7 @@ class FacilitiesController < ApplicationController
     respond_to do |format|
       if @facility.save
         format.html { redirect_to @facility, notice: 'Facility was successfully created.' }
-        format.json { render :show, status: :created, location: @facility }
+        format.json { render :edit, status: :created, location: @facility }
       else
         format.html { render :new }
         format.json { render json: @facility.errors, status: :unprocessable_entity }
@@ -43,7 +44,7 @@ class FacilitiesController < ApplicationController
     respond_to do |format|
       if @facility.update(facility_params)
         format.html { redirect_to @facility, notice: 'Facility was successfully updated.' }
-        format.json { render :show, status: :ok, location: @facility }
+        format.json { render :edit, status: :ok, location: @facility }
       else
         format.html { render :edit }
         format.json { render json: @facility.errors, status: :unprocessable_entity }
@@ -56,7 +57,7 @@ class FacilitiesController < ApplicationController
   def destroy
     @facility.destroy
     respond_to do |format|
-      format.html { redirect_to facilities_url, notice: 'Facility was successfully destroyed.' }
+      format.html { redirect_to static_pages_success_page_url, notice: 'Facility was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +70,6 @@ class FacilitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def facility_params
-      params.require(:facility).permit(:name, :sector)
+      params.require(:facility).permit(:name, :sector, :role_id, address_attributes: [:street, :city, :country, :zip_code])
     end
 end

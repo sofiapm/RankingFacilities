@@ -1,6 +1,6 @@
-<h1>Editing facility</h1>
+<h1 class="page-header"> Facility <%= @facility.name %> Information</h1>
 
-<%= render 'form' %>
+<% @action = {:action => 'edit'} %>
 
-<%= link_to 'Show', @facility %> |
-<%= link_to 'Back', facilities_path %>
+<%= render 'form', @action %>
+

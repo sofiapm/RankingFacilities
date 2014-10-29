@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th>Location</th>
+      <th>Street</th>
       <th>City</th>
       <th>Country</th>
       <th>Zip code</th>
@@ -14,7 +14,7 @@
   <tbody>
     <% @addresses.each do |address| %>
       <tr>
-        <td><%= address.location %></td>
+        <td><%= address.street %></td>
         <td><%= address.city %></td>
         <td><%= address.country %></td>
         <td><%= address.zip_code %></td>

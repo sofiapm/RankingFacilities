@@ -2,7 +2,8 @@ class CreateFacilities < ActiveRecord::Migration
   def change
     create_table :facilities do |t|
       t.string :name, null: false
-      t.string :sector, null: false
+      t.integer :address_id, null: false
+      t.integer :role_id, null:false
 
       t.timestamps
 

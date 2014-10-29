@@ -29,7 +29,7 @@ class AddressesController < ApplicationController
     respond_to do |format|
       if @address.save
         format.html { redirect_to @address, notice: 'Address was successfully created.' }
-        format.json { render :show, status: :created, location: @address }
+        format.json { render :show, status: :created, street: @address }
       else
         format.html { render :new }
         format.json { render json: @address.errors, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class AddressesController < ApplicationController
     respond_to do |format|
       if @address.update(address_params)
         format.html { redirect_to @address, notice: 'Address was successfully updated.' }
-        format.json { render :show, status: :ok, location: @address }
+        format.json { render :show, status: :ok, street: @address }
       else
         format.html { render :edit }
         format.json { render json: @address.errors, status: :unprocessable_entity }
@@ -69,6 +69,6 @@ class AddressesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_params
-      params.require(:address).permit(:location, :city, :country, :zip_code)
+      params.require(:address).permit(:street, :city, :country, :zip_code)
     end
 end

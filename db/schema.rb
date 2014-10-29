@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012155514) do
+ActiveRecord::Schema.define(version: 20141026142621) do
 
   create_table "addresses", force: true do |t|
-    t.string   "location",   null: false
+    t.string   "street",     null: false
     t.string   "city",       null: false
     t.string   "country",    null: false
     t.integer  "zip_code",   null: false
@@ -24,17 +24,29 @@ ActiveRecord::Schema.define(version: 20141012155514) do
 
   create_table "facilities", force: true do |t|
     t.string   "name",       null: false
-    t.string   "sector",     null: false
+    t.integer  "address_id", null: false
+    t.integer  "role_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "measures", force: true do |t|
-    t.string   "name",       null: false
-    t.float    "value",      null: false
-    t.date     "start_date", null: false
-    t.date     "end_date",   null: false
-    t.string   "unit",       null: false
+    t.string   "name",        null: false
+    t.float    "value",       null: false
+    t.date     "start_date",  null: false
+    t.date     "end_date",    null: false
+    t.string   "unit",        null: false
+    t.integer  "facility_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", force: true do |t|
+    t.string   "name",         null: false
+    t.string   "company_name", null: false
+    t.integer  "nif",          null: false
+    t.string   "sector",       null: false
+    t.integer  "user_id",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,12 +59,10 @@ ActiveRecord::Schema.define(version: 20141012155514) do
   create_table "users", force: true do |t|
     t.string   "first_name",                         null: false
     t.string   "last_name",                          null: false
-    t.integer  "nif",                                null: false
     t.string   "email",                              null: false
     t.string   "encrypted_password",                 null: false
-    t.integer  "roles_mask"
     t.integer  "address_id",                         null: false
-
+    t.integer  "current_role",           default: 0
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

@@ -6,6 +6,7 @@ class CreateMeasures < ActiveRecord::Migration
       t.date :start_date, null: false
       t.date :end_date, null: false
       t.string :unit, null: false
+      t.integer :facility_id, null: false
 
       t.timestamps
 

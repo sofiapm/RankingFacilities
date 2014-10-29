@@ -6,27 +6,55 @@
       <%= devise_error_messages! %>
 
       <fieldset>
+          <div class="form_fancy"><%= f.label :first_name %><br />
+          <%= f.text_field :first_name, :required => true, class: "form-control" %></div>
 
-          <div ><%= f.label :email %><br />
+          <div class="form_fancy"><%= f.label :last_name %><br />
+          <%= f.text_field :last_name, :required => true, class: "form-control" %></div>
+
+          <%= f.fields_for :address do |a| %>
+              <div class="form_fancy"><%= a.label :street %><br />
+              <%= a.text_field :street, :required => true, class: "form-control" %></div>
+              <div class="form_fancy"><%= a.label :city %><br />
+              <%= a.text_field :city, :required => true, class: "form-control" %></div>
+              <div class="form_fancy"><%= a.label :country %><br />
+              <%= a.text_field :country, :required => true, class: "form-control" %></div>
+              <div class="form_fancy"><%= a.label :zip_code %><br />
+              <%= a.text_field :zip_code, :required => true, class: "form-control" %></div>
+          <% end %>
+
+          <div class="form_fancy" ><%= f.label :email %><br />
           <%= f.email_field :email, autofocus: true, class: "form-control" %></div>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>
 
-          <div class="edit_user"><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+          <div class="form_fancy"><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+            <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %></div>
+            
+          <div class="form_fancy"><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
             <%= f.password_field :password, autocomplete: "off", class: "form-control" %></div>
 
-          <div class="edit_user"><%= f.label :password_confirmation %><br />
+          <div class="form_fancy"><%= f.label :password_confirmation %><br />
             <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %></div>
 
-          <div class="edit_user"><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-            <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %></div>
+        <% resource.roles.each do |r| %>
+          <h1 class="page-header"><%= r.name + ": " + r.company_name %></h1>
+          <%= f.fields_for r do |a| %>
+              <div class="form_fancy"><%= a.label :name %><br /><%= a.select :name, @roles_names.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
+              <div class="form_fancy"><%= a.label :company_name %><br />
+              <%= a.text_field :company_name, :required => true, class: "form-control" %></div>
+              <div class="form_fancy"><%= a.label :nif %><br />
+              <%= a.text_field :nif, :required => true, class: "form-control" %></div>
+              <div class="form_fancy"><%= a.label :sector %><br /><%= a.select :sector, @roles_sector.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
+          <% end %>
+        <% end %>
 
+        <div class="update_user pull-right">
+          <%= f.submit "Update", class: "btn btn-default" %>
+        </div>
 
-          <div class="update_user pull-right">
-              <%= f.submit "Update", class: "btn btn-default" %>
-          </div>
       </fieldset>
     <% end %>
   </div>

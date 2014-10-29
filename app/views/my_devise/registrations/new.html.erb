@@ -14,12 +14,9 @@
           <div class="form_fancy"><%= f.label :last_name %><br />
           <%= f.text_field :last_name, :required => true, class: "form-control" %></div>
 
-          <div class="form_fancy"><%= f.label :nif %><br />
-          <%= f.text_field :nif, :required => true, class: "form-control" %></div>
-
            <%= f.fields_for :address do |a| %>
-              <div class="form_fancy"><%= a.label :location %><br />
-              <%= a.text_field :location, :required => true, class: "form-control" %></div>
+              <div class="form_fancy"><%= a.label :street %><br />
+              <%= a.text_field :street, :required => true, class: "form-control" %></div>
               <div class="form_fancy"><%= a.label :city %><br />
               <%= a.text_field :city, :required => true, class: "form-control" %></div>
               <div class="form_fancy"><%= a.label :country %><br />
@@ -37,16 +34,6 @@
           <div class="form_fancy"><%= f.label :password_confirmation %><br />
             <%= f.password_field :password_confirmation, autocomplete: "off", :required => true, class: "form-control" %></div>
 
-         <!--  <%= f.hidden_field :roles, :value => [] %> -->
-         <div class="form_fancy"><%= f.label "Choose your Roles" %><br />
-  	        <% for role in User::ROLES %>
-  		        <% if role != "admin" %>
-  				  <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]"}%>
-  				  <%= label_tag "user_roles_#{role}", role.humanize %><br />
-  				<% end %>
-  			<% end %>
-  			<%= hidden_field_tag "user[roles][]", "" %>
-  		</div>
 
           <div class="update_user pull-right">
              <%= f.submit "Sign up", class: "btn btn-default" %>

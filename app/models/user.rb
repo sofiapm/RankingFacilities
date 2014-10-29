@@ -6,30 +6,21 @@ class User < ActiveRecord::Base
 
     include RoleModel
     
-  	has_many :facilities, class_name: 'Facility', foreign_key: 'user_id', dependent: :destroy 
+  	has_many :roles, class_name: 'Role', foreign_key: 'user_id', dependent: :destroy 
 	has_many :measures, :through => :facility
 	belongs_to :address, class_name: 'Address', foreign_key: 'address_id'
 
 	accepts_nested_attributes_for :address
 	
-	ROLES = %w[admin occupant owner facility_manager service_operator]
-
 	def full_name
 		first_name + " " + last_name
+
 	end
 
-	def roles=(roles)
-	  self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
-	end
-
-	def roles
-	  ROLES.reject do |r|
-	    ((roles_mask.to_i || 0) & 2**ROLES.index(r)).zero?
-	  end
-	end
-
-	def is?(role)
-	  roles.include?(role.to_s)
+	def not_roles rol 
+		rol.find_all do |r|
+			!roles.find_by_name(r)
+		end
 	end
 end
 

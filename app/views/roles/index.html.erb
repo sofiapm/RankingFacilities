@@ -1,0 +1,18 @@
+<h1 class="page-header">Edit Roles</h1>
+
+
+<div>
+    <% @roles.each do |role| %>
+      <div class="row list-group">
+        
+        <div class="col-xs-6 col-md-4">
+          <h4> <%= role.name %></h4>
+        </div>
+        <div class="col-xs-6 col-md-4 col-md-offset-2">
+            <%= link_to 'Delete', role, class: "btn btn-default", method: :delete, data: { confirm: 'Are you sure?' } %> 
+        </div>  
+      </div>  
+    <% end %>
+  </tbody>
+</div>
+
