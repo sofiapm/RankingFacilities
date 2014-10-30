@@ -1,4 +1,6 @@
 class SitesController < ApplicationController
+  before_filter :require_login
+  # , :authenticate
   before_action :set_site, only: [:show, :edit, :update, :destroy]
 
   # GET /sites
@@ -70,5 +72,9 @@ class SitesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
       params[:site]
+    end
+
+    def authenticate
+      
     end
 end

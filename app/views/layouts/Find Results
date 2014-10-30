@@ -1,0 +1,126 @@
+Searching 274 files for "edit_facility_path"
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/controllers/facilities_controller.rb:
+   32      respond_to do |format|
+   33        if @facility.save
+   34:         format.html { redirect_to edit_facility_path(@facility), notice: 'Facility was successfully created.' }
+   35          format.json { render :edit, status: :created, location: @facility }
+   36        else
+   ..
+   46      respond_to do |format|
+   47        if @facility.update(facility_params)
+   48:         format.html { redirect_to edit_facility_path(@facility), notice: 'Facility was successfully updated.' }
+   49          format.json { render :edit, status: :ok, location: @facility }
+   50        else
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/views/facilities/index.html.erb:
+   16          <td><%= facility.sector %></td>
+   17          <td><%= link_to 'Show', facility %></td>
+   18:         <td><%= link_to 'Edit', edit_facility_path(facility) %></td>
+   19          <td><%= link_to 'Destroy', facility, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   20        </tr>
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/views/facilities/show.html.erb:
+    7  
+    8  
+    9: <%= link_to 'Edit', edit_facility_path(@facility) %> |
+   10  <%= link_to 'Back', facilities_path %>
+   11  
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/views/layouts/_navbarVertical.html.erb:
+   29                      <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>
+   30                                         
+   31:                         <li><%= link_to f.name, edit_facility_path(f.id) %></li>
+   32                      <% end %>
+   33                  <% else %>
+
+~/Documents/ProjectThesis/RankingFacilities/log/development.log:
+    <binary>
+
+9 matches across 5 files
+
+
+Searching 274 files for "new_facility_path"
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/views/facilities/index.html.erb:
+   25  <br>
+   26  
+   27: <%= link_to 'New Facility', new_facility_path %>
+   28  
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/views/layouts/_navbarVertical.html.erb:
+   36                  <hr class="featurette-divider"> 
+   37                  <% if current_user.current_role != 0 %>
+   38:                     <li><%= link_to "+ Add Facility", new_facility_path %></li>
+   39                  <% else %>
+   40                      <li><%= link_to "+ Add Facility", static_pages_error_role_empty_page_path %></li>
+
+~/Documents/ProjectThesis/RankingFacilities/log/development.log:
+    <binary>
+
+11 matches across 3 files
+
+
+Searching 274 files for "new_facility_path"
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/views/facilities/index.html.erb:
+   25  <br>
+   26  
+   27: <%= link_to 'New Facility', new_facility_path %>
+   28  
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/views/layouts/_navbarVertical.html.erb:
+   36                  <hr class="featurette-divider"> 
+   37                  <% if current_user.current_role != 0 %>
+   38:                     <li><%= link_to "+ Add Facility", new_facility_path %></li>
+   39                  <% else %>
+   40                      <li><%= link_to "+ Add Facility", static_pages_error_role_empty_page_path %></li>
+
+~/Documents/ProjectThesis/RankingFacilities/log/development.log:
+    <binary>
+
+11 matches across 3 files
+
+
+Searching 274 files for "new_facility_path"
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/views/facilities/index.html.erb:
+   25  <br>
+   26  
+   27: <%= link_to 'New Facility', new_facility_path %>
+   28  
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/views/layouts/_navbarVertical.html.erb:
+   36                  <hr class="featurette-divider"> 
+   37                  <% if current_user.current_role != 0 %>
+   38:                     <li><%= link_to "+ Add Facility", new_facility_path %></li>
+   39                  <% else %>
+   40                      <li><%= link_to "+ Add Facility", static_pages_error_role_empty_page_path %></li>
+
+~/Documents/ProjectThesis/RankingFacilities/log/development.log:
+    <binary>
+
+11 matches across 3 files
+
+
+Searching 274 files for "new_facility_path"
+
+/Users/sofiamartins/Documents/ProjectThesis/RankingFacilities/app/views/layouts/_navbarVertical.html.erb:
+   36                  <hr class="featurette-divider"> 
+   37                  <% if current_user.current_role != 0 %>
+   38:                     <li><%= link_to "+ Add Facility", new_facility_path %></li>
+   39                  <% else %>
+   40                      <li><%= link_to "+ Add Facility", static_pages_error_role_empty_page_path %></li>
+
+~/Documents/ProjectThesis/RankingFacilities/log/development.log:
+    <binary>
+
+10 matches across 2 files
+
+
+Searching 274 files for "new_facility_path"
+
+~/Documents/ProjectThesis/RankingFacilities/log/development.log:
+    <binary>
+
+9 matches in 1 file

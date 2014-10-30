@@ -25,14 +25,20 @@
                 
             <hr class="featurette-divider">     
             <ul class="nav nav-list bs-docs-sidenav">
-                      
-                <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>
-                                   
-                    <li><%= link_to f.name, edit_facility_path(f.id) %></li>
+                <% if current_user.current_role != 0 %> 
+                    <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>
+                                       
+                        <li><%= link_to f.name, edit_facility_path(f.id) %></li>
+                    <% end %>
+                <% else %>
+                    <%= "There are no Facilities created." %>
                 <% end %>
-                
                 <hr class="featurette-divider"> 
-                <li><%= link_to "+ Add Facility", new_facility_path %></li>
+                <% if current_user.current_role != 0 %>
+                    <li><%= link_to "+ Add Facility", new_role_facility_path(current_user.current_role) %></li>
+                <% else %>
+                    <li><%= link_to "+ Add Facility", static_pages_error_role_empty_page_path %></li>
+                <% end %>
             </ul>
 
         </div>

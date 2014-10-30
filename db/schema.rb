@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20141026142621) do
     t.string   "name",       null: false
     t.integer  "address_id", null: false
     t.integer  "role_id",    null: false
+    t.integer  "user_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 20141026142621) do
     t.date     "end_date",    null: false
     t.string   "unit",        null: false
     t.integer  "facility_id", null: false
+    t.integer  "user_id",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

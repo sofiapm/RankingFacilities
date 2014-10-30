@@ -1,4 +1,5 @@
 class MeasuresController < ApplicationController
+  before_filter :require_login, :authenticate
   before_action :set_measure, only: [:show, :edit, :update, :destroy]
 
   # GET /measures
@@ -28,8 +29,8 @@ class MeasuresController < ApplicationController
 
     respond_to do |format|
       if @measure.save
-        format.html { redirect_to @measure, notice: 'Measure was successfully created.' }
-        format.json { render :show, status: :created, location: @measure }
+        format.html { redirect_to edit_measure_path(@measure), notice: 'Measure was successfully created.' }
+        format.json { render :edit, status: :created, location: @measure }
       else
         format.html { render :new }
         format.json { render json: @measure.errors, status: :unprocessable_entity }
@@ -42,8 +43,8 @@ class MeasuresController < ApplicationController
   def update
     respond_to do |format|
       if @measure.update(measure_params)
-        format.html { redirect_to @measure, notice: 'Measure was successfully updated.' }
-        format.json { render :show, status: :ok, location: @measure }
+        format.html { redirect_to edit_measure_path(@measure), notice: 'Measure was successfully updated.' }
+        format.json { render :edit, status: :ok, location: @measure }
       else
         format.html { render :edit }
         format.json { render json: @measure.errors, status: :unprocessable_entity }
@@ -69,6 +70,19 @@ class MeasuresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def measure_params
-      params.require(:measure).permit(:name, :value, :start_date, :end_date, :unit)
+      params.require(:measure).permit(:name, :value, :start_date, :end_date, :unit, :user_id, :facility_id)
+    end
+
+    def authenticate
+      # if params['id']
+      #   unless current_user.id == Measure.find(params['id'].to_i).user.id 
+      #     authenticate_app
+      #   end
+      # end
+      # if params['organization_id'] && Organization.find(params['organization_id']).measures.first
+      #   unless current_user.id == Organization.find(params['organization_id']).measures.first.user.id
+      #         authenticate_app
+      #   end
+      # end
     end
 end

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
     include RoleModel
     
   	has_many :roles, class_name: 'Role', foreign_key: 'user_id', dependent: :destroy 
+  	has_many :facilities, :through => :role
 	has_many :measures, :through => :facility
 	belongs_to :address, class_name: 'Address', foreign_key: 'address_id'
 

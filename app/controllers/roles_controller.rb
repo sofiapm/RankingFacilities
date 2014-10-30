@@ -1,4 +1,6 @@
 class RolesController < ApplicationController
+  before_filter :require_login
+  # , :authenticate
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   ROLES_NAMES = { occupant: 'Occupant', owner: 'Owner', facility_manager: 'Facility Manager', service_operator: 'Service Operator' }
@@ -7,15 +9,15 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
-    @roles = Role.all
+    @roles = current_user.roles
     @roles_names = ROLES_NAMES
     @roles_sector = ROLES_SECTOR
   end
 
-  # GET /roles/1
-  # GET /roles/1.json
-  def show
-  end
+  # # GET /roles/1
+  # # GET /roles/1.json
+  # def show
+  # end
 
   # GET /roles/new
   def new
@@ -37,7 +39,7 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to @role, notice: 'Role was successfully created.' }
+        format.html { redirect_to edit_role_path(@role), notice: 'Role was successfully created.' }
         format.json { render :edit, status: :created, location: @role }
       else
         format.html { render :new }
@@ -51,7 +53,7 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.html { redirect_to @role, notice: 'Role was successfully updated.' }
+        format.html { redirect_to edit_role_path(@role), notice: 'Role was successfully updated.' }
         format.json { render :edit, status: :ok, location: @role }
       else
         format.html { render :edit }
@@ -79,5 +81,13 @@ class RolesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
       params.require(:role).permit(:name, :company_name, :nif, :sector, :user_id)
+    end
+
+    def authenticate
+      if params['id']
+        unless current_user.id == Role.find(params['id'].to_i).user_id 
+          authenticate_app
+        end
+      end
     end
 end

@@ -13,7 +13,6 @@
     <% @facilities.each do |facility| %>
       <tr>
         <td><%= facility.name %></td>
-        <td><%= facility.sector %></td>
         <td><%= link_to 'Show', facility %></td>
         <td><%= link_to 'Edit', edit_facility_path(facility) %></td>
         <td><%= link_to 'Destroy', facility, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -24,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Facility', new_facility_path %>
+<%= link_to 'New Facility', new_role_facility_path(current_user.current_role) %>

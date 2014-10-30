@@ -4,7 +4,11 @@ class StaticPagesController < ApplicationController
     	render 'static_pages/home_page'
   	end
 
-	def edit_user_organizations
-    	render 'static_pages/edit_user_organizations'
-  	end  	
+	def error_page
+    	render 'static_pages/error_page'
+  	end 
+
+  	def success_page
+    	render 'static_pages/success_page'
+  	end 	
 end

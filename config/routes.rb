@@ -1,18 +1,22 @@
 Rails.application.routes.draw do
-  resources :roles
 
-  get 'static_pages/error_page' => 'static_pages#error_page'
+
+  get 'static_pages/error_you_can_not_access_page' => 'static_pages#error_you_can_not_access_page'
+  get 'static_pages/error_role_empty_page' => 'static_pages#error_role_empty_page'
   get 'static_pages/success_page' => 'static_pages#success_page'
   get "user_roles/update" => "user_roles#update"
   put "user_roles/update" => "user_roles#update"
 
-  resources :measures
 
   resources :sites
 
-  resources :facilities
-
   resources :addresses
+
+  resources :roles, shallow: true do
+    resources :facilities, shallow: true do
+        resources :measures
+    end
+  end
 
   devise_for :users, :controllers => {:registrations => "my_devise/registrations"}
 
