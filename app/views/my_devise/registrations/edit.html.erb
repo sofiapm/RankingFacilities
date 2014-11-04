@@ -39,17 +39,20 @@
           <div class="form_fancy"><%= f.label :password_confirmation %><br />
             <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %></div>
 
-        <% resource.roles.each do |r| %>
-          <h1 class="page-header"><%= r.name + ": " + r.company_name %></h1>
-          <%= f.fields_for r do |a| %>
-              <div class="form_fancy"><%= a.label :name %><br /><%= a.select :name, @roles_names.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
+        
+         
+          <%= f.fields_for :roles do |a| %>
+             <h1 class="page-header"><%= a.object.name + ": " + a.object.company_name %></h1>
+              <div class="form_fancy"><%= a.label :name %><br /><%= a.select :name, RankingFacilities::Application::ROLES_NAMES.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
               <div class="form_fancy"><%= a.label :company_name %><br />
               <%= a.text_field :company_name, :required => true, class: "form-control" %></div>
               <div class="form_fancy"><%= a.label :nif %><br />
               <%= a.text_field :nif, :required => true, class: "form-control" %></div>
-              <div class="form_fancy"><%= a.label :sector %><br /><%= a.select :sector, @roles_sector.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
+              <div class="form_fancy"><%= a.label :sector %><br /><%= a.select :sector, RankingFacilities::Application::ROLES_SECTOR.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
+              <%= a.hidden_field :id, :value => a.object.id %>
+
           <% end %>
-        <% end %>
+          <%= f.hidden_field :id, :value => current_user.id %>
 
         <div class="update_user pull-right">
           <%= f.submit "Update", class: "btn btn-default" %>

@@ -3,15 +3,12 @@ class RolesController < ApplicationController
   # , :authenticate
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
-  ROLES_NAMES = { occupant: 'Occupant', owner: 'Owner', facility_manager: 'Facility Manager', service_operator: 'Service Operator' }
-  ROLES_SECTOR = { sector1: 'Sector 1', sector2: 'Sector 2', sector3: 'Sector 3', sector4: 'Sector 4', sector5: 'Sector 5', sector6: 'Sector 6'}
+  
 
   # GET /roles
   # GET /roles.json
   def index
     @roles = current_user.roles
-    @roles_names = ROLES_NAMES
-    @roles_sector = ROLES_SECTOR
   end
 
   # # GET /roles/1
@@ -22,14 +19,10 @@ class RolesController < ApplicationController
   # GET /roles/new
   def new
     @role = Role.new
-    @roles_names = ROLES_NAMES
-    @roles_sector = ROLES_SECTOR
   end
 
   # GET /roles/1/edit
   def edit
-    @roles_names = ROLES_NAMES
-    @roles_sector = ROLES_SECTOR
   end
 
   # POST /roles

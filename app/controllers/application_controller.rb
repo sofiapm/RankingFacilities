@@ -5,15 +5,15 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
-  end
+  # rescue_from CanCan::AccessDenied do |exception|
+  #   redirect_to root_url, :alert => exception.message
+  # end
 
   protected
   
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:current_role, :first_name, :last_name, :nif, :email, :password, :password_confirmation, address_attributes: [:street, :city, :country, :zip_code]) }
-
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:current_role, :first_name, :last_name, :nif, :email, :current_password,:password, :password_confirmation, address_attributes: [:street, :city, :country, :zip_code], roles_attributes: [:name, :company_name, :nif, :sector, :id]) }
   end 
 
   private

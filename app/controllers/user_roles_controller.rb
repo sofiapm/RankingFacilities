@@ -12,4 +12,15 @@ class UserRolesController < ActionController::Base
 	    end
 	end
 
+	def update_state
+    	respond_to do |format|
+	      if current_user.update(:state => params[:state])
+	        format.html { redirect_to root_path, notice: 'State successfully changed.' }
+	        format.json { render :edit, status: :ok, location: current_user }
+	      else
+	        format.html { render :edit }
+	        format.json { render json: current_user.errors, status: :unprocessable_entity }
+	      end
+	    end
+	end
 end

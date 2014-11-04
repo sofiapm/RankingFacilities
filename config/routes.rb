@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'static_pages/success_page' => 'static_pages#success_page'
   get "user_roles/update" => "user_roles#update"
   put "user_roles/update" => "user_roles#update"
+  get "user_roles/update_state" => "user_roles#update_state"
+  put "user_roles/update_state" => "user_roles#update_state"
 
 
   resources :sites

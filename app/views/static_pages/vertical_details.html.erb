@@ -5,7 +5,7 @@
                 <div class="col-md-7">
                     <ul class="nav nav-list bs-docs-sidenav" role="tablist">
                         <li class="dropdown">
-                            <a class="dropdown-toggle vertical-title" data-toggle="dropdown" href="#myModal">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#myModal">
                                 <% if current_user.current_role != 0 %>
                                     <%= current_user.roles.find(current_user.current_role).name + ": " +  current_user.roles.find(current_user.current_role).company_name %> 
                                 <% else %>
@@ -27,35 +27,18 @@
                 </div>
                 <div class="col-md-5">
 
-                         
-                        <%=  link_to image_tag("icon_60846.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/user_roles", :state => "details", :action => 'update_state', :method => :put, :approved => true %>
-                        <%=  link_to image_tag("icon_30982.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ) , :controller => "/user_roles", :state => "metrics", :action => 'update_state', :method => :put, :approved => true %>
-                        <%=  link_to  image_tag("icon_31048.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/user_roles", :state => "indicators", :action => 'update_state', :method => :put, :approved => true %>
-
+                        <%= link_to image_tag("icon_60846.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ),  static_pages_vertical_details_path  %>  
+                        <%= image_tag("icon_30982.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" )   %>  
+                        <%= image_tag("icon_31048.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" )   %>  
                 </div> 
             </div>
             <hr class="featurette-divider">     
             <ul class="nav nav-list bs-docs-sidenav">
                 <% if current_user.current_role != 0 %> 
-                    <% if current_user.state == "details" %>
-                        <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>         
-                            <li><%= link_to f.name, edit_facility_path(f.id) %></li>
-                        <% end %>
-                    <%  end %>
-                    
-                    <% if current_user.state == "metrics" %>
-                        <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>           
-                            <li><%= link_to f.name, facility_measures_path(f.id) %></li>
-                        <% end %>
-                    <%  end %>
-
-                    <% if current_user.state == "indicators" %>
-                        <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>           
-                            <li><%= link_to f.name, edit_facility_path(f.id) %></li>
-                        <% end %>
-                    <%  end %>
-                    
-                    
+                    <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>
+                                       
+                        <li><%= link_to f.name, edit_facility_path(f.id) %></li>
+                    <% end %>
                 <% else %>
                     <%= "There are no Roles selected." %>
                 <% end %>

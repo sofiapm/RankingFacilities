@@ -1,4 +1,4 @@
-<%= form_for(@role) do |f| %>
+<%= form_for(@role,  html: { class: "well"  }) do |f| %>
   <% if @role.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
@@ -14,7 +14,7 @@
   <fieldset>
     <div class="form_fancy">
       <%= f.label "Role Name" %> <br>
-      <%= f.select :name, @roles_names.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %>
+      <%= f.select :name, RankingFacilities::Application::ROLES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %>
     </div>
 
     <div class="form_fancy"><%= f.label "Company Name" %><br />
@@ -24,7 +24,7 @@
       <%= f.text_field :nif, :required => true, class: "form-control" %></div>
 
     <div class="form_fancy"><%= f.label :sector %><br />
-      <%= f.select :sector, @roles_sector.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %>
+      <%= f.select :sector, RankingFacilities::Application::ROLES_SECTOR.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %>
     </div>
 
     <%= f.hidden_field :user_id, :value => current_user.id %>

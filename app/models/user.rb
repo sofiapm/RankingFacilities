@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 	has_many :measures, :through => :facility
 	belongs_to :address, class_name: 'Address', foreign_key: 'address_id'
 
-	accepts_nested_attributes_for :address
+	accepts_nested_attributes_for :address, :roles
 	
 	def full_name
 		first_name + " " + last_name
