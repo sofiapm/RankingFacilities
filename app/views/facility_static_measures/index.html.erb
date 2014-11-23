@@ -1,0 +1,32 @@
+<h1 class="page-header">Listing <%= Facility.find_by_id(params[:facility_id]).name %>  Attributes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @facility_static_measures.each do |facility_static_measure| %>
+      <tr>
+        <td><%= facility_static_measure.name %></td>
+        <td><%= facility_static_measure.value %></td>
+        <td><%= facility_static_measure.start_date %></td>
+        <td><%= facility_static_measure.end_date %></td>
+        <td><%= link_to 'Edit', edit_facility_static_measure_path(facility_static_measure) %></td>
+        <td><%= link_to 'Destroy', facility_static_measure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="import pull-right">
+<%= link_to 'New Facility Attribute', new_facility_facility_static_measure_path(params[:facility_id]), class: "btn btn-default"  %>
+</div>

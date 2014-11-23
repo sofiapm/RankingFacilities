@@ -1,5 +1,4 @@
-<h1>New measure</h1>
+<h1 class="page-header">New <%= Facility.find_by_id(params[:facility_id]).name %> Measure</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', measures_path %>
+<% @action = {:action => 'new'} %>
+<%= render 'form', @action%>

@@ -1,0 +1,48 @@
+<%= form_for([@facility, @facility_static_measure], html: {class: "well"}) do |f| %>
+  <% if @facility_static_measure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@facility_static_measure.errors.count, "error") %> prohibited this facility_static_measure from being saved:</h2>
+
+      <ul>
+      <% @facility_static_measure.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+  <div class="form_fancy">
+      <%= f.label "Name" %> <br>
+      <%= f.select :name, RankingFacilities::Application::ATTRIBUTES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %>
+  </div>
+  <div class="form_fancy">
+    <%= f.label :value %><br>
+    <%= f.text_field :value, class: "form-control" %>
+  </div>
+  <div class="row">
+    <div class="form_fancy col-md-3">
+      <%= f.label :start_date %><br>
+      <%= f.date_select :start_date, class: "form-control" %>
+    </div>
+    <div class="form_fancy col-md-3">
+      <%= f.label :end_date %><br>
+      <%= f.date_select :end_date, class: "form-control" %>
+    </div>
+  </div>
+  <% if @action[:action] == 'new' %>
+  <%= f.hidden_field :facility_id, :value => @action[:facility].id %>
+  <% end %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <div class="actions pull-left">
+  <% if @action[:action] == 'new' %>
+  <td><%= link_to 'Facility Attributes List', facility_facility_static_measures_path(@facility), class: "btn btn-default" %></td>
+  <% else %>
+  <td><%= link_to 'Facility Attributes List', facility_facility_static_measures_path(@facility_static_measure.facility.id), class: "btn btn-default" %></td>
+  <% end %>
+  </div>
+  <div class="actions pull-right">
+    <%= f.submit "Save", class: "btn btn-default"  %>
+  </div>
+  </fieldset>
+<% end %>

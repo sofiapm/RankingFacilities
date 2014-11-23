@@ -5,7 +5,7 @@ class MeasuresController < ApplicationController
   # GET /measures
   # GET /measures.json
   def index
-    @measures = Measure.all
+    @measures = Facility.find(params[:facility_id]).measures
   end
 
   # GET /measures/1
@@ -16,6 +16,7 @@ class MeasuresController < ApplicationController
   # GET /measures/new
   def new
     @measure = Measure.new
+    @facility = Facility.find(params[:facility_id])
   end
 
   # GET /measures/1/edit
@@ -55,11 +56,17 @@ class MeasuresController < ApplicationController
   # DELETE /measures/1
   # DELETE /measures/1.json
   def destroy
+    @facility_id = @measure.facility.id
     @measure.destroy
     respond_to do |format|
-      format.html { redirect_to measures_url, notice: 'Measure was successfully destroyed.' }
+      format.html { redirect_to facility_measures_path(@facility_id), notice: 'Measure was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+      Measure.import(params[:file], params[:facility_id].to_i, current_user.id)
+      redirect_to facility_measures_url(params[:facility_id]), notice: "Measures imported."
   end
 
   private
@@ -70,19 +77,19 @@ class MeasuresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def measure_params
-      params.require(:measure).permit(:name, :value, :start_date, :end_date, :unit, :user_id, :facility_id)
+      params.require(:measure).permit(:name, :value, :start_date, :end_date, :user_id, :facility_id) #, :unit)
     end
 
     def authenticate
-      # if params['id']
-      #   unless current_user.id == Measure.find(params['id'].to_i).user.id 
-      #     authenticate_app
-      #   end
-      # end
-      # if params['organization_id'] && Organization.find(params['organization_id']).measures.first
-      #   unless current_user.id == Organization.find(params['organization_id']).measures.first.user.id
-      #         authenticate_app
-      #   end
-      # end
+      if params[:id]
+        unless current_user.id == Measure.find(params[:id].to_i).user.id 
+          authenticate_app
+        end
+      end
+      if params[:facility_id] && Facility.find(params[:facility_id])
+        unless current_user.id == Facility.find(params[:facility_id]).user.id
+              authenticate_app
+        end
+      end
     end
 end

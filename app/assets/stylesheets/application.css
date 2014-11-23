@@ -70,3 +70,21 @@
     background-color: #f5f5f5;
 }
 
+.import{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+
+table{
+    width: 98%;
+}
+table, th, td {
+   border-bottom: 1px solid black;
+
+}
+
+th,td {
+    padding: 15px;
+}
+

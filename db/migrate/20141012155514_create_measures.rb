@@ -5,7 +5,7 @@ class CreateMeasures < ActiveRecord::Migration
       t.float :value, null: false
       t.date :start_date, null: false
       t.date :end_date, null: false
-      t.string :unit, null: false
+      # t.string :unit, null: false
       t.integer :facility_id, null: false
       t.integer :user_id, null: false
 

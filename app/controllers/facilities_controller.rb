@@ -72,7 +72,9 @@ class FacilitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def facility_params
-      params.require(:facility).permit(:name, :sector, :role_id, :user_id, address_attributes: [:street, :city, :country, :zip_code])
+      params.require(:facility).permit(:name, :sector, :role_id, :user_id, 
+        address_attributes: [:street, :city, :country, :zip_code])
+        # facility_static_measure_attributes: [:name, :value, :start_date, :end_date, :user_id, :facility_id])
     end
 
     def authenticate

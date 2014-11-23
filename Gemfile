@@ -34,6 +34,8 @@ gem 'cancancan', '~> 1.9'
 
 gem 'role_model'
 
+gem 'roo', '~> 1.13.2'
+
 gem 'foreigner'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

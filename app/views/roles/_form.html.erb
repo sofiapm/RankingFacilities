@@ -24,7 +24,7 @@
       <%= f.text_field :nif, :required => true, class: "form-control" %></div>
 
     <div class="form_fancy"><%= f.label :sector %><br />
-      <%= f.select :sector, RankingFacilities::Application::ROLES_SECTOR.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %>
+      <%= f.select :sector, RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %>
     </div>
 
     <%= f.hidden_field :user_id, :value => current_user.id %>

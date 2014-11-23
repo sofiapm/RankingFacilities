@@ -15,7 +15,7 @@
                             <ul class="dropdown-menu col-md-12" role="menu">
                                 <% current_user.roles.each do |r| %>
                                        
-                                       <li><%= link_to r.name, :controller => "/user_roles", :current_role => r.id, :action => 'update', :method => :put, :approved => true %></li>
+                                       <li><%= link_to r.name + ": " + r.company_name, :controller => "/user_roles", :current_role => r.id, :action => 'update', :method => :put, :approved => true %></li>
                                 <% end %>
                                 <li class="divider"></li>
                                 <li><%= link_to "Edit Roles", roles_path %></li>
@@ -29,7 +29,9 @@
 
                          
                         <%=  link_to image_tag("icon_60846.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/user_roles", :state => "details", :action => 'update_state', :method => :put, :approved => true %>
+
                         <%=  link_to image_tag("icon_30982.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ) , :controller => "/user_roles", :state => "metrics", :action => 'update_state', :method => :put, :approved => true %>
+
                         <%=  link_to  image_tag("icon_31048.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/user_roles", :state => "indicators", :action => 'update_state', :method => :put, :approved => true %>
 
                 </div> 

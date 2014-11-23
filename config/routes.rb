@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+ 
+
   get 'static_pages/error_you_can_not_access_page' => 'static_pages#error_you_can_not_access_page'
   get 'static_pages/error_role_empty_page' => 'static_pages#error_role_empty_page'
   get 'static_pages/success_page' => 'static_pages#success_page'
@@ -9,14 +11,18 @@ Rails.application.routes.draw do
   get "user_roles/update_state" => "user_roles#update_state"
   put "user_roles/update_state" => "user_roles#update_state"
 
+  # get '*unmatched_route', :to => 'application#raise_not_found!'
 
   resources :sites
 
   resources :addresses
-
+  #resources :facility_static_measures
+  
   resources :roles, shallow: true do
-    resources :facilities, shallow: true do
-        resources :measures
+    resources :facilities do
+        resources :measures, :facility_static_measures  do
+          collection { post :import }
+        end
     end
   end
 

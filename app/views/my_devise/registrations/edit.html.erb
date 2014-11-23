@@ -48,7 +48,7 @@
               <%= a.text_field :company_name, :required => true, class: "form-control" %></div>
               <div class="form_fancy"><%= a.label :nif %><br />
               <%= a.text_field :nif, :required => true, class: "form-control" %></div>
-              <div class="form_fancy"><%= a.label :sector %><br /><%= a.select :sector, RankingFacilities::Application::ROLES_SECTOR.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
+              <div class="form_fancy"><%= a.label :sector %><br /><%= a.select :sector, RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
               <%= a.hidden_field :id, :value => a.object.id %>
 
           <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103193056) do
+ActiveRecord::Schema.define(version: 20141120124554) do
 
   create_table "addresses", force: true do |t|
     t.string   "street",     null: false
@@ -31,12 +31,22 @@ ActiveRecord::Schema.define(version: 20141103193056) do
     t.datetime "updated_at"
   end
 
+  create_table "facility_static_measures", force: true do |t|
+    t.string   "name"
+    t.float    "value"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "facility_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "measures", force: true do |t|
     t.string   "name",        null: false
     t.float    "value",       null: false
     t.date     "start_date",  null: false
     t.date     "end_date",    null: false
-    t.string   "unit",        null: false
     t.integer  "facility_id", null: false
     t.integer  "user_id",     null: false
     t.datetime "created_at"
@@ -59,23 +69,23 @@ ActiveRecord::Schema.define(version: 20141103193056) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "first_name",                         null: false
-    t.string   "last_name",                          null: false
-    t.string   "email",                              null: false
-    t.string   "encrypted_password",                 null: false
-    t.integer  "address_id",                         null: false
+    t.string   "first_name",                                 null: false
+    t.string   "last_name",                                  null: false
+    t.string   "email",                                      null: false
+    t.string   "encrypted_password",                         null: false
+    t.integer  "address_id",                                 null: false
     t.integer  "current_role",           default: 0
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0, null: false
+    t.integer  "sign_in_count",          default: 0,         null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state"
+    t.string   "state",                  default: "details"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
