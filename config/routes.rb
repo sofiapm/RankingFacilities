@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   
   resources :roles, shallow: true do
     resources :facilities do
-        resources :measures, :facility_static_measures  do
+        resources :measures, :facility_static_measures, :kpis  do
           collection { post :import }
         end
     end

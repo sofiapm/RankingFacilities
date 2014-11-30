@@ -10,7 +10,7 @@
     <p> <strong>end_date</strong> - Date Type </p>
   </div>
   <div class="form_fancy col-md-3">
-    <%= image_tag("icon_24574.png", :class => "img-polaroid", :style => "width: 60%; height: 60%;" )   %>
+    <%= image_tag("icon_24574.png", :class => "img-polaroid", :style => "width: 60%; height: 60%;")   %>
   </div>
   <div class="form_fancy col-md-3">  
     <br/>
@@ -25,6 +25,22 @@
 </div>
 
 <h1 class="page-header">Listing <%= Facility.find_by_id(params[:facility_id]).name %> Measures</h1>
+
+<div class="well col-md-12">
+<%= search_form_for [@facility, @q]  do |f| %>
+
+  <%= f.label :name_cont %>
+  <%= f.search_field :name_cont %>
+
+  <%= f.label "Starting From Date" %>
+  <%= f.bootstrap_date :start_date_gteq %>
+
+  <%= f.label "Till Date" %>
+  <%= f.bootstrap_date :end_date_lteq %>
+
+  <%= f.submit "Search", class: "btn btn-default"  %>
+<% end %>
+</div>
 
 <table>
   <thead>
@@ -48,6 +64,7 @@
         <td><%= link_to 'Destroy', measure, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-link" %></td>
       </tr>
     <% end %>
+        <tr><%= render 'new_form' %></tr>
   </tbody>
 </table>
 

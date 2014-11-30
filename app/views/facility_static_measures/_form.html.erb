@@ -23,11 +23,11 @@
   <div class="row">
     <div class="form_fancy col-md-3">
       <%= f.label :start_date %><br>
-      <%= f.date_select :start_date, class: "form-control" %>
+      <%= f.bootstrap_date :start_date %>
     </div>
     <div class="form_fancy col-md-3">
       <%= f.label :end_date %><br>
-      <%= f.date_select :end_date, class: "form-control" %>
+      <%= f.bootstrap_date :end_date %>
     </div>
   </div>
   <% if @action[:action] == 'new' %>

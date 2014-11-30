@@ -1,0 +1,25 @@
+
+<%= form_for [@facility, @facility_static_measure] do |f| %>
+  <% if @facility_static_measure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@facility_static_measure.errors.count, "error") %> prohibited this measure from being saved:</h2>
+
+      <ul>
+      <% @facility_static_measure.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <td><%= f.select :name, RankingFacilities::Application::ATTRIBUTES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %></td>
+  <td><%= f.text_field :value, class: "form-control" %></td>
+  <td><%= f.bootstrap_date :start_date %></td>
+  <td><%= f.bootstrap_date :end_date %></td>
+  <%= f.hidden_field :facility_id, :value => params[:facility_id] %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <td></td>
+  <td><%= f.submit "Save", class: "btn btn-default"  %></td>
+
+<% end %>

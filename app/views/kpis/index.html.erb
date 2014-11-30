@@ -1,0 +1,81 @@
+
+<h1 class="page-header"><%= @facility.name %>  Benchmark Reports</h1>
+
+<div class="well col-md-12">
+<%= form_tag(facility_kpis_path(params[:facility_id]), :method => "get") do %>
+  <%= label_tag "Business Sector" %>
+  <%= select_tag :business_sector, options_for_select(RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value })  %>
+
+  <%= label_tag "Country" %>
+  <%= select_tag :country, options_for_select(RankingFacilities::Application::COUNTRY.inject([]){|acum, (key, value) | acum << value }) %>
+
+  <%= label_tag "City" %>
+  <%= select_tag :city, options_for_select(RankingFacilities::Application::CITIES.inject([]){|acum, (key, value) | acum << value })  %>
+
+  <%= label_tag "Year" %>
+  <%= text_field_tag :year%>
+
+  <%= submit_tag "Search", class: "btn btn-default"  %>
+
+<% end %>
+</div>
+
+<% @v = @facility.internal_work_cost %>
+<%= render 'graph', @v %>
+
+<%= render 'columnbasicsgraph', @v %>
+
+<%= render 'linecolumnchart', @v %>
+
+
+<% @v = @facility.water_consumption_fte %>
+<%= render 'graph', @v %>
+
+<%= render 'columnbasicsgraph', @v %>
+
+<%= render 'linecolumnchart', @v %>
+
+
+
+<% @v = @facility.waste_production_fte %>
+<%= render 'graph', @v %>
+
+<%= render 'columnbasicsgraph', @v %>
+
+<%= render 'linecolumnchart', @v %>
+
+
+
+<% @v = @facility.capacity_vs_utilization %>
+<%= render 'graph', @v %>
+
+<%= render 'columnbasicsgraph', @v %>
+
+<%= render 'linecolumnchart', @v %>
+
+
+
+<% @v = @facility.space_experience %>
+<%= render 'graph', @v %>
+
+<%= render 'columnbasicsgraph', @v %>
+
+<%= render 'linecolumnchart', @v %>
+
+
+
+<% @v = @facility.energy_consumption %>
+<%= render 'graph', @v %>
+
+<%= render 'columnbasicsgraph', @v %>
+
+<%= render 'linecolumnchart', @v %>
+
+<%= render 'columndrilldowngraph', @v %>
+
+
+
+
+
+<script src="/assets/highcharts.js"></script>
+<script src="/assets/exporting.js"></script>

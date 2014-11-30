@@ -5,7 +5,13 @@ class FacilityStaticMeasuresController < ApplicationController
   # GET /facility_static_measures
   # GET /facility_static_measures.json
   def index
-    @facility_static_measures = FacilityStaticMeasure.all #Facility.find(params[:facility_id]).facility_static_measures
+    @facility = Facility.find(params[:facility_id])
+    @q = FacilityStaticMeasure.where(facility_id: params[:facility_id].to_i).search(params[:q])
+
+    @facility_static_measures =  @q.result(distinct: true)
+    # @facility_static_measures = FacilityStaticMeasure.where(facility_id: params[:facility_id].to_i).sort_by{|vn| vn[:date]} #Facility.find(params[:facility_id]).facility_static_measures
+    @facility_static_measure = FacilityStaticMeasure.new
+       
   end
 
   # GET /facility_static_measures/1

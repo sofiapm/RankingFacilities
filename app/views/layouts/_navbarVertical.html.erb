@@ -12,7 +12,7 @@
                                     <%= "Role Not Selected" %>
                                 <% end %> 
                             <span class="caret"></span></a>
-                            <ul class="dropdown-menu col-md-12" role="menu">
+                            <ul class="dropdown-menu dropdown col-md-12" role="menu">
                                 <% current_user.roles.each do |r| %>
                                        
                                        <li><%= link_to r.name + ": " + r.company_name, :controller => "/user_roles", :current_role => r.id, :action => 'update', :method => :put, :approved => true %></li>
@@ -38,7 +38,7 @@
             </div>
             <hr class="featurette-divider">     
             <ul class="nav nav-list bs-docs-sidenav">
-                <% if current_user.current_role != 0 %> 
+                <% if current_user.current_role != 0 && current_user.roles.find(current_user.current_role).has_facilities? %> 
                     <% if current_user.state == "details" %>
                         <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>         
                             <li><%= link_to f.name, edit_facility_path(f.id) %></li>
@@ -53,7 +53,7 @@
 
                     <% if current_user.state == "indicators" %>
                         <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>           
-                            <li><%= link_to f.name, edit_facility_path(f.id) %></li>
+                            <li><%= link_to f.name, facility_kpis_path(f.id) %></li>
                         <% end %>
                     <%  end %>
                     

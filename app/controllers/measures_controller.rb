@@ -5,7 +5,11 @@ class MeasuresController < ApplicationController
   # GET /measures
   # GET /measures.json
   def index
-    @measures = Facility.find(params[:facility_id]).measures
+    # @measures = Facility.find().measures.sort_by{|vn| vn[:date]}
+    @facility = Facility.find(params[:facility_id])
+    @q = Facility.find(params[:facility_id]).measures.search(params[:q])
+    @measures = @q.result(distinct: true)
+    @measure = Measure.new
   end
 
   # GET /measures/1

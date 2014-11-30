@@ -1,4 +1,5 @@
 class Facility < ActiveRecord::Base
+	# include Kpi
 
 	belongs_to :role, class_name: 'Role', foreign_key: 'role_id'
 	has_one :user, :through => :role
@@ -9,4 +10,26 @@ class Facility < ActiveRecord::Base
 
 	accepts_nested_attributes_for :address
 	# accepts_nested_attributes_for :facility_static_measure
+
+	def internal_work_cost
+  		Kpi.internal_work_cost self
+  	end
+
+  	def water_consumption_fte
+  		Kpi.water_consumption_fte self
+  	end
+
+  	def waste_production_fte
+  		Kpi.waste_production_fte self
+  	end
+
+  	def capacity_vs_utilization
+  		Kpi.capacity_vs_utilization self
+  	end
+  	def space_experience
+  		Kpi.space_experience self
+  	end
+  	def energy_consumption
+  		Kpi.energy_consumption self
+  	end
 end
