@@ -9,7 +9,7 @@ function () {
             zoomType: 'x'
         },
         title: {
-            text: '<%=@v[:name]%>'
+            text: '<%=@v[:name] + ": " + @v[:year].to_s%>'
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
@@ -18,7 +18,7 @@ function () {
         },
         xAxis: {
             type: 'datetime',
-            minRange: 14 * 24 * 3600000 // fourteen days
+            minRange: 30 * 24 * 3600000 // 30 days
         },
         yAxis: {
             title: {
@@ -53,8 +53,8 @@ function () {
         series: [{
             type: 'area',
             name: '<%=@v[:name]%>',
-            pointInterval: 30 * 24 * 3600 * 1000,
-            pointStart: Date.UTC(2010, 0, 1),
+            pointInterval: 28*24 * 3600 * 1000,
+            pointStart: Date.UTC(<%= @v[:year]  %>, 1, 0),
             data: <%= @v[:values]%>
         }]
     });

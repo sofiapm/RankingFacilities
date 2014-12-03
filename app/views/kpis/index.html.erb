@@ -1,80 +1,79 @@
 
 <h1 class="page-header"><%= @facility.name %>  Benchmark Reports</h1>
 
-<div class="well col-md-12">
+<div class="row well col-md-12">
+
 <%= form_tag(facility_kpis_path(params[:facility_id]), :method => "get") do %>
-  <%= label_tag "Business Sector" %>
-  <%= select_tag :business_sector, options_for_select(RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value })  %>
+  	<div class="col-md-6">
+		<%= label_tag "Business Sector" %>
+		<%= select_tag :business_sector, options_for_select(RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value }) , class: "form-control " %>
 
-  <%= label_tag "Country" %>
-  <%= select_tag :country, options_for_select(RankingFacilities::Application::COUNTRY.inject([]){|acum, (key, value) | acum << value }) %>
+		<%= label_tag "Year" %>
+		<%= text_field_tag :year , "", class: "form-control "%>
+	</div>
+	<div class="col-md-6">
+	  	<%= label_tag "Country" %>
+  		<%= select_tag :country, options_for_select(RankingFacilities::Application::COUNTRY.inject([]){|acum, (key, value) | acum << value }) , class: "form-control "%>
+  		<%= label_tag "City" %>
+  		<%= select_tag :city, options_for_select(RankingFacilities::Application::CITIES.inject([]){|acum, (key, value) | acum << value }) , class: "form-control " %>
+  </div>
 
-  <%= label_tag "City" %>
-  <%= select_tag :city, options_for_select(RankingFacilities::Application::CITIES.inject([]){|acum, (key, value) | acum << value })  %>
-
-  <%= label_tag "Year" %>
-  <%= text_field_tag :year%>
-
-  <%= submit_tag "Search", class: "btn btn-default"  %>
+  <%= submit_tag "Search", class: "btn btn-default pull-right"  %>
 
 <% end %>
 </div>
 
-<% @v = @facility.internal_work_cost %>
+<div class="indicators_graph col-md-12">
+
+<% @v = @facility.internal_work_cost(params[:year]) %>
 <%= render 'graph', @v %>
-
-<%= render 'columnbasicsgraph', @v %>
-
+<% @v = @facility.best_internal_work_cost(params[:year]) %>
 <%= render 'linecolumnchart', @v %>
 
-
-<% @v = @facility.water_consumption_fte %>
+<% @v = @facility.water_consumption_fte(params[:year]) %>
 <%= render 'graph', @v %>
-
-<%= render 'columnbasicsgraph', @v %>
-
+<% @v = @facility.best_water_consumption_fte(params[:year]) %>
 <%= render 'linecolumnchart', @v %>
 
-
-
-<% @v = @facility.waste_production_fte %>
+<% @v = @facility.waste_production_fte(params[:year]) %>
 <%= render 'graph', @v %>
-
-<%= render 'columnbasicsgraph', @v %>
-
+<% @v = @facility.best_waste_production_fte(params[:year]) %>
 <%= render 'linecolumnchart', @v %>
 
-
-
-<% @v = @facility.capacity_vs_utilization %>
+<% @v = @facility.capacity_vs_utilization(params[:year]) %>
 <%= render 'graph', @v %>
-
-<%= render 'columnbasicsgraph', @v %>
-
+<% @v = @facility.best_capacity_vs_utilization(params[:year]) %>
 <%= render 'linecolumnchart', @v %>
 
-
-
-<% @v = @facility.space_experience %>
+<% @v = @facility.space_experience(params[:year]) %>
 <%= render 'graph', @v %>
-
-<%= render 'columnbasicsgraph', @v %>
-
+<% @v = @facility.best_space_experience(params[:year]) %>
 <%= render 'linecolumnchart', @v %>
 
-
-
-<% @v = @facility.energy_consumption %>
+<% @v = @facility.energy_consumption(params[:year]) %>
 <%= render 'graph', @v %>
-
-<%= render 'columnbasicsgraph', @v %>
-
+<% @v = @facility.best_energy_consumption(params[:year]) %>
 <%= render 'linecolumnchart', @v %>
 
-<%= render 'columndrilldowngraph', @v %>
+<% @v = @facility.cleaning_cost_nfa(params[:year]) %>
+<%= render 'graph', @v %>
+<% @v = @facility.best_cleaning_cost_nfa(params[:year]) %>
+<%= render 'linecolumnchart', @v %>
 
+<% @v = @facility.space_cost_nfa(params[:year]) %>
+<%= render 'graph', @v %>
+<% @v = @facility.best_space_cost_nfa(params[:year]) %>
+<%= render 'linecolumnchart', @v %>
 
+<% @v = @facility.occupancy_cost_nfa(params[:year]) %>
+<%= render 'graph', @v %>
+<% @v = @facility.best_occupancy_cost_nfa(params[:year]) %>
+<%= render 'linecolumnchart', @v %>
 
+<% @v = @facility.costs_year %>
+<%= render 'columnbasicsgraph', @v %>
+
+</div>
 
 
 <script src="/assets/highcharts.js"></script>
