@@ -111,6 +111,25 @@ module Kpi
 		{value: array, year: year}
 	end
 
+	# verifica qual a facility com melhores resultados de um determinado KPI
+	def self.best_method method, facilities, year
+		best_average = {}
+		facilities.each do |f|
+			results = send(method, f, year)
+			
+			average = avg results[:values]
+			
+			unless best_average[:average]
+				best_average = {:results => results, :average => average}
+			else 
+				if average < best_average[:average] #se der NaN, entao da menor..
+					best_average = {:results => results, :average => average}
+				end
+			end
+		end
+		best_average
+	end
+
 	###################################################################################################################
 	#
 	# Metodos de Calculo de Indicadores
@@ -144,19 +163,7 @@ module Kpi
 		end
 		my_facility_results=internal_work_cost(facility, year)
 		facilities = Facility.all
-		best_average = {}
-		facilities.each do |f|
-			results=internal_work_cost(f, year)
-			average= avg results[:values]
-			
-			if !best_average[:average]
-				best_average = {:results => results, :average => average}
-			else 
-				if average < best_average[:average]
-					best_average = {:results => results, :average => average}
-				end
-			end
-		end
+		best_average = best_method :internal_work_cost, facilities, year
 		
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
@@ -185,19 +192,7 @@ module Kpi
 		end
 		my_facility_results=water_consumption_fte(facility, year)
 		facilities = Facility.all
-		best_average = {}
-		facilities.each do |f|
-			results=water_consumption_fte(f, year)
-			average= avg results[:values]
-			
-			if !best_average[:average]
-				best_average = {:results => results, :average => average}
-			else 
-				if average < best_average[:average] #se der NaN, entao da menor..
-					best_average = {:results => results, :average => average}
-				end
-			end
-		end
+		best_average = best_method :water_consumption_fte, facilities, year
 		
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
@@ -226,19 +221,7 @@ module Kpi
 		end
 		my_facility_results=waste_production_fte(facility, year)
 		facilities = Facility.all
-		best_average = {}
-		facilities.each do |f|
-			results=waste_production_fte(f, year)
-			average= avg results[:values]
-			
-			if !best_average[:average]
-				best_average = {:results => results, :average => average}
-			else 
-				if average < best_average[:average] #se der NaN, entao da menor..
-					best_average = {:results => results, :average => average}
-				end
-			end
-		end
+		best_average = best_method :waste_production_fte, facilities, year
 		
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
@@ -267,19 +250,7 @@ module Kpi
 		end
 		my_facility_results=capacity_vs_utilization(facility, year)
 		facilities = Facility.all
-		best_average = {}
-		facilities.each do |f|
-			results=capacity_vs_utilization(f, year)
-			average= avg results[:values]
-			
-			if !best_average[:average]
-				best_average = {:results => results, :average => average}
-			else 
-				if average < best_average[:average] #se der NaN, entao da menor..
-					best_average = {:results => results, :average => average}
-				end
-			end
-		end
+		best_average = best_method :capacity_vs_utilization, facilities, year
 		
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
@@ -308,19 +279,7 @@ module Kpi
 		end
 		my_facility_results=space_experience(facility, year)
 		facilities = Facility.all
-		best_average = {}
-		facilities.each do |f|
-			results=space_experience(f, year)
-			average= avg results[:values]
-			
-			if !best_average[:average]
-				best_average = {:results => results, :average => average}
-			else 
-				if average < best_average[:average] #se der NaN, entao da menor..
-					best_average = {:results => results, :average => average}
-				end
-			end
-		end
+		best_average = best_method :space_experience, facilities, year
 		
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
@@ -349,19 +308,7 @@ module Kpi
 		end
 		my_facility_results=energy_consumption(facility, year)
 		facilities = Facility.all
-		best_average = {}
-		facilities.each do |f|
-			results=energy_consumption(f, year)
-			average= avg results[:values]
-			
-			if !best_average[:average]
-				best_average = {:results => results, :average => average}
-			else 
-				if average < best_average[:average] #se der NaN, entao da menor..
-					best_average = {:results => results, :average => average}
-				end
-			end
-		end
+		best_average = best_method :energy_consumption, facilities, year
 		
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
@@ -392,19 +339,7 @@ module Kpi
 		end
 		my_facility_results=cleaning_cost_nfa(facility, year)
 		facilities = Facility.all
-		best_average = {}
-		facilities.each do |f|
-			results=cleaning_cost_nfa(f, year)
-			average= avg results[:values]
-			
-			if !best_average[:average]
-				best_average = {:results => results, :average => average}
-			else 
-				if average < best_average[:average] #se der NaN, entao da menor..
-					best_average = {:results => results, :average => average}
-				end
-			end
-		end
+		best_average = best_method :cleaning_cost_nfa, facilities, year
 		
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
@@ -434,19 +369,7 @@ module Kpi
 		end
 		my_facility_results=space_cost_nfa(facility, year)
 		facilities = Facility.all
-		best_average = {}
-		facilities.each do |f|
-			results=space_cost_nfa(f, year)
-			average= avg results[:values]
-			
-			if !best_average[:average]
-				best_average = {:results => results, :average => average}
-			else 
-				if average < best_average[:average] #se der NaN, entao da menor..
-					best_average = {:results => results, :average => average}
-				end
-			end
-		end
+		best_average = best_method :space_cost_nfa, facilities, year
 		
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
@@ -474,37 +397,23 @@ module Kpi
 			:type => RankingFacilities::Application::KPI_UNITS[:oc_nfa], :x => :toc, :y => :nfa, :year => h_toc[:year]}
 	end
 
-	def self.best_occupancy_cost_nfa(facility, country, city, year)
+	def self.best_occupancy_cost_nfa(facility, year)
 		if year == ''
 			year = Date.current.year
 		end
 		my_facility_results = occupancy_cost_nfa(facility, year)
 
-		if country != ''
-			facilities = Facility.find_by(country: country)
-		else
+		# if country != ''
+		# 	facilities = Facility.find_by(country: country)
+		# else
 			facilities = Facility.all
-		end
+		# end
 
-		if city != ''
-			facilities = facilities.find_by(country: country)
-		end
+		# if city != ''
+		# 	facilities = facilities.find_by(country: country)
+		# end
 
-
-		best_average = {}
-		facilities.each do |f|
-			results = occupancy_cost_nfa(f, year)
-			
-			average = avg results[:values]
-			
-			if !best_average[:average]
-				best_average = {:results => results, :average => average}
-			else 
-				if average < best_average[:average] #se der NaN, entao da menor..
-					best_average = {:results => results, :average => average}
-				end
-			end
-		end
+        best_average = best_method :occupancy_cost_nfa, facilities, year
 		
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
