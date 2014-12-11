@@ -11,31 +11,28 @@
 		<div class="row">
 			<% if user_signed_in? %>
 				<%= render 'layouts/navbar' %>	
-			    <%= render 'layouts/navbarVertical' %>	
-			    <div class="container-fluid col-md-9 col-md-offset-3 body-container">
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div class="col-md-3 vertical-bar affix">
+					    	<%= render 'layouts/navbarVertical' %>	
+					    </div>
+					    <div class="col-md-9 col-md-offset-3">
 
-			        <p class="notice"><%= notice %></p>
-			        <p class="alert"><%= alert %></p>
+					        <p class="notice"><%= notice %></p>
+					        <p class="alert"><%= alert %></p>
 
-			        <%= yield %>
-			    </div>
+					        <%= yield %>
+
+					        <%= render 'layouts/footer' %>
+					    </div>
+				    </div>
+				</div>
 			 <% else %>
 			   	<%= render 'layouts/navbar' %>	
 			    <%= yield %>
+			    <%= render 'layouts/footer' %>
 			<% end %>
 			
 		</div>
-		
-		<div class="row">
-			<% if user_signed_in? %>
-				<div class="container-fluid col-md-9 col-md-offset-3 marketing">
-			         <%= render 'layouts/footer' %>
-		    	 </div>
-	    	<% else %>
-	    		<div class="container-fluid marketing">
-		        	 <%= render 'layouts/footer' %>
-	    		 </div>
-			<% end %>
-    	 </div>
 	</body>
 </html>

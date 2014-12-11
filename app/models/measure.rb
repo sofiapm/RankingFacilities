@@ -8,6 +8,16 @@ class Measure < ActiveRecord::Base
 	  header = spreadsheet.row(1)
 	  (2..spreadsheet.last_row).each do |i|
 	    row = Hash[[header, spreadsheet.row(i)].transpose]
+		if !row["name"] or !RankingFacilities::Application::METRIC_NAMES.inject([]){|acum, (key, value) | acum << value }.include? row["name"]
+			raise "You have empty or not valid values on 'name' column."
+		elsif !row["value"] or !row["value"].is_a? Float
+			raise "You have empty or not valid values on 'value' column."
+		elsif !row["start_date"] or !row["start_date"].is_a? Date
+			raise "You have empty or not valid values on 'start_date' column."
+		elsif !row["end_date"] or !row["end_date"].is_a? Date
+			raise "You have empty or not valid values on 'end_date' column."
+		end
+			  	  
 	    measure = find_by_id(row["id"]) || new
 	    row["facility_id"]= facility_id
 	    row["user_id"]= current_user

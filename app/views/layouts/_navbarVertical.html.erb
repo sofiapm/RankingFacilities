@@ -1,8 +1,8 @@
 
-    <div class="container-fluid col-md-3 vertical-bar affix">
+    
         <div class="marketing"> 
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-6">
                     <ul class="nav nav-list bs-docs-sidenav" role="tablist">
                         <li class="dropdown">
                             <a class="dropdown-toggle vertical-title" data-toggle="dropdown" href="#myModal">
@@ -12,7 +12,7 @@
                                     <%= "Role Not Selected" %>
                                 <% end %> 
                             <span class="caret"></span></a>
-                            <ul class="dropdown-menu dropdown col-md-12" role="menu">
+                            <ul class="dropdown-menu dropdown " role="menu">
                                 <% current_user.roles.each do |r| %>
                                        
                                        <li><%= link_to r.name + ": " + r.company_name, :controller => "/user_roles", :current_role => r.id, :action => 'update', :method => :put, :approved => true %></li>
@@ -25,14 +25,14 @@
                         </li>   
                     </ul> 
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
 
-                         
-                        <%=  link_to image_tag("icon_60846.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/user_roles", :state => "details", :action => 'update_state', :method => :put, :approved => true %>
+                        <%=  link_to image_tag((("icon_60846copy.png" if current_user.state == "details") || "icon_60846.png"), :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/user_roles", :state => "details", :action => 'update_state', :method => :put, :approved => true %>
+                       
 
-                        <%=  link_to image_tag("icon_30982.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ) , :controller => "/user_roles", :state => "metrics", :action => 'update_state', :method => :put, :approved => true %>
+                        <%=  link_to image_tag((("icon_30982copy.png" if current_user.state == "metrics") || "icon_30982.png"), :class => "img-polaroid", :style => "width: 30%; height: 30%;" ) , :controller => "/user_roles", :state => "metrics", :action => 'update_state', :method => :put, :approved => true %>
 
-                        <%=  link_to  image_tag("icon_31048.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/user_roles", :state => "indicators", :action => 'update_state', :method => :put, :approved => true %>
+                        <%=  link_to  image_tag((("icon_31048copy.png" if current_user.state == "indicators") || "icon_31048.png"), :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/user_roles", :state => "indicators", :action => 'update_state', :method => :put, :approved => true %>
 
                 </div> 
             </div>
@@ -70,4 +70,3 @@
             </ul>
 
         </div>
-    </div>

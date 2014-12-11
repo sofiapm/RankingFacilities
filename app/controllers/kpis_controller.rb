@@ -3,7 +3,9 @@ class KpisController < ApplicationController
 	before_filter :require_login, :authenticate
 
 	def index
-   @facility = Facility.find(params['facility_id'])
+    @facility = Facility.find(params['facility_id'])
+    @q = Facility.search(params[:q])
+    @all_facilities = @q.result(distinct: true)
 	end
 
 	private

@@ -1,4 +1,6 @@
+<div class="form_facility col-md-12">
 <h1 class="page-header">New <%= Facility.find_by_id(params[:facility_id]).name %> Attribute</h1>
 
 <% @action = {:action => 'new', :facility => @facility} %>
 <%= render 'form', @action%>
+</div>

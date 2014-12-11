@@ -21,7 +21,7 @@
 
 $(document).ready( function(){
   $('.datepicker').datepicker({
-    dateFormat: "yy-mm-dd"
+    dateFormat: "dd-mm-yy"
   });
 
     $('.dropdown').hover(function() {

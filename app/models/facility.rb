@@ -11,28 +11,32 @@ class Facility < ActiveRecord::Base
 	accepts_nested_attributes_for :address
 	# accepts_nested_attributes_for :facility_static_measure
 
-	   def internal_work_cost year
+	   # def get_address
+    #   address || OpendStruct.new city: 'City Unavaylable'
+    #  end
+     def internal_work_cost year
   		Kpi.internal_work_cost(self, year)
   	end
 
-    def best_internal_work_cost year
-      Kpi.best_internal_work_cost(self, year)
+    def best_internal_work_cost year, facilities
+
+      Kpi.best_internal_work_cost(self, year, facilities)
     end
 
   	def water_consumption_fte year
   		Kpi.water_consumption_fte(self, year)
   	end
 
-    def best_water_consumption_fte year
-      Kpi.best_water_consumption_fte(self, year)
+    def best_water_consumption_fte year, facilities
+      Kpi.best_water_consumption_fte(self, year, facilities)
     end
 
   	def waste_production_fte year
   		Kpi.waste_production_fte(self, year)
   	end
 
-    def best_waste_production_fte year
-      Kpi.best_waste_production_fte(self, year)
+    def best_waste_production_fte year, facilities
+      Kpi.best_waste_production_fte(self, year, facilities)
     end
 
     def costs_year
@@ -43,47 +47,47 @@ class Facility < ActiveRecord::Base
   		Kpi.capacity_vs_utilization(self, year)
    	end
 
-    def best_capacity_vs_utilization year
-      Kpi.best_capacity_vs_utilization(self, year)
+    def best_capacity_vs_utilization year, facilities
+      Kpi.best_capacity_vs_utilization(self, year, facilities)
     end
 
   	def space_experience year
   		Kpi.space_experience(self, year)
   	end
 
-    def best_space_experience year
-      Kpi.best_space_experience(self, year)
+    def best_space_experience year, facilities
+      Kpi.best_space_experience(self, year, facilities)
     end
 
   	def energy_consumption year
   		Kpi.energy_consumption(self, year)
   	end
 
-    def best_energy_consumption year
-      Kpi.best_energy_consumption(self, year)
+    def best_energy_consumption year, facilities
+      Kpi.best_energy_consumption(self, year, facilities)
     end
 
     def cleaning_cost_nfa year
       Kpi.cleaning_cost_nfa(self, year)
     end
 
-    def best_cleaning_cost_nfa year
-      Kpi.best_cleaning_cost_nfa(self, year)
+    def best_cleaning_cost_nfa year, facilities
+      Kpi.best_cleaning_cost_nfa(self, year, facilities)
     end
 
     def space_cost_nfa year
       Kpi.space_cost_nfa(self, year)
     end
 
-    def best_space_cost_nfa year
-      Kpi.best_space_cost_nfa(self, year)
+    def best_space_cost_nfa year, facilities
+      Kpi.best_space_cost_nfa(self, year, facilities)
     end
 
     def occupancy_cost_nfa year
       Kpi.occupancy_cost_nfa(self, year)
     end
 
-    def best_occupancy_cost_nfa year
-      Kpi.best_occupancy_cost_nfa(self, year)
+    def best_occupancy_cost_nfa year, facilities
+      Kpi.best_occupancy_cost_nfa(self, year, facilities)
     end
 end

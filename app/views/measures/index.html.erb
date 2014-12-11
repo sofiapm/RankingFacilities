@@ -1,74 +1,77 @@
-<h1 class="page-header"> Import <%= Facility.find_by_id(params[:facility_id]).name %> Measures</h1>
+<div class="form_facility col-md-12">
 
-<div class="row well import">
-  <div class="import_explanation col-md-6">
-    <p> A CSV or Excel file can be used to import Measures. </p>
-    <p> The columns of the file should be in this order:</p>
-    <p> <strong>name</strong> - String Type </p>
-    <p> <strong>value</strong> - Float Type </p>
-    <p> <strong>start_date</strong> - Date Type </p>
-    <p> <strong>end_date</strong> - Date Type </p>
-  </div>
-  <div class="form_fancy col-md-3">
-    <%= image_tag("icon_24574.png", :class => "img-polaroid", :style => "width: 60%; height: 60%;")   %>
-  </div>
-  <div class="form_fancy col-md-3">  
-    <br/>
-    <br/>
-    <%= form_tag import_facility_measures_path(params[:facility_id]), multipart: true do %>
+  <h1 class="page-header"> Import <%= Facility.find_by_id(params[:facility_id]).name %> Measures</h1>
 
-    <div class="form_fancy"><%= file_field_tag :file %></div>
-    <div class="form_fancy"><%= submit_tag "Import" %></div>
+  <div class="row well import">
+    <div class="import_explanation col-md-6">
+      <p> A CSV or Excel file can be used to import Measures. </p>
+      <p> The columns of the file should be in this order:</p>
+      <p> <strong>name</strong> - String Type </p>
+      <p> <strong>value</strong> - Float Type </p>
+      <p> <strong>start_date</strong> - Date Type </p>
+      <p> <strong>end_date</strong> - Date Type </p>
+    </div>
+    <div class="form_fancy col-md-3">
+      <%= image_tag("icon_24574.png", :class => "img-polaroid", :style => "width: 60%; height: 60%;")   %>
+    </div>
+    <div class="form_fancy col-md-3">  
+      <br/>
+      <br/>
+      <%= form_tag import_facility_measures_path(params[:facility_id]), multipart: true do %>
+
+      <div class="form_fancy"><%= file_field_tag :file %></div>
+      <div class="form_fancy"><%= submit_tag "Import" %></div>
+    <% end %>
+    </div>
+
+  </div>
+
+  <h1 class="page-header">Listing <%= Facility.find_by_id(params[:facility_id]).name %> Measures</h1>
+
+  <div class="well col-md-12">
+  <%= search_form_for [@facility, @q]  do |f| %>
+
+    <%= f.label :name_cont %>
+    <%= f.search_field :name_cont %>
+
+    <%= f.label "Starting From Date" %>
+    <%= f.bootstrap_date :start_date_gteq %>
+
+    <%= f.label "Till Date" %>
+    <%= f.bootstrap_date :end_date_lteq %>
+
+    <%= f.submit "Search", class: "btn btn-default pull-right"  %>
   <% end %>
   </div>
 
-</div>
-
-<h1 class="page-header">Listing <%= Facility.find_by_id(params[:facility_id]).name %> Measures</h1>
-
-<div class="well col-md-12">
-<%= search_form_for [@facility, @q]  do |f| %>
-
-  <%= f.label :name_cont %>
-  <%= f.search_field :name_cont %>
-
-  <%= f.label "Starting From Date" %>
-  <%= f.bootstrap_date :start_date_gteq %>
-
-  <%= f.label "Till Date" %>
-  <%= f.bootstrap_date :end_date_lteq %>
-
-  <%= f.submit "Search", class: "btn btn-default"  %>
-<% end %>
-</div>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Value</th>
-      <th>Start date</th>
-      <th>End date</th>
-      <th colspan="10"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @measures.each do |measure| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= measure.name %></td>
-        <td><%= measure.value %></td>
-        <td><%= measure.start_date %></td>
-        <td><%= measure.end_date %></td>
-        <td><%= link_to 'Edit', edit_measure_path(measure), class: "btn-link" %></td>
-        <td><%= link_to 'Destroy', measure, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-link" %></td>
+        <th>Name</th>
+        <th>Value</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th colspan="10"></th>
       </tr>
-    <% end %>
-        <tr><%= render 'new_form' %></tr>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-<div class="import pull-right">
-<%= link_to 'New Measure    ', new_facility_measure_path(params[:facility_id]), class: "btn btn-default" %>
+    <tbody>
+      <% @measures.each do |measure| %>
+        <tr>
+          <td><%= measure.name %></td>
+          <td><%= measure.value %></td>
+          <td><%= measure.start_date %></td>
+          <td><%= measure.end_date %></td>
+          <td><%= link_to 'Edit', edit_measure_path(measure), class: "btn-link" %></td>
+          <td><%= link_to 'Destroy', measure, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-link" %></td>
+        </tr>
+      <% end %>
+          <tr><%= render 'new_form' %></tr>
+    </tbody>
+  </table>
+
+  <br>
+  <div class="import pull-right">
+  <%= link_to 'New Measure', new_facility_measure_path(params[:facility_id]), class: "btn btn-default" %>
+  </div>
 </div>

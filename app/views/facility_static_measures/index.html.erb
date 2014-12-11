@@ -1,49 +1,53 @@
+<div class="form_facility col-md-12">
 <h1 class="page-header">Listing <%= Facility.find_by_id(params[:facility_id]).name %>  Attributes</h1>
-<div class="well col-md-12">
-<%= search_form_for [@facility, @q]  do |f| %>
 
-  <%= f.label :name_cont %>
-  <%= f.search_field :name_cont %>
+  <div class="well">
+  <%= search_form_for [@facility, @q]  do |f| %>
 
-  <%= f.label "Starting From Date" %>
-  <%= f.bootstrap_date :start_date_gteq %>
+    <%= f.label :name_cont %>
+    <%= f.search_field :name_cont %>
 
-  <%= f.label "Till Date" %>
-  <%= f.bootstrap_date :end_date_lteq %>
+    <%= f.label "Starting From Date" %>
+    <%= f.bootstrap_date :start_date_gteq %>
 
-  <%= f.submit %>
-<% end %>
+    <%= f.label "Till Date" %>
+    <%= f.bootstrap_date :end_date_lteq %>
 
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Value</th>
-      <th>Start date</th>
-      <th>End date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  
-  <tbody>
-    <% @facility_static_measures.each do |facility_static_measure| %>
+    <%= f.submit "Search", class: "btn btn-default pull-right"%>
+  <% end %>
+
+  </div>
+
+  <table>
+    <thead>
       <tr>
-        <td><%= facility_static_measure.name %></td>
-        <td><%= facility_static_measure.value %></td>
-        <td><%= facility_static_measure.start_date %></td>
-        <td><%= facility_static_measure.end_date %></td>
-        <td><%= link_to 'Edit', edit_facility_static_measure_path(facility_static_measure) %></td>
-        <td><%= link_to 'Destroy', facility_static_measure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
+        <th>Name</th>
+        <th>Value</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-    <tr><%= render 'new_form' %></tr>
-  </tbody>
-</table>
+    </thead>
+    
+    <tbody>
+      <% @facility_static_measures.each do |facility_static_measure| %>
+        <tr>
+          <td><%= facility_static_measure.name %></td>
+          <td><%= facility_static_measure.value %></td>
+          <td><%= facility_static_measure.start_date %></td>
+          <td><%= facility_static_measure.end_date %></td>
+          <td><%= link_to 'Edit', edit_facility_static_measure_path(facility_static_measure) %></td>
+          <td><%= link_to 'Destroy', facility_static_measure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
-<br>
+        </tr>
+      <% end %>
+      <tr><%= render 'new_form' %></tr>
+    </tbody>
+  </table>
 
-<div class="import pull-right">
-<%= link_to 'New Facility Attribute', new_facility_facility_static_measure_path(params[:facility_id]), class: "btn btn-default"  %>
+  <br>
+
+  <div class="import pull-right">
+  <%= link_to 'New Facility Attribute', new_facility_facility_static_measure_path(params[:facility_id]), class: "btn btn-default"  %>
+  </div>
 </div>
