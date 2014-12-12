@@ -2,6 +2,14 @@
 
 one:
   name: MyString
+  company_name: MyString
+  nif: 123456789
+  sector: MyString
+  user_id: 1
 
 two:
   name: MyString
+  company_name: MyString
+  nif: 123456787
+  sector: MyString
+  user_id: 1

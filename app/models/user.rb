@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  	devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
     include RoleModel
@@ -13,7 +13,10 @@ class User < ActiveRecord::Base
 	belongs_to :address, class_name: 'Address', foreign_key: 'address_id'
 
 	accepts_nested_attributes_for :address, :roles
-	
+	validates :first_name, presence: true
+	validates :last_name, presence: true
+	validates :email, presence: true
+
 	def full_name
 		first_name + " " + last_name
 
