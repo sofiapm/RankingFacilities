@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  street: MyString
-  city: MyString
-  country: MyString
-  zip_code: 1
+joana_less_than_four:
+  street: Av. Liberdade
+  city: Lisbon
+  country: Portugal
+  zip_code: 123
 
-two:
-  street: MyString
-  city: MyString
-  country: MyString
-  zip_code: 1
+joana_great_than_four:
+  street: Av. Liberdade
+  city: Lisbon
+  country: Portugal
+  zip_code: 12356
