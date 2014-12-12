@@ -27,4 +27,5 @@ class UserTest < ActiveSupport::TestCase
 		puts user.errors.inspect
 		assert !user.errors[:email].empty?
 	end 
+	
 end
