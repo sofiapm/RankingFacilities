@@ -1,19 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  value: 1.5
-  start_date: 2014-10-12
-  end_date: 2014-10-12
-  facility_id: 1
-  user_id: 1
 
-
-two:
-  name: MyString
+tcc:
+  name: Total Cleaning Cost
   value: 1.5
-  start_date: 2014-10-12
-  end_date: 2014-10-12
+  start_date: 2014-10-20
+  end_date: 2014-11-20
   facility_id: 1
   user_id: 1
 

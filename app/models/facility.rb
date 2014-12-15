@@ -9,6 +9,8 @@ class Facility < ActiveRecord::Base
 	belongs_to :address, class_name: 'Address', foreign_key: 'address_id'
 
 	accepts_nested_attributes_for :address
+
+  validates :name, presence: true
 	# accepts_nested_attributes_for :facility_static_measure
 
 	   # def get_address

@@ -1,17 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+nfa:
+  name: Net Floor Area
   value: 1.5
-  start_date: 2014-11-20
-  end_date: 2014-11-20
-  facility_id: 1
-  user_id: 1
-
-two:
-  name: MyString
-  value: 1.5
-  start_date: 2014-11-20
+  start_date: 2014-10-20
   end_date: 2014-11-20
   facility_id: 1
   user_id: 1

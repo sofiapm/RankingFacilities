@@ -16,11 +16,13 @@
 						<div class="col-md-3 vertical-bar affix">
 					    	<%= render 'layouts/navbarVertical' %>	
 					    </div>
-					    <div class="col-md-9 col-md-offset-3">
-
-					        <p class="notice"><%= notice %></p>
-					        <p class="alert"><%= alert %></p>
-
+					    <div class="container-conteudo col-md-9 col-md-offset-3">
+					    	<% flash.each do |type, message| %>
+					    		<div class="alert <%= flash_class type %>">
+							    	<button class="close" data-dismiss="alert" >X</button>
+							    	<%= message %>
+							    </div>
+					    	<% end %>
 					        <%= yield %>
 
 					        <%= render 'layouts/footer' %>
@@ -29,8 +31,17 @@
 				</div>
 			 <% else %>
 			   	<%= render 'layouts/navbar' %>	
-			    <%= yield %>
-			    <%= render 'layouts/footer' %>
+			   	<div class=" container-fluid container-conteudo col-md-12">
+				   	<% flash.each do |type, message| %>
+					    <div class="alert <%= flash_class type %>">
+							<button class="close" data-dismiss="alert" >X</button>
+							<%= message %>
+						</div>
+					<% end %>
+				    <%= yield %>
+			    
+			    	<%= render 'layouts/footer' %>
+			    </div>
 			<% end %>
 			
 		</div>

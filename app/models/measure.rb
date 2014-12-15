@@ -3,6 +3,11 @@ class Measure < ActiveRecord::Base
 	belongs_to :facility, class_name: 'Facility', foreign_key: 'facility_id'
 	has_one :user, :through => :facility
 
+	validates :name, presence: true
+	validates :value, presence: true
+	validates :start_date, presence: true
+	validates :end_date, presence: true
+
 	def self.import(file, facility_id, current_user)
 	  spreadsheet = open_spreadsheet(file)
 	  header = spreadsheet.row(1)
