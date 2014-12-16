@@ -4,4 +4,12 @@ joana:
   last_name: Goterres
   encrypted_password: password
   address_id: 1
+  id: 1
 
+lina:
+  email: lina@gmail.com
+  first_name: Lina
+  last_name: Goterres
+  encrypted_password: password
+  address_id: 2
+  id: 2

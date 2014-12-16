@@ -62,7 +62,7 @@ class FacilityStaticMeasuresController < ApplicationController
   # DELETE /facility_static_measures/1
   # DELETE /facility_static_measures/1.json
   def destroy
-    @facility_id = @facility_static_measure.facility.id
+    @facility_id = @facility_static_measure.facility_id
     @facility_static_measure.destroy
     respond_to do |format|
       format.html { redirect_to facility_facility_static_measures_path(@facility_id), notice: 'Facility static measure was successfully destroyed.' }

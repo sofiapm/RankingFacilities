@@ -2,9 +2,12 @@ require 'test_helper'
 
 class AddressesControllerTest < ActionController::TestCase
   setup do
-    @address = addresses(:one)
+    @address = addresses(:joana_address)
+    @user = users(:joana)
   end
 
+#### O Address tem de ser acedido pelo utilizador para a facility
+### mas também pelo not-user para criar conta
   test "should get index" do
     get :index
     assert_response :success
@@ -18,7 +21,7 @@ class AddressesControllerTest < ActionController::TestCase
 
   test "should create address" do
     assert_difference('Address.count') do
-      post :create, address: { city: @address.city, country: @address.country, location: @address.location, zip_code: @address.zip_code }
+      post :create, address: { city: @address.city, country: @address.country, street: @address.street, zip_code: @address.zip_code }
     end
 
     assert_redirected_to address_path(assigns(:address))
@@ -35,7 +38,7 @@ class AddressesControllerTest < ActionController::TestCase
   end
 
   test "should update address" do
-    patch :update, id: @address, address: { city: @address.city, country: @address.country, location: @address.location, zip_code: @address.zip_code }
+    patch :update, id: @address, address: { city: @address.city, country: @address.country, street: @address.street, zip_code: @address.zip_code }
     assert_redirected_to address_path(assigns(:address))
   end
 
@@ -46,4 +49,5 @@ class AddressesControllerTest < ActionController::TestCase
 
     assert_redirected_to addresses_path
   end
+
 end

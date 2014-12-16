@@ -1,6 +1,6 @@
 class RolesController < ApplicationController
   before_filter :require_login
-  # , :authenticate
+  #, :authenticate
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   

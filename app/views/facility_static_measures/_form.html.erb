@@ -39,7 +39,7 @@
     <% if @action[:action] == 'new' %>
     <td><%= link_to 'Facility Attributes List', facility_facility_static_measures_path(@facility), class: "btn btn-default" %></td>
     <% else %>
-    <td><%= link_to 'Facility Attributes List', facility_facility_static_measures_path(@facility_static_measure.facility.id), class: "btn btn-default" %></td>
+    <td><%= link_to 'Facility Attributes List', facility_facility_static_measures_path(@facility_static_measure.facility_id), class: "btn btn-default" %></td>
     <% end %>
     </div>
     <div class="actions pull-right">

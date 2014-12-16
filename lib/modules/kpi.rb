@@ -5,20 +5,20 @@ module Kpi
 	# Metodos de Apoio
 	#
 	###################################################################################################################
-	def self.measures_output facility
-		measures = facility.measures.sort_by{|vn| vn[:date]}
-		final=[]
-		RankingFacilities::Application::METRIC_NAMES.each do |mn|
-			array = []
-			measures.each do |m|
-				if m.name.to_sym == mn[0]
-					array << m.value
-				end
-			end
-			final << {:values => array, :name => mn[1]}
-		end
-		return final
-	end
+	# def self.measures_output facility
+	# 	measures = facility.measures.sort_by{|vn| vn[:date]}
+	# 	final=[]
+	# 	RankingFacilities::Application::METRIC_NAMES.each do |mn|
+	# 		array = []
+	# 		measures.each do |m|
+	# 			if m.name.to_sym == mn[0]
+	# 				array << m.value
+	# 			end
+	# 		end
+	# 		final << {:values => array, :name => mn[1]}
+	# 	end
+	# 	return final
+	# end
 
 	#dado um array de valores de um ano, calcula a média de cada trimestre
 	def self.calc_quarter_average results
@@ -34,7 +34,7 @@ module Kpi
 				end
 			end
 		else
-			flash[:alert] = "There are no data to calculate this KPI by quarter."
+			
 			avg_by_quarter=['error','error','error','error']
 		end
 		avg_by_quarter
@@ -197,7 +197,7 @@ module Kpi
 			i = i + 1
 		end
 		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:iwc], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:iwc], :x => :tlc, :y => :ae, :year => h_tlc[:year]}
+			:type => RankingFacilities::Application::KPI_UNITS[:iwc], :x => :tlc, :y => :ae, :year => year}
 	end
 
 
@@ -229,7 +229,7 @@ module Kpi
 		end
 
 		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:wc_fte], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:wc_fte], :x => :wc, :y => :fte, :year => h_wc[:year]}
+			:type => RankingFacilities::Application::KPI_UNITS[:wc_fte], :x => :wc, :y => :fte, :year => year}
 	end
 
 	def self.best_water_consumption_fte(facility, year, facilities)
@@ -256,7 +256,7 @@ module Kpi
 		end
 
 		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:wp_fte], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:wp_fte], :x => :wp, :y => :fte, :year => h_wp[:year]}
+			:type => RankingFacilities::Application::KPI_UNITS[:wp_fte], :x => :wp, :y => :fte, :year => year}
 	end
 
 	def self.best_waste_production_fte(facility, year, facilities)
@@ -283,7 +283,7 @@ module Kpi
 		end
 
 		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:cu], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:cu], :x => :nfa, :y => :fte, :year => h_fte[:year]}
+			:type => RankingFacilities::Application::KPI_UNITS[:cu], :x => :nfa, :y => :fte, :year => year}
 	end
 
 	def self.best_capacity_vs_utilization(facility, year, facilities)
@@ -310,7 +310,7 @@ module Kpi
 		end
 
 		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:se], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:se], :x => :pa, :y => :nfa, :year => h_nfa[:year]}
+			:type => RankingFacilities::Application::KPI_UNITS[:se], :x => :pa, :y => :nfa, :year => year}
 	end
 
 	def self.best_space_experience(facility, year, facilities)
@@ -337,7 +337,7 @@ module Kpi
 		end
 
 		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:ec_nfa], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:ec_nfa], :x => :ec, :y => :nfa, :year => h_ec[:year]}
+			:type => RankingFacilities::Application::KPI_UNITS[:ec_nfa], :x => :ec, :y => :nfa, :year => year}
 	end
 
 	def self.best_energy_consumption(facility, year, facilities)
@@ -366,7 +366,7 @@ module Kpi
 		end
 
 		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:cc_nfa], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:cc_nfa], :x => :tcc, :y => :nfa, :year => h_tcc[:year]}
+			:type => RankingFacilities::Application::KPI_UNITS[:cc_nfa], :x => :tcc, :y => :nfa, :year => year}
 	end
 
 	def self.best_cleaning_cost_nfa(facility, year, facilities)
@@ -394,7 +394,7 @@ module Kpi
 			end
 		end
 		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:sc_nfa], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:sc_nfa], :x => :tsc, :y => :nfa, :year => h_tsc[:year]}
+			:type => RankingFacilities::Application::KPI_UNITS[:sc_nfa], :x => :tsc, :y => :nfa, :year => year}
 	end
 
 	def self.best_space_cost_nfa(facility, year, facilities)
@@ -426,7 +426,7 @@ module Kpi
 		end
 
 		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:oc_nfa], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:oc_nfa], :x => :toc, :y => :nfa, :year => h_toc[:year]}
+			:type => RankingFacilities::Application::KPI_UNITS[:oc_nfa], :x => :toc, :y => :nfa, :year => year}
 	end
 
 	def self.best_occupancy_cost_nfa(facility, year, facilities)

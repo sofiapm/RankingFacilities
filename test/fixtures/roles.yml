@@ -6,3 +6,12 @@ occupant_role:
   nif: 123456786
   sector: Healthcare
   user_id: 1
+  id: 1
+
+owner_role:
+  name: Occupant
+  company_name: Hospital da Luz
+  nif: 123456787
+  sector: Healthcare
+  user_id: 1
+  id: 0

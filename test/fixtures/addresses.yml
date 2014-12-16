@@ -11,3 +11,9 @@ joana_great_than_four:
   city: Lisbon
   country: Portugal
   zip_code: 12356
+
+joana_address:
+  street: Av. Liberdade
+  city: Lisbon
+  country: Portugal
+  zip_code: 1235

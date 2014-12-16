@@ -21,8 +21,11 @@ class Facility < ActiveRecord::Base
   	end
 
     def best_internal_work_cost year, facilities
-
-      Kpi.best_internal_work_cost(self, year, facilities)
+      if facilities.empty?
+        raise "There are no facilities to compare your best_internal_work_cost" 
+      else
+        Kpi.best_internal_work_cost(self, year, facilities)
+      end
     end
 
   	def water_consumption_fte year
@@ -30,7 +33,11 @@ class Facility < ActiveRecord::Base
   	end
 
     def best_water_consumption_fte year, facilities
-      Kpi.best_water_consumption_fte(self, year, facilities)
+      if facilities.empty?
+        raise "There are no facilities to compare your best_water_consumption_fte" 
+      else
+        Kpi.best_water_consumption_fte(self, year, facilities)
+      end
     end
 
   	def waste_production_fte year
@@ -38,7 +45,11 @@ class Facility < ActiveRecord::Base
   	end
 
     def best_waste_production_fte year, facilities
-      Kpi.best_waste_production_fte(self, year, facilities)
+      if facilities.empty?
+        raise "There are no facilities to compare your best_waste_production_fte" 
+      else
+        Kpi.best_waste_production_fte(self, year, facilities)
+      end
     end
 
     def costs_year
@@ -50,7 +61,11 @@ class Facility < ActiveRecord::Base
    	end
 
     def best_capacity_vs_utilization year, facilities
-      Kpi.best_capacity_vs_utilization(self, year, facilities)
+      if facilities.empty?
+        raise "There are no facilities to compare your best_capacity_vs_utilization" 
+      else
+        Kpi.best_capacity_vs_utilization(self, year, facilities)
+      end
     end
 
   	def space_experience year
@@ -58,7 +73,11 @@ class Facility < ActiveRecord::Base
   	end
 
     def best_space_experience year, facilities
-      Kpi.best_space_experience(self, year, facilities)
+      if facilities.empty?
+        raise "There are no facilities to compare your best_space_experience" 
+      else
+        Kpi.best_space_experience(self, year, facilities)
+      end
     end
 
   	def energy_consumption year
@@ -66,7 +85,11 @@ class Facility < ActiveRecord::Base
   	end
 
     def best_energy_consumption year, facilities
-      Kpi.best_energy_consumption(self, year, facilities)
+      if facilities.empty?
+        raise "There are no facilities to compare your best_energy_consumption" 
+      else
+        Kpi.best_energy_consumption(self, year, facilities)
+      end
     end
 
     def cleaning_cost_nfa year
@@ -74,7 +97,11 @@ class Facility < ActiveRecord::Base
     end
 
     def best_cleaning_cost_nfa year, facilities
-      Kpi.best_cleaning_cost_nfa(self, year, facilities)
+      if facilities.empty?
+        raise "There are no facilities to compare your best_cleaning_cost_nfa" 
+      else
+        Kpi.best_cleaning_cost_nfa(self, year, facilities)
+      end
     end
 
     def space_cost_nfa year
@@ -82,7 +109,11 @@ class Facility < ActiveRecord::Base
     end
 
     def best_space_cost_nfa year, facilities
-      Kpi.best_space_cost_nfa(self, year, facilities)
+      if facilities.empty?
+        raise "There are no facilities to compare your best_space_cost_nfa" 
+      else
+        Kpi.best_space_cost_nfa(self, year, facilities)
+      end
     end
 
     def occupancy_cost_nfa year
@@ -90,6 +121,10 @@ class Facility < ActiveRecord::Base
     end
 
     def best_occupancy_cost_nfa year, facilities
-      Kpi.best_occupancy_cost_nfa(self, year, facilities)
+      if facilities.empty?
+        raise "There are no facilities to compare your best_occupancy_cost_nfa" 
+      else
+        Kpi.best_occupancy_cost_nfa(self, year, facilities)
+      end
     end
 end
