@@ -9,7 +9,7 @@ function () {
             zoomType: 'x'
         },
         title: {
-            text: '<%=@v[:name] + ": " + @v[:year].to_s%>'
+            text: '<%=@v[:name] + ": " + @v[:year].to_s + " to " + Date.current.year.to_s %>'
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
