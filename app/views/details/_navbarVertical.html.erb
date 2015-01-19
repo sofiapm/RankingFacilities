@@ -1,11 +1,11 @@
-
-    
-        <div class="marketing"> 
+<% content_for :verticalbar do %>
+<div class="marketing"> 
             <div class="row">
                 <div class="col-md-6">
                     <ul class="nav nav-list bs-docs-sidenav" role="tablist">
                         <li class="dropdown">
                             <a class="dropdown-toggle vertical-title" data-toggle="dropdown" href="#myModal">
+                                
                                 <% if current_user.current_role != 0 %>
                                     <%= current_user.roles.find(current_user.current_role).name + ": " +  current_user.roles.find(current_user.current_role).company_name %> 
                                 <% else %>
@@ -27,35 +27,23 @@
                 </div>
                 <div class="col-md-6">
 
-                        <%=  link_to image_tag((("icon_60846copy.png" if current_user.state == "details") || "icon_60846.png"), :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/user_roles", :state => "details", :action => 'update_state', :method => :put, :approved => true %>
-                       
+                        <%=  link_to image_tag("icon_60846copy.png", :class => "img-polaroid", :style => "width: 30%; height: 30%;" ) %>
 
-                        <%=  link_to image_tag((("icon_30982copy.png" if current_user.state == "metrics") || "icon_30982.png"), :class => "img-polaroid", :style => "width: 30%; height: 30%;" ) , :controller => "/user_roles", :state => "metrics", :action => 'update_state', :method => :put, :approved => true %>
+                        <%=  link_to image_tag( "icon_30982.png", :class => "img-polaroid", :style => "width: 30%; height: 30%;" ) , :controller => "/metrics", :action => 'index' %>
 
-                        <%=  link_to  image_tag((("icon_31048copy.png" if current_user.state == "indicators") || "icon_31048.png"), :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/user_roles", :state => "indicators", :action => 'update_state', :method => :put, :approved => true %>
+                        <%=  link_to  image_tag( "icon_31048.png", :class => "img-polaroid", :style => "width: 30%; height: 20%;" ), :controller => "/indicators", :action => 'index' %>
 
                 </div> 
             </div>
             <hr class="featurette-divider">     
             <ul class="nav nav-list bs-docs-sidenav">
                 <% if current_user.current_role != 0 && current_user.roles.find(current_user.current_role).has_facilities? %> 
-                    <% if current_user.state == "details" %>
+                    
                         <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>         
                             <li><%= link_to f.name, edit_facility_path(f.id) %></li>
                         <% end %>
-                    <%  end %>
                     
-                    <% if current_user.state == "metrics" %>
-                        <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>           
-                            <li><%= link_to f.name, facility_measures_path(f.id) %></li>
-                        <% end %>
-                    <%  end %>
-
-                    <% if current_user.state == "indicators" %>
-                        <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>           
-                            <li><%= link_to f.name, facility_kpis_path(f.id) %></li>
-                        <% end %>
-                    <%  end %>
+                    
                     
                     
                 <% else %>
@@ -65,8 +53,9 @@
                 <% if current_user.current_role != 0 %>
                     <li><%= link_to "+ Add Facility", new_role_facility_path(current_user.current_role) %></li>
                 <% else %>
-                    <li><%= link_to "+ Add Facility", static_pages_error_role_empty_page_path %></li>
+                    <li><%= link_to "+ Add Facility", error_role_empty_page_path %></li>
                 <% end %>
             </ul>
 
         </div>
+        <% end %>

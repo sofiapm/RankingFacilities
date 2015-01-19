@@ -25,14 +25,14 @@
 }
 
 .conteudo{
-    padding-top: 5%;
+    padding-top: 0%;
     text-align: center;
 
 }
 
 .conteudo p {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .form_fancy{
@@ -46,7 +46,7 @@
     padding-right: 30px;
 }
 
-.vertical-bar {
+.verticalbar {
 	padding-right: 0px;
 	padding-left: 30px;
     top: 72px;
@@ -80,7 +80,7 @@
 }
 
 .mensagens{
-    padding-top: 5%;
+    padding-top: 0%;
     background-color: lightgray;
 
     font-size: 15px;

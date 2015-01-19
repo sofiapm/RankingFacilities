@@ -50,18 +50,18 @@ class ApplicationController < ActionController::Base
   def require_login
     unless logged_in?
       flash[:error] = "You must be logged in to access this section"
-      redirect_to static_pages_error_you_can_not_access_page_path # halts request cycle
+      redirect_to error_you_can_not_access_page_path # halts request cycle
     end
   end
 
   def authenticate_app
     flash[:error] = "You can not access this section"
-    redirect_to static_pages_error_you_can_not_access_page_path # halts request cycle
+    redirect_to error_you_can_not_access_page_path # halts request cycle
   end
 
   def error_add_facility
     flash[:error] = "You need to select a Role"
-    redirect_to static_pages_error_role_empty_page_path # halts request cycle
+    redirect_to error_role_empty_page_path # halts request cycle
   end
 
   # The logged_in? method simply returns true if the user is logged

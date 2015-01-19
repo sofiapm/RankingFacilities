@@ -61,43 +61,43 @@ class MeasuresControllerTest < ActionController::TestCase
   test "should not get index" do
     get :index, facility_id: @facility.id
     assert_response :redirect
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not get new" do
     get :new, facility_id: @facility.id
     assert_response :redirect
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not create measure" do
     assert_difference('FacilityStaticMeasure.count', 0) do
       post :create, measure: { end_date: @measure.end_date, facility_id: @measure.facility_id, name: @measure.name, start_date: @measure.start_date, user_id: @measure.user_id, value: @measure.value }, facility_id: @facility.id
     end
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not show measure" do
     get :show, id: @measure
     assert_response :redirect
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not get edit" do
     get :edit, id: @measure
     assert_response :redirect
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not update measure" do
     patch :update, id: @measure, measure: { end_date: @measure.end_date, facility_id: @measure.facility_id, name: @measure.name, start_date: @measure.start_date, user_id: @measure.user_id, value: @measure.value }, facility_id: @facility.id
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not destroy measure" do
     assert_difference('FacilityStaticMeasure.count', 0) do
       delete :destroy, id: @measure
     end
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 end

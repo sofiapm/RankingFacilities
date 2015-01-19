@@ -29,7 +29,6 @@ module Kpi
 				if r
 					avg_by_quarter << r.sum / r.size.to_f
 				else
-					flash[:alert] = "There are no data to calculate the quarter for this KPI."
 					avg_by_quarter << 'error'
 				end
 			end

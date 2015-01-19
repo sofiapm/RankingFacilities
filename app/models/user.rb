@@ -27,6 +27,11 @@ class User < ActiveRecord::Base
 			!roles.find_by_name(r)
 		end
 	end
+
+	def set_role_zero
+		self.current_role = 0
+		binding.pry
+	end
 end
 
 

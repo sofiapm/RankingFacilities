@@ -1,3 +1,6 @@
+<% content_for :verticalbar do %>
+	<%= render 'details/navbarVertical' %>	
+<% end %>
 <div class="form_facility col-md-12">
 <h1 class="page-header">New <%= Facility.find_by_id(params[:facility_id]).name %> Attribute</h1>
 

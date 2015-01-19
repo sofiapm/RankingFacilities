@@ -59,7 +59,7 @@ class FacilitiesController < ApplicationController
   def destroy
     @facility.destroy
     respond_to do |format|
-      format.html { redirect_to static_pages_success_page_url, notice: 'Facility was successfully destroyed.' }
+      format.html { redirect_to success_page_url, notice: 'Facility was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

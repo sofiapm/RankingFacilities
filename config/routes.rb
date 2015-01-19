@@ -3,9 +3,16 @@ Rails.application.routes.draw do
 
  
 
-  get 'static_pages/error_you_can_not_access_page' => 'static_pages#error_you_can_not_access_page'
-  get 'static_pages/error_role_empty_page' => 'static_pages#error_role_empty_page'
-  get 'static_pages/success_page' => 'static_pages#success_page'
+  get 'indicators' => 'indicators#index'
+
+  get 'metrics' => 'metrics#index'
+
+  get 'details' => 'details#index'
+
+  get 'error_you_can_not_access_page' => 'static_pages#error_you_can_not_access_page'
+  get 'error_role_empty_page' => 'static_pages#error_role_empty_page'
+  get 'success_page' => 'static_pages#success_page'
+  get 'home' => 'static_pages#home'
   get "user_roles/update" => "user_roles#update"
   put "user_roles/update" => "user_roles#update"
   get "user_roles/update_state" => "user_roles#update_state"

@@ -46,7 +46,7 @@
                 <% if current_user.current_role != 0 %>
                     <li><%= link_to "+ Add Facility", new_role_facility_path(current_user.current_role) %></li>
                 <% else %>
-                    <li><%= link_to "+ Add Facility", static_pages_error_role_empty_page_path %></li>
+                    <li><%= link_to "+ Add Facility", error_role_empty_page_path %></li>
                 <% end %>
             </ul>
 

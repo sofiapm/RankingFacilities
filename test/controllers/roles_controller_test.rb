@@ -60,13 +60,13 @@ class RolesControllerTest < ActionController::TestCase
   test "should not get index" do
     get :index
     assert_response :redirect
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not get new" do
     get :new
     assert_response :redirect
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not create role" do
@@ -74,24 +74,24 @@ class RolesControllerTest < ActionController::TestCase
       post :create, role: { name: @role.name }
     end
 
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not show role" do
     get :show, id: @role
     assert_response :redirect
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not get edit" do
     get :edit, id: @role
     assert_response :redirect
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not update role" do
     patch :update, id: @role, role: { name: @role.name }
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 
   test "should not destroy role" do
@@ -99,6 +99,6 @@ class RolesControllerTest < ActionController::TestCase
       delete :destroy, id: @role
     end
 
-    assert_redirected_to static_pages_error_you_can_not_access_page_path
+    assert_redirected_to error_you_can_not_access_page_path
   end
 end
