@@ -3,6 +3,16 @@ Rails.application.routes.draw do
 
  
 
+  get 'granular_measure/new'
+
+  get 'granular_measure/create'
+
+  get 'granular_measure/edit'
+
+  get 'granular_measure/update'
+
+  get 'granular_measure/destroy'
+
   get 'indicators' => 'indicators#index'
 
   get 'metrics' => 'metrics#index'

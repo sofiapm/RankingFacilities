@@ -1,18 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-joana_less_than_four:
+jane_less_than_four:
   street: Av. Liberdade
   city: Lisbon
   country: Portugal
   zip_code: 123
 
-joana_great_than_four:
+jane_great_than_four:
   street: Av. Liberdade
   city: Lisbon
   country: Portugal
   zip_code: 12356
 
-joana_address:
+jane_address:
   street: Av. Liberdade
   city: Lisbon
   country: Portugal

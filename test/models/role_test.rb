@@ -30,7 +30,7 @@ class RoleTest < ActiveSupport::TestCase
 
 	test "a role should have an unique nif" do
 		role = Role.new
-		role.nif = roles(:occupant_role).nif
+		role.nif = roles(:jane_occupant_role).nif
 
 		assert !role.save
 		puts role.errors.inspect

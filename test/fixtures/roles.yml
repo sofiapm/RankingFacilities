@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-occupant_role:
+jane_occupant_role:
   name: Occupant
   company_name: Hospital da Luz
   nif: 123456786
@@ -8,10 +8,26 @@ occupant_role:
   user_id: 1
   id: 1
 
-owner_role:
-  name: Occupant
+jane_owner_role:
+  name: Owner
   company_name: Hospital da Luz
   nif: 123456787
   sector: Healthcare
   user_id: 1
   id: 0
+
+john_occupant_role:
+  name: Occupant
+  company_name: Hospital da Luz
+  nif: 129056786
+  sector: Healthcare
+  user_id: 1
+  id: 2
+
+john_owner_role:
+  name: Owner
+  company_name: Hospital da Luz
+  nif: 123906787
+  sector: Healthcare
+  user_id: 1
+  id: 3

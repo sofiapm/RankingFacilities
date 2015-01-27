@@ -36,6 +36,7 @@ class FacilityStaticMeasuresController < ApplicationController
 
     respond_to do |format|
       if @facility_static_measure.save
+        
         format.html { redirect_to edit_facility_static_measure_path(@facility_static_measure), notice: 'Facility static measure was successfully created.' }
         format.json { render :edit, status: :created, location: @facility_static_measure }
       else

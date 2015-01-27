@@ -4,7 +4,7 @@ class MeasuresControllerTest < ActionController::TestCase
   setup do
     @measure = measures(:tcc)
     @facility = facilities(:Vodafone)
-    @user = users(:joana)
+    @user = users(:jane)
   end
 
 ######### Passa se user logged in ############

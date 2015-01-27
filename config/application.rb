@@ -15,11 +15,11 @@ module RankingFacilities
     ROLES_NAMES = { occupant: 'Occupant', owner: 'Owner', facility_manager: 'Facility Manager', service_operator: 'Service Operator' }
     #ROLES_SECTOR = { sector1: 'Sector 1', sector2: 'Sector 2', sector3: 'Sector 3', sector4: 'Sector 4', sector5: 'Sector 5', sector6: 'Sector 6'}
     
-    ATTRIBUTES_NAMES = { nfa: 'Net Floor Area', pa: 'Primary Area'}
+    ATTRIBUTES_NAMES = { nfa: 'Net Floor Area', pa: 'Primary Area', tlc: 'Total Level Area', fte: 'Full Time Equivalent',}
     ATTRIBUTES_UNITS = { nfa: 'm2', pa: 'm2'}
 
     METRIC_NAMES = { tlc: 'Total Labour Costs', tcc: 'Total Cleaning Cost', tsc: 'Total Space Cost', toc: 'Total Occupancy Cost',
-     ae: 'Actual Expenses', fte: 'Full Time Equivalent', ec: 'Energy Consumption', wc: 'Water Consumption', wp: 'Waste Production' }
+     ae: 'Actual Expenses', ec: 'Energy Consumption', wc: 'Water Consumption', wp: 'Waste Production' }
     METRIC_UNITS = { tlc: '€', tcc: '€', tsc: '€', toc: '€', ae: '€', fte: 'u', ec: 'kWh', wc: 'm3', wp: 'ton'}
     
     KPI_NAMES = { cc_nfa: 'Cleaning Cost per Square Meter', sc_nfa: 'Space Cost per Square Meter', oc_nfa: 'Occupancy Cost per Square Meter', 

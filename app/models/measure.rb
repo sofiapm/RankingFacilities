@@ -1,7 +1,8 @@
 class Measure < ActiveRecord::Base
-
+	include DefineGranularMeasure
 	belongs_to :facility, class_name: 'Facility', foreign_key: 'facility_id'
 	has_one :user, :through => :facility
+	has_many :granular_measures, class_name: 'GranularMeasure', foreign_key: 'measure_id', dependent: :destroy
 
 	validates :name, presence: true
 	validates :value, presence: true
@@ -14,9 +15,9 @@ class Measure < ActiveRecord::Base
 	  (2..spreadsheet.last_row).each do |i|
 	    row = Hash[[header, spreadsheet.row(i)].transpose]
 		if !row["name"] or !RankingFacilities::Application::METRIC_NAMES.inject([]){|acum, (key, value) | acum << value }.include? row["name"]
-			raise "You have empty or not valid values on 'name' column."
+			raise "You have empty or not valid values on 'name' column: " +  row["name"]
 		elsif !row["value"] or !row["value"].is_a? Float
-			raise "You have empty or not valid values on 'value' column."
+			raise "You have empty or not valid values on 'value' column: "
 		elsif !row["start_date"] or !row["start_date"].is_a? Date
 			raise "You have empty or not valid values on 'start_date' column."
 		elsif !row["end_date"] or !row["end_date"].is_a? Date
@@ -28,6 +29,7 @@ class Measure < ActiveRecord::Base
 	    row["user_id"]= current_user
 	    measure.attributes = row.to_hash.slice(*Measure.attribute_names())
 	    measure.save!
+	    DefineGranularMeasure.add_granular_measure(measure)
 	  end
 	end
 

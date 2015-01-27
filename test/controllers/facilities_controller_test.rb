@@ -3,8 +3,10 @@ require 'test_helper'
 class FacilitiesControllerTest < ActionController::TestCase
   setup do
     @static_measure = facility_static_measures(:nfa)
+    @address = addresses(:jane_address)
+    @role = roles(:jane_occupant_role)
     @facility = facilities(:Vodafone)
-    @user = users(:joana)
+    @user = users(:jane)
     :initialize_facility_static_measures
   end
 
@@ -37,10 +39,11 @@ class FacilitiesControllerTest < ActionController::TestCase
   #   sign_in @user
 
   #   assert_difference('Facility.count') do
-  #     post :create, facility: { name: @facility.name, role_id: @facility.role_id, address_id: @facility.address_id, user_id: @facility.user_id}, address_id: @facility.address_id, role_id: @facility.role_id
+  #     post :create, facility: { name: @facility.name, role_id: @role.id, address_id: @address.id, user_id: @user.id,
+  #                               street: @address.street, city: @address.city, country: @address.country, zip_code: @address.zip_code}
   #   end
 
-  #   assert_redirected_to edit_facility_path(@facility.id)
+  #   assert_redirected_to edit_facility_path(assigns(:facility))
   # end
 
   test "create-should get redirect to error page if not loged in" do
@@ -86,15 +89,16 @@ class FacilitiesControllerTest < ActionController::TestCase
     assert_redirected_to error_you_can_not_access_page_path
   end
 
-  # test "should destroy facility if loged in" do
-  #   sign_in @user
-  #   @static_measure.facility_id = @facility.id
-  #   assert_difference('Facility.count', -1) do
-  #     delete :destroy, id: @facility, facility: { name: @facility.name}
-  #   end
+  test "should destroy facility if loged in" do
+    sign_in @user
+    @static_measure.facility_id = @facility.id
+    assert_difference('Facility.count', -1) do
+      delete :destroy, id: @facility, facility: { name: @facility.name}
+    end
 
-  #   assert_redirected_to facilities_path
-  # end
+    assert_redirected_to success_page_url
+  end
+
 
   test "destroy-should get redirect to error page if not loged in" do
     assert_difference('Facility.count', 0) do

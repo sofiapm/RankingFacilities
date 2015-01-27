@@ -40,12 +40,6 @@
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
-	<% @v = @facility.waste_production_fte(year) %>
-	<%= render 'graph', @v %>
-	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_waste_production_fte(year, @all_facilities) %>
-		<%= render 'linecolumnchart', @v %>
-	<% end %>
 
 	<% @v = @facility.capacity_vs_utilization(year) %>
 	<%= render 'graph', @v %>

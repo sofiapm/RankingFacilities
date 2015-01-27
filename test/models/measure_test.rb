@@ -12,8 +12,8 @@ class MeasureTest < ActiveSupport::TestCase
 
 		measure.name = "Nome Measure"
 
-		assert !measure.save
-		assert !measure.errors[:name].empty?
+		assert_not measure.save
+		assert_not measure.errors[:name].empty?
 	end 
 
 	test "a user should enter a value" do

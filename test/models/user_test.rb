@@ -21,7 +21,7 @@ class UserTest < ActiveSupport::TestCase
 
 	test "a user should have an unique email" do
 		user = User.new
-		user.email = users(:joana).email
+		user.email = users(:jane).email
 
 		assert !user.save
 		puts user.errors.inspect

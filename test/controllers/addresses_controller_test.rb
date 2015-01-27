@@ -2,8 +2,8 @@ require 'test_helper'
 
 class AddressesControllerTest < ActionController::TestCase
   setup do
-    @address = addresses(:joana_address)
-    @user = users(:joana)
+    @address = addresses(:jane_address)
+    @user = users(:jane)
   end
 
 #### O Address tem de ser acedido pelo utilizador para a facility

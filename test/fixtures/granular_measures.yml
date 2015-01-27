@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 0.2
+  day: 2014-10-20
+  measure_id: 1
+
+two:
+  value: 0.2
+  day: 2014-10-21
+  measure_id: 1
+
+three:
+  value: 0.2
+  day: 2014-10-22
+  measure_id: 1

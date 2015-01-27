@@ -1,4 +1,5 @@
 class MeasuresController < ApplicationController
+  include DefineGranularMeasure
   before_filter :require_login, :authenticate
   before_action :set_measure, only: [:show, :edit, :update, :destroy]
 
@@ -31,9 +32,10 @@ class MeasuresController < ApplicationController
   # POST /measures.json
   def create
     @measure = Measure.new(measure_params)
-
+    
     respond_to do |format|
       if @measure.save
+        DefineGranularMeasure.add_granular_measure(@measure)
         format.html { redirect_to edit_measure_path(@measure), notice: 'Measure was successfully created.' }
         format.json { render :edit, status: :created, location: @measure }
       else

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120124554) do
+ActiveRecord::Schema.define(version: 20150119125652) do
 
   create_table "addresses", force: true do |t|
     t.string   "street",     null: false
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 20141120124554) do
     t.date     "end_date"
     t.integer  "facility_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "granular_measures", force: true do |t|
+    t.float    "value",      null: false
+    t.date     "day",        null: false
+    t.integer  "measure_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

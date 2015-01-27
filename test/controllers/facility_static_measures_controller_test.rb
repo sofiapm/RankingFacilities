@@ -4,7 +4,7 @@ class FacilityStaticMeasuresControllerTest < ActionController::TestCase
   setup do
     @facility_static_measure = facility_static_measures(:nfa)
     @facility = facilities(:Vodafone)
-    @user = users(:joana)
+    @user = users(:jane)
   end
 
 ######### Passa se user logged in ############

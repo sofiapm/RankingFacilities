@@ -2,8 +2,8 @@ require 'test_helper'
 
 class RolesControllerTest < ActionController::TestCase
   setup do
-    @role = roles(:occupant_role)
-    @user = users(:joana)
+    @role = roles(:jane_occupant_role)
+    @user = users(:jane)
   end
   ######## Passa se Loged In #########
   test "should get index" do
@@ -22,10 +22,10 @@ class RolesControllerTest < ActionController::TestCase
   test "should create role" do
     sign_in @user
     assert_difference('Role.count') do
-      post :create, role: { name: "Facility Manager" }
+      post :create, role: { name: "Facility Manager", company_name: "CreateTest: Roles", nif: "911234567", sector: "Healthcare", user_id: @user.id }
     end
 
-    assert_redirected_to role_path(assigns(:role))
+    assert_redirected_to edit_role_path(assigns(:role))
   end
 
   test "should show role" do
