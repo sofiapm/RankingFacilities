@@ -30,7 +30,7 @@ gem 'pry-rescue',        group: :development
 gem 'pry-stack_explorer',        group: :development
 
 gem 'rails_12factor', group: :production
-# gem 'pg', group: :production
+gem 'pg', group: :production
 
 gem 'devise'
 gem 'cancancan', '~> 1.9'
