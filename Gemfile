@@ -29,6 +29,8 @@ gem 'pry',        group: :development
 gem 'pry-rescue',        group: :development
 gem 'pry-stack_explorer',        group: :development
 
+gem 'rails_12factor', group: :production
+
 gem 'devise'
 gem 'cancancan', '~> 1.9'
 
@@ -54,4 +56,6 @@ gem 'seed-fu', '~> 2.3'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+#ruby "2.2.0"
 
