@@ -85,7 +85,7 @@ module Kpi
 
 		unless !year || year == ""
 			#se o ano tiver sido especificado no search
-			measures = facility.measures.where("strftime('%Y', start_date) <= ? AND strftime('%Y', end_date) >= ? AND name = ?", year.to_i.to_s, year.to_i.to_s, nome_measure).sort_by{|vn| vn[:date]}
+			measures = facility.measures.where("extract(year from start_date) <= ? AND extract(year from end_date) >= ? AND name = ?", year.to_i.to_s, year.to_i.to_s, nome_measure).sort_by{|vn| vn[:date]}
 		else
 			#se não o ano não tiver sido especificado no search
 			measures = facility.measures.where(name: nome_measure).sort_by{|vn| vn[:date]}
@@ -144,14 +144,14 @@ module Kpi
 			if !firstyear || !lastyear
 				measures = FacilityStaticMeasure.where(facility_id: facility.id, name: nome_measure).sort_by{|vn| vn[:start_date]}
 			else
-				measures = FacilityStaticMeasure.where(facility_id: facility.id, name: nome_measure).where("strftime('%Y', start_date) <= ? AND strftime('%Y', end_date) >= ?", firstyear.to_i.to_s, lastyear.to_i.to_s).sort_by{|vn| vn[:date]}
+				measures = FacilityStaticMeasure.where(facility_id: facility.id, name: nome_measure).where("extract(year from start_date) <= ? AND extract(year from end_date) >= ?", firstyear.to_i.to_s, lastyear.to_i.to_s).sort_by{|vn| vn[:date]}
 			end
 			
 			if measures.first
 				year = measures.first.end_date.year
 			end
 		else
-			measures = FacilityStaticMeasure.where(facility_id: facility.id, name: nome_measure).where("strftime('%Y', start_date) <= ? AND strftime('%Y', end_date) >= ?", year.to_i.to_s, year.to_i.to_s).sort_by{|vn| vn[:date]}
+			measures = FacilityStaticMeasure.where(facility_id: facility.id, name: nome_measure).where("extract(year from start_date) <= ? AND extract(year from end_date) >= ?", year.to_i.to_s, year.to_i.to_s).sort_by{|vn| vn[:date]}
 		end 
 		
 		array = []
@@ -197,7 +197,7 @@ module Kpi
 	# 	if !year or year == ""
 	# 		measures = facility.measures.where(name: nome_measure).sort_by{|vn| vn[:start_date]}
 	# 	else
-	# 		measures = facility.measures.where("strftime('%Y', start_date) <= ? AND strftime('%Y', end_date) >= ? AND name = ?", year.to_i.to_s, year.to_i.to_s, nome_measure).sort_by{|vn| vn[:date]}
+	# 		measures = facility.measures.where("extract(year from start_date) <= ? AND extract(year from end_date) >= ? AND name = ?", year.to_i.to_s, year.to_i.to_s, nome_measure).sort_by{|vn| vn[:date]}
 	# 	end 
 			
 	# 	array = []
@@ -221,7 +221,7 @@ module Kpi
 	# 	if !year or year == ""
 	# 		measures = FacilityStaticMeasure.where(facility_id: facility.id, name: nome_measure).sort_by{|vn| vn[:start_date]}
 	# 	else
-	# 		measures = FacilityStaticMeasure.where(facility_id: facility.id, name: nome_measure).where("strftime('%Y', start_date) <= ? AND strftime('%Y', end_date) >= ?", year.to_i.to_s, year.to_i.to_s).sort_by{|vn| vn[:date]}
+	# 		measures = FacilityStaticMeasure.where(facility_id: facility.id, name: nome_measure).where("extract(year from start_date) <= ? AND extract(year from end_date) >= ?", year.to_i.to_s, year.to_i.to_s).sort_by{|vn| vn[:date]}
 	# 	end 
 		
 	# 	array = []
