@@ -181,6 +181,7 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
+    wisper (1.6.0)
 
 PLATFORMS
   ruby
@@ -211,3 +212,4 @@ DEPENDENCIES
   therubyracer
   turbolinks
   uglifier
+  wisper
