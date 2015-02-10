@@ -1,6 +1,6 @@
 class KpisController < ApplicationController
   include Kpi
-	# before_filter :require_login, :authenticate
+	before_filter :require_login, :authenticate
 
 	def index
     @facility = Facility.find(params['facility_id'])
