@@ -1,6 +1,6 @@
 class MeasuresController < ApplicationController
   include DefineGranularMeasure
-  before_filter :require_login, :authenticate
+  # before_filter :require_login, :authenticate
   before_action :set_measure, only: [:show, :edit, :update, :destroy]
 
   # GET /measures
