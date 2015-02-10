@@ -32,10 +32,15 @@ class MeasuresController < ApplicationController
   # POST /measures.json
   def create
     @measure = Measure.new(measure_params)
-    
+    # @measure.subscribe(CalculateIndicators)
+
+    # @measure.on(:import_finished) { |facility, date_created_at| CalculateIndicators.calculate_indicators(facility, date_created_at) }
+    # @measure.on(:added_measure) { |facility, date_created_at| CalculateIndicators.calculate_indicators(facility, date_created_at) }
+    # @measure.execute(:added_measure, @measure.facility, @measure.created_at)
     respond_to do |format|
       if @measure.save
         DefineGranularMeasure.add_granular_measure(@measure)
+        CalculateIndicators.calculate_indicators(facility, date_created_at)
         format.html { redirect_to edit_measure_path(@measure), notice: 'Measure was successfully created.' }
         format.json { render :edit, status: :created, location: @measure }
       else

@@ -26,65 +26,63 @@
 	<% year = params[:year] || '' %>
 	<div class="indicators_graph col-md-12 pull-left">
 	
-	<% @v = @facility.internal_work_cost(year) %>
+	<% @v = @facility.kpi_query(:iwc, @facility, year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_internal_work_cost(year, @all_facilities) %>
+		<% @v = @facility.best_kpi_query(:iwc, year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
-	<% @v = @facility.water_consumption_fte(year) %>
+	<% @v = @facility.kpi_query(:wc_fte, @facility, year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_water_consumption_fte(year, @all_facilities) %>
+		<% @v = @facility.best_kpi_query(:wc_fte, year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
-
-	<% @v = @facility.capacity_vs_utilization(year) %>
+	<% @v = @facility.kpi_query(:ec_nfa, @facility, year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_capacity_vs_utilization(year, @all_facilities) %>
+		<% @v = @facility.best_kpi_query(:ec_nfa, year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
-	<% @v = @facility.space_experience(year) %>
+	<% @v = @facility.kpi_query(:cc_nfa, @facility, year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_space_experience(year, @all_facilities) %>
+		<% @v = @facility.best_kpi_query(:cc_nfa, year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
-	<% @v = @facility.energy_consumption(year) %>
+	<% @v = @facility.kpi_query(:sc_nfa, @facility, year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_energy_consumption(year, @all_facilities) %>
+		<% @v = @facility.best_kpi_query(:sc_nfa, year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
-	<% @v = @facility.cleaning_cost_nfa(year) %>
+	<% @v = @facility.kpi_query(:oc_nfa, @facility, year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_cleaning_cost_nfa(year, @all_facilities) %>
+		<% @v = @facility.best_kpi_query(:oc_nfa, year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
-	<% @v = @facility.space_cost_nfa(year) %>
+	<% @v = @facility.kpi_query(:cu, @facility, year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_space_cost_nfa(year, @all_facilities) %>
+		<% @v = @facility.best_kpi_query(:cu, year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
-	<% @v = @facility.occupancy_cost_nfa(year) %>
+	<% @v = @facility.kpi_query(:se, @facility, year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_occupancy_cost_nfa(year, @all_facilities) %>
+		<% @v = @facility.best_kpi_query(:se, year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
-
 	<% @v = @facility.costs_year %>
-	<%= render 'columnbasicsgraph', @v %>
+	<%= render 'columnbasicsgraph', @v %> 
 
 	</div>
 

@@ -1,40 +1,10 @@
 module Kpi
-
+	include CalculateIndicators
 	###################################################################################################################
 	#
 	# Metodos de Apoio
 	#
-	###################################################################################################################
-
-	#dado um array de valores de um ano, calcula a média de cada trimestre
-	def self.calc_quarter_average results
-		
-		if results.size>0
-			result_by_quarter=results.in_groups(4, 0)
-			avg_by_quarter = []
-
-			result_by_quarter.each do |r|
-				if r
-					avg_by_quarter << r.sum / r.size.to_f
-				else
-					avg_by_quarter << 0
-				end
-			end
-		else
-			
-			avg_by_quarter=[ ]
-		end
-		avg_by_quarter
-	end
-
-	def self.avg array
-		if array.size > 0
-			average = array.sum / array.size.to_f
-		else 
-			average = 0
-		end
-	end
-
+	##################################################################################################################
 	# verifica qual a facility com melhores resultados de um determinado KPI
 	def self.best_facility_method method, facilities, year
 		best_average = {}
@@ -42,7 +12,7 @@ module Kpi
 
 			results = send(method, f, year)
 			
-			average = avg results[:values]
+			average = CalculateIndicators.AuxiliarKpiCalc.avg results[:values]
 
 			unless best_average[:average]
 				best_average = {:results => results, :average => average}
@@ -55,25 +25,6 @@ module Kpi
 		best_average
 	end
 
-	#recebe um array com um valor de medida por cada dia e soma-os para ter o valor do mês
-	def self.get_month_value array
-		value = 0
-		array.each do |a|
-			value = value + a.value
-		end
-		value
-	end
-
-	#se o ano nõ tiver especificado anteriormente, então year=ano corrente
-	def self.specify_year year
-		
-		if year == '' or !year
-			year = Date.current.year
-		end
-		
-		year
-		
-	end
 
 	#devolve um array com todos os valores de uma determinada measure ordenada por data
 	#pode corresponder a um determinado ano
@@ -111,7 +62,7 @@ module Kpi
 		array_month_value = []
 		#itera sobre cada um dos meses do ano
 		grouped_array_granular_measures.each do |gm|
-				month_value = get_month_value(gm.second)
+				month_value = AuxiliarKpiCalc.get_month_value(gm.second)
 				#array para fazer os calculos dos indicadores
 				array_month_value << month_value 
 		end
@@ -186,56 +137,6 @@ module Kpi
 		{value: array, year: year}
 	end
 
-	#Quando nao temos em conta os valores por dia e assumimos que o utilizador coloca os valores de measure do dia 1 ao ultimo dia do mês
-	# #devolve um array com todos os valores de uma determinada measure ordenada por data
-	# #pode corresponder a um determinado ano
-	# def self.measurement *args
-	# 	facility=args[0]
-	# 	nome_measure = args[1]
-	# 	year=args[2]
-
-	# 	if !year or year == ""
-	# 		measures = facility.measures.where(name: nome_measure).sort_by{|vn| vn[:start_date]}
-	# 	else
-	# 		measures = facility.measures.where("extract(year from start_date) <= ? AND extract(year from end_date) >= ? AND name = ?", year.to_i.to_s, year.to_i.to_s, nome_measure).sort_by{|vn| vn[:date]}
-	# 	end 
-			
-	# 	array = []
-	# 	measures.each do |m|
-	# 		array << m.value
-	# 	end
-	# 	if measures.first
-	# 		year = measures.first.end_date.year
-	# 	end
-
-	# 	{value: array, year: year}
-	# end
-
-	# #devolve um array com todos os valores de uma determinada measure estatica ordenada por data
-	# #pode corresponder a um determinado ano
-	# def self.static_measurement *args
-	# 	facility=args[0]
-	# 	nome_measure = args[1]
-	# 	year=args[2]
-
-	# 	if !year or year == ""
-	# 		measures = FacilityStaticMeasure.where(facility_id: facility.id, name: nome_measure).sort_by{|vn| vn[:start_date]}
-	# 	else
-	# 		measures = FacilityStaticMeasure.where(facility_id: facility.id, name: nome_measure).where("extract(year from start_date) <= ? AND extract(year from end_date) >= ?", year.to_i.to_s, year.to_i.to_s).sort_by{|vn| vn[:date]}
-	# 	end 
-		
-	# 	array = []
-	# 	measures.each do |m|
-	# 		array << m.value
-	# 	end
-
-	# 	if measures.first
-	# 		year = measures.first.start_date.year
-	# 	end
-	
-	# 	{value: array, year: year}
-	# end
-
 
 	###################################################################################################################
 	#
@@ -265,7 +166,7 @@ module Kpi
 	# Encontra os resultados da melhor facility relativamente a este indicador
 	def self.best_internal_work_cost(facility, year, facilities)
 
-		year = specify_year year
+		year = AuxiliarKpiCalc.specify_year year
 
 		my_facility_results=internal_work_cost(facility, year)
 
@@ -273,8 +174,8 @@ module Kpi
 		
 		best_average = best_facility_method :internal_work_cost, facilities, year
 
-		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
-		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
+		my_facility_results[:values] = AuxiliarKpiCalc.calc_quarter_average(my_facility_results[:values])
+		best_average[:results][:values] = AuxiliarKpiCalc.calc_quarter_average(best_average[:results][:values])
 
 		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
 	end
@@ -295,13 +196,13 @@ module Kpi
 	end
 
 	def self.best_water_consumption_fte(facility, year, facilities)
-		year = specify_year year
+		year = AuxiliarKpiCalc.specify_year year
 		my_facility_results=water_consumption_fte(facility, year)
 		facilities = facilities || Facility.all
 		best_average = best_facility_method :water_consumption_fte, facilities, year
 		
-		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
-		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
+		my_facility_results[:values] = AuxiliarKpiCalc.calc_quarter_average(my_facility_results[:values])
+		best_average[:results][:values] = AuxiliarKpiCalc.calc_quarter_average(best_average[:results][:values])
 
 	
 		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
@@ -322,13 +223,13 @@ module Kpi
 	end
 
 	def self.best_waste_production_fte(facility, year, facilities)
-		year = specify_year year
+		year = AuxiliarKpiCalc.specify_year year
 		my_facility_results=waste_production_fte(facility, year)
 		facilities = facilities || Facility.all
 		best_average = best_facility_method :waste_production_fte, facilities, year
 		
-		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
-		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
+		my_facility_results[:values] = AuxiliarKpiCalc.calc_quarter_average(my_facility_results[:values])
+		best_average[:results][:values] = AuxiliarKpiCalc.calc_quarter_average(best_average[:results][:values])
 
 	
 		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
@@ -350,13 +251,13 @@ module Kpi
 	end
 
 	def self.best_capacity_vs_utilization(facility, year, facilities)
-		year = specify_year year
+		year = AuxiliarKpiCalc.specify_year year
 		my_facility_results=capacity_vs_utilization(facility, year)
 		facilities = facilities || Facility.all
 		best_average = best_facility_method :capacity_vs_utilization, facilities, year
 		
-		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
-		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
+		my_facility_results[:values] = AuxiliarKpiCalc.calc_quarter_average(my_facility_results[:values])
+		best_average[:results][:values] = AuxiliarKpiCalc.calc_quarter_average(best_average[:results][:values])
 
 		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
 	end
@@ -376,13 +277,13 @@ module Kpi
 	end
 
 	def self.best_space_experience(facility, year, facilities)
-		year = specify_year year
+		year = AuxiliarKpiCalc.specify_year year
 		my_facility_results=space_experience(facility, year)
 		facilities = facilities || Facility.all
 		best_average = best_facility_method :space_experience, facilities, year
 		
-		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
-		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
+		my_facility_results[:values] = AuxiliarKpiCalc.calc_quarter_average(my_facility_results[:values])
+		best_average[:results][:values] = AuxiliarKpiCalc.calc_quarter_average(best_average[:results][:values])
 
 
 		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
@@ -404,41 +305,13 @@ module Kpi
 	end
 
 	def self.best_energy_consumption(facility, year, facilities)
-		year = specify_year year
+		year = AuxiliarKpiCalc.specify_year year
 		my_facility_results=energy_consumption(facility, year)
 		facilities = facilities || Facility.all
 		best_average = best_facility_method :energy_consumption, facilities, year
 		
-		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
-		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
-
-	
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
-	end
-
-	def self.cleaning_cost_nfa(facility, year)
-		h_ec = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:ec], year)
-		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], year, h_ec[:year], h_ec[:lastyear], h_ec[:month_per_year])
-		
-		array = []
-		i=0
-		while i < h_ec[:value].size do
-			array << (h_ec[:value][i].to_f / h_nfa[:value][i].to_f ).round(2)
-			i = i + 1
-		end
-
-		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:ec_nfa], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:ec_nfa], :x => :ec, :y => :nfa, :year => h_ec[:year]}
-	end
-
-	def self.cleaning_cost_nfa(facility, year, facilities)
-		year = specify_year year
-		my_facility_results=energy_consumption(facility, year)
-		facilities = facilities || Facility.all
-		best_average = best_facility_method :energy_consumption, facilities, year
-		
-		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
-		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
+		my_facility_results[:values] = AuxiliarKpiCalc.calc_quarter_average(my_facility_results[:values])
+		best_average[:results][:values] = AuxiliarKpiCalc.calc_quarter_average(best_average[:results][:values])
 
 	
 		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
@@ -462,13 +335,13 @@ module Kpi
 	end
 
 	def self.best_cleaning_cost_nfa(facility, year, facilities)
-		year = specify_year year
+		year = AuxiliarKpiCalc.specify_year year
 		my_facility_results=cleaning_cost_nfa(facility, year)
 		facilities = facilities || Facility.all
 		best_average = best_facility_method :cleaning_cost_nfa, facilities, year
 		
-		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
-		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
+		my_facility_results[:values] = AuxiliarKpiCalc.calc_quarter_average(my_facility_results[:values])
+		best_average[:results][:values] = AuxiliarKpiCalc.calc_quarter_average(best_average[:results][:values])
 
 	
 		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
@@ -491,13 +364,13 @@ module Kpi
 	end
 
 	def self.best_space_cost_nfa(facility, year, facilities)
-		year = specify_year year
+		year = AuxiliarKpiCalc.specify_year year
 		my_facility_results=space_cost_nfa(facility, year)
 		facilities = facilities || Facility.all
 		best_average = best_facility_method :space_cost_nfa, facilities, year
 		
-		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
-		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
+		my_facility_results[:values] = AuxiliarKpiCalc.calc_quarter_average(my_facility_results[:values])
+		best_average[:results][:values] = AuxiliarKpiCalc.calc_quarter_average(best_average[:results][:values])
 
 	
 		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
@@ -524,15 +397,15 @@ module Kpi
 	end
 
 	def self.best_occupancy_cost_nfa(facility, year, facilities)
-		year = specify_year year
+		year = AuxiliarKpiCalc.specify_year year
 		my_facility_results = occupancy_cost_nfa(facility, year)
 
 		facilities = facilities || Facility.all
 
         best_average = best_facility_method :occupancy_cost_nfa, facilities, year
 		
-		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
-		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
+		my_facility_results[:values] = AuxiliarKpiCalc.calc_quarter_average(my_facility_results[:values])
+		best_average[:results][:values] = AuxiliarKpiCalc.calc_quarter_average(best_average[:results][:values])
 
 		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
 	end
@@ -540,9 +413,9 @@ module Kpi
 	#substituir por cleaning, space e occupancy costs
 	def self.costs_year facility
 		year = Date.current.year
-		hash = {:first => {:name => year-2, :values => [avg(cleaning_cost_nfa(facility, (year-2).to_s)[:values]).round(2), avg(space_cost_nfa(facility, (year-2).to_s)[:values]).round(2), avg(occupancy_cost_nfa(facility, (year-2).to_s)[:values]).round(2) ]}}
-		hash[:second]={:name => year-1, :values => [avg(cleaning_cost_nfa(facility, (year-1).to_s)[:values]).round(2), avg(space_cost_nfa(facility, (year-1).to_s)[:values]).round(2), avg(occupancy_cost_nfa(facility, (year-1).to_s)[:values]).round(2) ]}
-		hash[:third]={:name => year, :values => [avg(cleaning_cost_nfa(facility, year.to_s)[:values]).round(2), avg(space_cost_nfa(facility, year.to_s)[:values]).round(2), avg(occupancy_cost_nfa(facility, year.to_s)[:values]).round(2) ]}
+		hash = {:first => {:name => year-2, :values => [AuxiliarKpiCalc.avg(cleaning_cost_nfa(facility, (year-2).to_s)[:values]).round(2), AuxiliarKpiCalc.avg(space_cost_nfa(facility, (year-2).to_s)[:values]).round(2), AuxiliarKpiCalc.avg(occupancy_cost_nfa(facility, (year-2).to_s)[:values]).round(2) ]}}
+		hash[:second]={:name => year-1, :values => [AuxiliarKpiCalc.avg(cleaning_cost_nfa(facility, (year-1).to_s)[:values]).round(2), AuxiliarKpiCalc.avg(space_cost_nfa(facility, (year-1).to_s)[:values]).round(2), AuxiliarKpiCalc.avg(occupancy_cost_nfa(facility, (year-1).to_s)[:values]).round(2) ]}
+		hash[:third]={:name => year, :values => [AuxiliarKpiCalc.avg(cleaning_cost_nfa(facility, year.to_s)[:values]).round(2), AuxiliarKpiCalc.avg(space_cost_nfa(facility, year.to_s)[:values]).round(2), AuxiliarKpiCalc.avg(occupancy_cost_nfa(facility, year.to_s)[:values]).round(2) ]}
 		hash[:categories] = ["Cleaning", "Space", "Occupancy"]
 		hash[:graph_name] = 'Cost per NFA'
 		hash

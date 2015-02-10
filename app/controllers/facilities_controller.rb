@@ -2,6 +2,7 @@ class FacilitiesController < ApplicationController
   before_filter :require_login, :authenticate
   before_action :set_facility, only: [:show, :edit, :update, :destroy]
 
+
   # GET /facilities
   # GET /facilities.json
   def index
@@ -28,9 +29,16 @@ class FacilitiesController < ApplicationController
   # POST /facilities.json
   def create
     @facility = Facility.new(facility_params)
+    # service = Measure.new
+    # service.subscribe(@facility, async: :true)
 
+    # service.on(:import_finished) { |facility, date_created_at| CalculateIndicators.calculate_indicators(facility, date_created_at) }
+    # service.on(:added_measure) { |facility, date_created_at| CalculateIndicators.calculate_indicators(facility, date_created_at) }
+
+    # service.execute(:nothing, 0, 0)
     respond_to do |format|
       if @facility.save
+
         format.html { redirect_to edit_facility_path(@facility), notice: 'Facility was successfully created.' }
         format.json { render :edit, status: :created, location: @facility }
       else
