@@ -31,7 +31,7 @@ gem 'pry-stack_explorer',        group: :development
 
 gem 'rails_12factor', group: :production
 gem 'pg' #, group: :production
-
+gem 'hirb'
 gem 'devise'
 gem 'cancancan', '~> 1.9'
 

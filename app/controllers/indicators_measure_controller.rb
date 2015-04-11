@@ -1,0 +1,2 @@
+class IndicatorsMeasureController < ApplicationController
+end

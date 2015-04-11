@@ -22,11 +22,23 @@ module DefineGranularMeasure
 		end
 	end
 
+	def self.update_granular_measure measure
+		
+		gran_mea = measure.granular_measures
+		new_value = average_value_per_day(measure.value.to_f, number_of_days(measure.start_date.to_date, measure.end_date.to_date))
+		
+		gran_mea.each do |gm|
+			gm.update({day: gm.day, measure_id: gm.measure_id, value: new_value.to_s})
+			CalculateIndicators.update_indicators(gm)
+		end
+
+	end
+
 	def self.number_of_days start_date, end_date
 		end_date - start_date
 	end
 
 	def self.average_value_per_day value, number_of_days
-		value/number_of_days
+		value/number_of_days || 0
 	end
 end

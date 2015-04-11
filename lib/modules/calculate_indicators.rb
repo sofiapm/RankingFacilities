@@ -25,9 +25,10 @@ module CalculateIndicators
  		#[{:date=>[10, 2014], :n_months=>29998.709999999977}], [{:date=>[11, 2014], :n_months=>31033.14827586205}], [{:date=>[12, 2014], :n_months=>29998.709999999977}]]
 		sum_per_month=[]
 		grouped_array_granular_measures.each do |ay|
-			sum_per_month << [:date => ay.first , value: ay.second.map(&:value).sum/ay.second.count]
+			sum_per_month << [:date => ay.first , value: ay.second.map(&:value).sum/ay.second.count, :measure_id_first => ay.second.first.id, :measure_id_last => ay.second.last.id]
+
 		end
-	
+		
 		sum_per_month
 	end
 
@@ -71,6 +72,22 @@ module CalculateIndicators
 		{value: array, beggining_date: firstyear}
 	end
 
+	def self.save_indicators_measures indicator_id, measure_id
+			ind_gran_mea=IndicatorsMeasure.new
+	    	ind_gran_mea.attributes = {"indicators_id"=>indicator_id, "measures_id"=>measure_id}
+	    	ind_gran_mea.save!
+	end
+
+	def self.save_and_verify_indicator_measure indicator_id, measure_first_id, measure_last_id
+		
+		while measure_first_id < measure_last_id do
+			save_indicators_measures(indicator_id, measure_first_id)
+			measure_first_id = measure_first_id + 1
+		end
+		save_indicators_measures(indicator_id, measure_last_id)
+
+	end
+
 	def self.internal_work_cost(facility, created_at)
 
 		h_tlc = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:tlc], created_at)
@@ -81,7 +98,22 @@ module CalculateIndicators
 			indicator=Indicator.new
 			indicator.attributes = {"id"=>nil, "facility_id"=>facility.id, "name"=>RankingFacilities::Application::KPI_NAMES[:iwc], "value"=>((h_tlc[i].first[:value].to_f/h_ae[i].first[:value].to_f )*100).round(4), "date"=>Date.new(h_tlc[i].first[:date].second,h_tlc[i].first[:date].first)}
 	    	indicator.save!
+	    	save_and_verify_indicator_measure(indicator.id, h_tlc[i].first[:measure_id_first], h_tlc[i].first[:measure_id_last])
+	    	save_and_verify_indicator_measure(indicator.id, h_ae[i].first[:measure_id_first], h_ae[i].first[:measure_id_last])
 			i = i + 1
+		end
+	end
+
+	def self.update_internal_work_cost (gmeasure)
+		indicator = Indicator.find(IndicatorsMeasure.where("measures_id = ?", gmeasure.id).first.indicators_id)
+
+		h_tlc = measurement(gmeasure.measure.facility, RankingFacilities::Application::METRIC_NAMES[:tlc], gmeasure.measure.created_at)
+		h_ae = measurement(gmeasure.measure.facility, RankingFacilities::Application::METRIC_NAMES[:ae], gmeasure.measure.created_at)
+
+		i=0
+		while i < h_tlc.size do
+			indicator.update({"id"=>indicator.id, "facility_id"=>gmeasure.measure.facility, "name"=>RankingFacilities::Application::KPI_NAMES[:iwc], "value"=>((h_tlc[i].first[:value].to_f/h_ae[i].first[:value].to_f )*100).round(4), "date"=>Date.new(h_tlc[i].first[:date].second,h_tlc[i].first[:date].first)})
+			i=i+1
 		end
 	end
 
@@ -89,12 +121,26 @@ module CalculateIndicators
 		h_wc = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:wc], created_at)
 		h_fte = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:fte], h_wc.first.first[:date].second, h_wc.last.first[:date].second, h_wc.count)
 		
-		array = []
+		
 		i=0
 		while i < h_wc.size do
 			indicator=Indicator.new
 			indicator.attributes = {"id"=>nil, "facility_id"=>facility.id, "name"=>RankingFacilities::Application::KPI_NAMES[:wc_fte], "value"=>((h_wc[i].first[:value].to_f/h_fte[:value][i].to_f )).round(4), "date"=>Date.new(h_wc[i].first[:date].second,h_wc[i].first[:date].first)}
 	    	indicator.save!
+	    	save_and_verify_indicator_measure(indicator.id, h_wc[i].first[:measure_id_first], h_wc[i].first[:measure_id_last])
+			i = i + 1
+		end
+	end
+
+	def self.update_water_consumption_fte (gmeasure)
+		indicator = Indicator.find(IndicatorsMeasure.where("measures_id = ?", gmeasure.id).first.indicators_id)
+
+		h_wc = measurement(gmeasure.measure.facility, RankingFacilities::Application::METRIC_NAMES[:wc], gmeasure.measure.created_at)
+		h_fte  = static_measurement(gmeasure.measure.facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:fte], h_wc.first.first[:date].second, h_wc.last.first[:date].second, h_wc.count)
+		
+		i=0
+		while i < h_wc.size do
+			indicator.update({"id"=>indicator.id, "facility_id"=>gmeasure.measure.facility, "name"=>RankingFacilities::Application::KPI_NAMES[:wc_fte], "value"=>((h_wc[i].first[:value].to_f/h_fte[:value][i].to_f )).round(4), "date"=>Date.new(h_wc[i].first[:date].second,h_wc[i].first[:date].first)})
 			i = i + 1
 		end
 	end
@@ -102,45 +148,87 @@ module CalculateIndicators
 	def self.waste_production_fte(facility, created_at)
 		h_wp = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:wp], created_at)
 		h_fte  = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:fte], h_wp.first.first[:date].second, h_wp.last.first[:date].second, h_wp.count)
-		array = []
+		
 		i=0
 		while i < h_wp.size do
 			indicator=Indicator.new
-			indicator.attributes = {"id"=>nil, "facility_id"=>facility.id, "name"=>RankingFacilities::Application::KPI_NAMES[:wp_fte], "value"=>((h_wp[i].first[:value].to_f/h_fte[:value][i].to_f )).round(4), "date"=>Date.new(h_wp[i].first[:date].second,h_wp[i].first[:date].first)}
+			indicator.attributes = {"id"=>nil,"facility_id"=>facility.id, "name"=>RankingFacilities::Application::KPI_NAMES[:wp_fte], "value"=>((h_wp[i].first[:value].to_f/h_fte[:value][i].to_f )).round(4), "date"=>Date.new(h_wp[i].first[:date].second,h_wp[i].first[:date].first)}
 	    	indicator.save!
+	    	save_and_verify_indicator_measure(indicator.id, h_wp[i].first[:measure_id_first], h_wp[i].first[:measure_id_last])
 			i = i + 1
 		end
 
+	end
+
+	def self.update_waste_production_fte (gmeasure)
+		indicator = Indicator.find(IndicatorsMeasure.where("measures_id = ?", gmeasure.id).first.indicators_id)
+
+		h_wp = measurement(gmeasure.measure.facility, RankingFacilities::Application::METRIC_NAMES[:wp], gmeasure.measure.created_at)
+		h_fte  = static_measurement(gmeasure.measure.facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:fte], h_wp.first.first[:date].second, h_wp.last.first[:date].second, h_wp.count)
+		
+		i=0
+		while i < h_wp.size do
+			indicator.update({"id"=>indicator.id, "facility_id"=>gmeasure.measure.facility, "name"=>RankingFacilities::Application::KPI_NAMES[:wp_fte], "value"=>((h_wp[i].first[:value].to_f/h_fte[:value][i].to_f )).round(4), "date"=>Date.new(h_wp[i].first[:date].second,h_wp[i].first[:date].first)})
+			i=i+1
+		end
 	end
 
 	def self.energy_consumption(facility, created_at)
 		h_ec = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:ec], created_at)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], h_ec.first.first[:date].second, h_ec.last.first[:date].second, h_ec.count)
 		
-		array = []
+		
 		i=0
 		while i < h_ec.size do
 			indicator=Indicator.new
 			indicator.attributes = {"id"=>nil, "facility_id"=>facility.id, "name"=>RankingFacilities::Application::KPI_NAMES[:ec_nfa], "value"=>((h_ec[i].first[:value].to_f/h_nfa[:value][i].to_f )).round(4), "date"=>Date.new(h_ec[i].first[:date].second,h_ec[i].first[:date].first)}
 	    	indicator.save!
+	    	save_and_verify_indicator_measure(indicator.id, h_ec[i].first[:measure_id_first], h_ec[i].first[:measure_id_last])
 			i = i + 1
 		end
 
+	end
+
+	def self.update_energy_consumption (gmeasure)
+		indicator = Indicator.find(IndicatorsMeasure.where("measures_id = ?", gmeasure.id).first.indicators_id)
+
+		h_ec = measurement(gmeasure.measure.facility, RankingFacilities::Application::METRIC_NAMES[:ec], gmeasure.measure.created_at)
+		h_nfa = static_measurement(gmeasure.measure.facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], h_ec.first.first[:date].second, h_ec.last.first[:date].second, h_ec.count)
+
+		i=0
+		while i < h_ec.size do
+			indicator.update({"id"=>indicator.id, "facility_id"=>gmeasure.measure.facility, "name"=>RankingFacilities::Application::KPI_NAMES[:ec_nfa], "value"=>((h_ec[i].first[:value].to_f/h_nfa[:value][i].to_f )).round(4), "date"=>Date.new(h_ec[i].first[:date].second,h_ec[i].first[:date].first)})
+			i=i+1
+		end
 	end
 
 	def self.cleaning_cost_nfa (facility, created_at)
 		h_tcc = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:tcc], created_at)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], h_tcc.first.first[:date].second, h_tcc.last.first[:date].second, h_tcc.count)
 		
-		array = []
+	
 		i=0
 		if h_nfa[:value].size>0
 			while i < h_tcc.size do
 				indicator=Indicator.new
 				indicator.attributes = {"id"=>nil, "facility_id"=>facility.id, "name"=>RankingFacilities::Application::KPI_NAMES[:cc_nfa], "value"=>((h_tcc[i].first[:value].to_f/h_nfa[:value][i].to_f )).round(4), "date"=>Date.new(h_tcc[i].first[:date].second, h_tcc[i].first[:date].first)}
 	    		indicator.save!
+	    		save_and_verify_indicator_measure(indicator.id, h_tcc[i].first[:measure_id_first], h_tcc[i].first[:measure_id_last])
 				i = i + 1
 			end
+		end
+	end
+
+	def self.update_cleaning_cost_nfa (gmeasure)
+		indicator = Indicator.find(IndicatorsMeasure.where("measures_id = ?", gmeasure.id).first.indicators_id)
+
+		h_tcc = measurement(gmeasure.measure.facility, RankingFacilities::Application::METRIC_NAMES[:tcc], gmeasure.measure.created_at)
+		h_nfa = static_measurement(gmeasure.measure.facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], h_tcc.first.first[:date].second, h_tcc.last.first[:date].second, h_tcc.count)
+
+		i=0
+		while i < h_tcc.size do
+			indicator.update({"id"=>indicator.id, "facility_id"=>gmeasure.measure.facility, "name"=>RankingFacilities::Application::KPI_NAMES[:cc_nfa], "value"=>((h_tcc[i].first[:value].to_f/h_nfa[:value][i].to_f )).round(4), "date"=>Date.new(h_tcc[i].first[:date].second, h_tcc[i].first[:date].first)})
+			i=i+1
 		end
 	end
 
@@ -148,37 +236,63 @@ module CalculateIndicators
 		h_tsc = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:tsc], created_at)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], h_tsc.first.first[:date].second, h_tsc.last.first[:date].second, h_tsc.count)
 		
-		array = []
+	
 		i=0
 	
 			while i < h_tsc.size do
 				indicator=Indicator.new
 				indicator.attributes = {"id"=>nil, "facility_id"=>facility.id, "name"=>RankingFacilities::Application::KPI_NAMES[:sc_nfa], "value"=>((h_tsc[i].first[:value].to_f/h_nfa[:value][i].to_f )).round(4), "date"=>Date.new(h_tsc[i].first[:date].second, h_tsc[i].first[:date].first)}
 	    		indicator.save!
+	    		save_and_verify_indicator_measure(indicator.id, h_tsc[i].first[:measure_id_first], h_tsc[i].first[:measure_id_last])
 				i = i + 1
 			end
+	end
+
+	def self.update_space_cost_nfa (gmeasure)
+		indicator = Indicator.find(IndicatorsMeasure.where("measures_id = ?", gmeasure.id).first.indicators_id)
+
+		h_tsc = measurement(gmeasure.measure.facility, RankingFacilities::Application::METRIC_NAMES[:tsc], gmeasure.measure.created_at)
+		h_nfa = static_measurement(gmeasure.measure.facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], h_tsc.first.first[:date].second, h_tsc.last.first[:date].second, h_tsc.count)
+
+		i=0
+		while i < h_tsc.size do
+			indicator.update({"id"=>indicator.id, "facility_id"=>gmeasure.measure.facility, "name"=>RankingFacilities::Application::KPI_NAMES[:sc_nfa], "value"=>((h_tsc[i].first[:value].to_f/h_nfa[:value][i].to_f )).round(4), "date"=>Date.new(h_tsc[i].first[:date].second, h_tsc[i].first[:date].first)})
+			i=i+1
+		end
 	end
 
 	def self.occupancy_cost_nfa (facility, created_at)
 		h_toc = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:toc], created_at)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], h_toc.first.first[:date].second, h_toc.last.first[:date].second, h_toc.count)
 		
-		array = []
 		i=0
 
 			while i < h_toc.size do
 				indicator=Indicator.new
 				indicator.attributes = {"id"=>nil, "facility_id"=>facility.id, "name"=>RankingFacilities::Application::KPI_NAMES[:oc_nfa], "value"=>((h_toc[i].first[:value].to_f/h_nfa[:value][i].to_f )).round(4), "date"=>Date.new(h_toc[i].first[:date].second, h_toc[i].first[:date].first)}
 	    		indicator.save!
+	    		save_and_verify_indicator_measure(indicator.id, h_toc[i].first[:measure_id_first], h_toc[i].first[:measure_id_last])
 				i = i + 1
 			end
+	end
+
+	def self.update_occupancy_cost_nfa (gmeasure)
+		indicator = Indicator.find(IndicatorsMeasure.where("measures_id = ?", gmeasure.id).first.indicators_id)
+
+		h_toc = measurement(gmeasure.measure.facility, RankingFacilities::Application::METRIC_NAMES[:toc], gmeasure.measure.created_at)
+		h_nfa = static_measurement(gmeasure.measure.facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], h_toc.first.first[:date].second, h_toc.last.first[:date].second, h_toc.count)
+
+		i=0
+		while i < h_toc.size do
+			indicator.update({"id"=>indicator.id, "facility_id"=>gmeasure.measure.facility, "name"=>RankingFacilities::Application::KPI_NAMES[:oc_nfa], "value"=>((h_toc[i].first[:value].to_f/h_nfa[:value][i].to_f )).round(4), "date"=>Date.new(h_toc[i].first[:date].second, h_toc[i].first[:date].first)})
+			i=i+1
+		end
 	end
 
 	def self.capacity_vs_utilization(facility)
 		h_fte = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:fte])
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa])
-		
-		array = []
+
 		i=0
 		initial_date=h_nfa[:beggining_date]
 		while i < h_nfa[:value].size do
@@ -189,14 +303,12 @@ module CalculateIndicators
 			i = i + 1
 		end
 
-		{:values => array, :name => RankingFacilities::Application::KPI_NAMES[:cu], :facility_name => facility.name ,
-			:type => RankingFacilities::Application::KPI_UNITS[:cu], :x => :nfa, :y => :fte, :year => h_fte[:year]}
 	end
 
 	def self.space_experience(facility)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa])
 		h_pa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:pa])
-		array = []
+		
 		i=0
 		initial_date=h_nfa[:beggining_date]
 		while i < h_nfa[:value].size do
@@ -219,6 +331,28 @@ module CalculateIndicators
 		capacity_vs_utilization(facility)
 		space_experience(facility)
 	end
+
+	def self.update_indicators gmeasure
+		case gmeasure.measure.name
+		when RankingFacilities::Application::METRIC_NAMES[:tlc] || RankingFacilities::Application::METRIC_NAMES[:ae]
+			update_internal_work_cost(gmeasure)  
+		when RankingFacilities::Application::METRIC_NAMES[:toc]
+		  	update_occupancy_cost_nfa(gmeasure)
+		when RankingFacilities::Application::METRIC_NAMES[:tsc]
+		  	update_space_cost_nfa(gmeasure)
+		when RankingFacilities::Application::METRIC_NAMES[:tcc]
+			update_cleaning_cost_nfa(gmeasure)
+		when RankingFacilities::Application::METRIC_NAMES[:ec]
+			update_energy_consumption(gmeasure)
+		when RankingFacilities::Application::METRIC_NAMES[:wp]
+			update_waste_production_fte(gmeasure)
+		when RankingFacilities::Application::METRIC_NAMES[:wc]
+			update_water_consumption_fte(gmeasure)
+		else
+		  puts "Name of measure dont correspond any existent one. Cant update indicators"
+		end
+	end
+
 
 end
 

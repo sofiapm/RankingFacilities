@@ -4,7 +4,9 @@ class Measure < ActiveRecord::Base
 	belongs_to :facility, class_name: 'Facility', foreign_key: 'facility_id'
 	has_one :user, :through => :facility
 	has_many :granular_measures, class_name: 'GranularMeasure', foreign_key: 'measure_id', dependent: :destroy
-
+	# has_and_belongs_to_many :indicators, class_name: 'Indicator', foreign_key: 'measure_id', dependent: :destroy
+	# has_and_belongs_to_many :indicators
+	
 	validates :name, presence: true
 	validates :value, presence: true
 	validates :start_date, presence: true

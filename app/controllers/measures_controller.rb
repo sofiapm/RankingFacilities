@@ -40,7 +40,8 @@ class MeasuresController < ApplicationController
     respond_to do |format|
       if @measure.save
         DefineGranularMeasure.add_granular_measure(@measure)
-        CalculateIndicators.calculate_indicators(facility, date_created_at)
+        #quando adiciona 1 a um não faz sentido calcular todos os indicadores,podem faltar dados, só se foram calculados de x em x tempo
+        #CalculateIndicators.calculate_indicators(facility, date_created_at)
         format.html { redirect_to edit_measure_path(@measure), notice: 'Measure was successfully created.' }
         format.json { render :edit, status: :created, location: @measure }
       else
@@ -55,6 +56,8 @@ class MeasuresController < ApplicationController
   def update
     respond_to do |format|
       if @measure.update(measure_params)
+        DefineGranularMeasure.update_granular_measure(@measure)
+        #CalculateIndicators.update_indicators(@measure)
         format.html { redirect_to edit_measure_path(@measure), notice: 'Measure was successfully updated.' }
         format.json { render :edit, status: :ok, location: @measure }
       else

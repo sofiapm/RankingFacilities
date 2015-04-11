@@ -4,7 +4,6 @@ class CreateIndicators < ActiveRecord::Migration
       t.string :name
       t.float :value
       t.date :date
-
       t.timestamps
     end
   end
