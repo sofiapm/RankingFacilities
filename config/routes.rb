@@ -22,12 +22,10 @@ Rails.application.routes.draw do
   get 'error_you_can_not_access_page' => 'static_pages#error_you_can_not_access_page'
   get 'error_role_empty_page' => 'static_pages#error_role_empty_page'
   get 'success_page' => 'static_pages#success_page'
-  get 'home' => 'static_pages#home_page'
   get "user_roles/update" => "user_roles#update"
   put "user_roles/update" => "user_roles#update"
   get "user_roles/update_state" => "user_roles#update_state"
   put "user_roles/update_state" => "user_roles#update_state"
-  get "/home", :to => "devise/sessions#new"
 
   # get '*unmatched_route', :to => 'application#raise_not_found!'
 
