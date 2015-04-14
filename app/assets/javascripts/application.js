@@ -25,9 +25,11 @@ $(document).ready( function(){
     dateFormat: "dd-mm-yy"
   });
 
-    $('.dropdown').hover(function() {
-        $(this).find('.dropdown-menu').first().stop(true, true).delay(10).slideDown();
-    }, function() {
-        $(this).find('.dropdown-menu').first().stop(true, true).delay(10).slideUp()
-    });
+  $('.dropdown').hover(function() {
+          $(this).find('.dropdown-menu').first().stop(true, true).delay(10).slideDown();
+      }, function() {
+          $(this).find('.dropdown-menu').first().stop(true, true).delay(10).slideUp()
+      });
+
+
 });

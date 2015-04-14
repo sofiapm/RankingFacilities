@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119125652) do
+ActiveRecord::Schema.define(version: 20150219163312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,23 @@ ActiveRecord::Schema.define(version: 20150119125652) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "indicators", force: true do |t|
+    t.string   "name"
+    t.float    "value"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "facility_id"
+  end
+
+  create_table "indicators_measures", id: false, force: true do |t|
+    t.integer "indicators_id"
+    t.integer "measures_id"
+  end
+
+  add_index "indicators_measures", ["indicators_id"], name: "index_indicators_measures_on_indicators_id", using: :btree
+  add_index "indicators_measures", ["measures_id"], name: "index_indicators_measures_on_measures_id", using: :btree
 
   create_table "measures", force: true do |t|
     t.string   "name",        null: false
