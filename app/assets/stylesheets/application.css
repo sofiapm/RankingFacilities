@@ -35,7 +35,6 @@
 .modal.custom .modal-dialog {
     width:50%;
     padding-bottom:100px;
-    /*add what you want here*/
     text-align: left;
     color: rgba(23, 23, 21, 0.4);
 }
@@ -44,7 +43,6 @@
     width:35%;
     height: 60%;
     padding-top:15%;
-    /*add what you want here*/
     text-align: left;
     color: rgba(23, 23, 21, 0.4);
 }
@@ -58,86 +56,3 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
-/*******************************************************/
-/* .jum-top {
-    margin-top: 0px !important;
-    height: 100vh;
-
- }
-
-.title_page {
-    padding-top: 5%;
-    padding-bottom: 2%;
-}
-
-.conteudo{
-    padding-top: 0%;
-    text-align: center;
-
-}
-
-.conteudo p {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 15px;
-}
-
-.register_login_window{
-    padding-top: 45px;
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-.verticalbar {
-	padding-right: 0px;
-	padding-left: 30px;
-    top: 72px;
-}
-
-.container-conteudo{
-    top: 60px;
-}
-
-.body-container{
-    margin-top: 0px;
-}
-
-.vertical-title{
-	font-size: 105% !important;
-    font-weight: bold;
-}
-
-
-
-.import{
-    margin-right: 20px;
-    margin-left: 20px;
-}
-
-.mensagens{
-    padding-top: 0%;
-    background-color: lightgray;
-
-    font-size: 15px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    text-decoration: underline;
-    color: red;
-    border:1px solid black;
-
-}
-
-
-
-table{
-    width: 98%;
-}
-table, th, td {
-   border-bottom: 1px solid black;
-
-}
-
-th,td {
-    padding: 15px;
-}
-*/
-
