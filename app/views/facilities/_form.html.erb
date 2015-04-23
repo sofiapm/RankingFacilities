@@ -1,5 +1,8 @@
 
-  <%= form_for([@role, @facility], html: {class: "well"}) do |f| %>
+  <%= form_for([@role, @facility], html: {class: "ls-box ls-board-box"}) do |f| %>
+    <header class="ls-info-header">
+      <h2 class="ls-title-3">Facility Details</h2>
+    </header>
     <% if @facility.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@facility.errors.count, "error") %> prohibited this facility from being saved:</h2>
@@ -24,17 +27,33 @@
       <div class="form_fancy"><%= a.label :country %><br />
       <%= a.select :country, RankingFacilities::Application::COUNTRY.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %></div>
       <div class="form_fancy"><%= a.label :zip_code %><br />
-      <%= a.text_field :zip_code, :required => true, class: "form-control" %></div>
+      <%= a.text_field :zip_code, :required => true, class: "form-control" %></div><br/>
     <% end %>
     
     <%= f.hidden_field :role_id, :value => current_user.current_role %>
     <%= f.hidden_field :user_id, :value => current_user %>
     
     <div class="update_user pull-right">
-      <%= f.submit "Save Facility", class: "btn btn-default" %>
+      <%= f.submit "Save Facility", class: "ls-btn-lg ls-no-radius" %>
       <% if @action[:action] == 'edit' %>
-        <td><%= link_to 'Delete', @facility, class: "btn btn-default" , method: :delete, data: { confirm: 'Are you sure?'} %></td>
+        <td><%= link_to 'Delete', @facility, class: "ls-btn-lg ls-no-radius" , method: :delete, data: { confirm: 'Are you sure?'} %></td>
       <% end %>
     </div>
     </fieldset>
   <% end %>
+
+<% if @action[:action] == 'edit'%>
+  <div class="ls-list ls-no-radius">
+        <header class="ls-list-header">
+          <div class="ls-list-title col-md-4">
+            <a href="#" >Facility Static Metrics</a>
+           
+          </div>
+          <div class="col-md-6 col-md-offset-2 ls-txt-right ">
+            
+<!--             <%= link_to 'New Facility Static Metrics', new_facility_facility_static_measure_path(params[:id]), class: "ls-btn ls-no-radius" %> -->
+            <%= link_to 'View List', facility_facility_static_measures_path(params[:id]), class: "ls-btn ls-no-radius" %>
+          </div>
+        </header>
+  </div>   <br/>
+<% end %>

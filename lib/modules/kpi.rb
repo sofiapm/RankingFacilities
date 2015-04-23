@@ -247,7 +247,7 @@ module Kpi
 	#pega em dois arrays do mesmo tamanho - se nao houver falta de insercao de measures
 	#utiliza-os para o calculo
 	def self.internal_work_cost(facility, year)
-
+		year = specify_year year
 		h_tlc = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:tlc], year)
 		h_ae = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:ae], year)
 		array = []
@@ -276,10 +276,11 @@ module Kpi
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
 
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
+		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values], :year => year}
 	end
 
 	def self.water_consumption_fte(facility, year)
+		year = specify_year year
 		h_wc = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:wc], year)
 		h_fte = h_fte = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:fte], year, h_wc[:year], h_wc[:lastyear], h_wc[:month_per_year])
 		
@@ -304,10 +305,11 @@ module Kpi
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
 
 	
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
+		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values], :year => year}
 	end
 
 	def self.waste_production_fte(facility, year)
+		year = specify_year year
 		h_wp = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:wp], year)
 		h_fte = h_fte = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:fte], year, h_wp[:year], h_wp[:lastyear], h_wp[:month_per_year])
 		array = []
@@ -331,10 +333,11 @@ module Kpi
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
 
 	
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
+		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values], :year => year}
 	end
 
 	def self.capacity_vs_utilization(facility, year)
+		year = specify_year year
 		h_fte = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:fte], year)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], year)
 		
@@ -358,10 +361,11 @@ module Kpi
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
 
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
+		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values], :year => year}
 	end
 
 	def self.space_experience(facility, year)
+		year = specify_year year
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], year)
 		h_pa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:pa], year)
 		array = []
@@ -385,10 +389,11 @@ module Kpi
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
 
 
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
+		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values], :year => year}
 	end
 
 	def self.energy_consumption(facility, year)
+		year = specify_year year
 		h_ec = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:ec], year)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], year, h_ec[:year], h_ec[:lastyear], h_ec[:month_per_year])
 		
@@ -413,10 +418,11 @@ module Kpi
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
 
 	
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
+		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values], :year => year}
 	end
 
 	def self.cleaning_cost_nfa(facility, year)
+		year = specify_year year
 		h_ec = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:ec], year)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], year, h_ec[:year], h_ec[:lastyear], h_ec[:month_per_year])
 		
@@ -441,10 +447,11 @@ module Kpi
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
 
 	
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
+		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values], :year => year}
 	end
 
 	def self.cleaning_cost_nfa (facility, year)
+		year = specify_year year
 		h_tcc = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:tcc], year)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], year, h_tcc[:year], h_tcc[:lastyear], h_tcc[:month_per_year])
 		
@@ -471,10 +478,11 @@ module Kpi
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
 
 	
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
+		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values], :year => year}
 	end
 
 	def self.space_cost_nfa (facility, year)
+		year = specify_year year
 		h_tsc = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:tsc], year)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], year, h_tsc[:year], h_tsc[:lastyear], h_tsc[:month_per_year])
 		
@@ -500,10 +508,11 @@ module Kpi
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
 
 	
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
+		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values], :year => year}
 	end
 
 	def self.occupancy_cost_nfa (facility, year)
+		year = specify_year year
 		h_toc = measurement(facility, RankingFacilities::Application::METRIC_NAMES[:toc], year)
 		h_nfa = static_measurement(facility, RankingFacilities::Application::ATTRIBUTES_NAMES[:nfa], year, h_toc[:year], h_toc[:lastyear], h_toc[:month_per_year])
 		
@@ -534,7 +543,7 @@ module Kpi
 		my_facility_results[:values] = calc_quarter_average(my_facility_results[:values])
 		best_average[:results][:values] = calc_quarter_average(best_average[:results][:values])
 
-		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values]}
+		{:my_facility_results => my_facility_results, :best_facility_results => best_average[:results][:values], :year => year}
 	end
 
 	#substituir por cleaning, space e occupancy costs

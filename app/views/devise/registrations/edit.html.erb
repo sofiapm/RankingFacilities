@@ -1,8 +1,8 @@
-<h1 class="page-header">Edit My <%= resource_name.to_s.humanize %> Information</h1>
 
+<h1 class="ls-title-intro ls-ico-user">Edit My <%= resource_name.to_s.humanize %> Information</h1>
 <div class="row">
   <div class="col-xs-12 col-md-8">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "well"  }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "ls-form ls-form-inline"  }) do |f| %>
       <%= devise_error_messages! %>
 
       <fieldset>

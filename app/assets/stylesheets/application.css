@@ -53,6 +53,12 @@
     font-size: 30px;
     color: rgba(23, 23, 21, 0.6);
 }
+
+.form_fancy{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 /*******************************************************/
 /* .jum-top {
     margin-top: 0px !important;
@@ -74,11 +80,6 @@
 .conteudo p {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 15px;
-}
-
-.form_fancy{
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 .register_login_window{

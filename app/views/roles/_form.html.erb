@@ -1,5 +1,9 @@
-<%= form_for(@role,  html: { class: "well"  }) do |f| %>
+<%= form_for(@role,  html: { class: "ls-box ls-board-box"  }) do |f| %>
+  <header class="ls-info-header">
+    <h2 class="ls-title-3">Role Details</h2>
+  </header>
   <% if @role.errors.any? %>
+
     <div id="error_explanation">
       <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
 
@@ -14,23 +18,23 @@
   <fieldset>
     <div class="form_fancy">
       <%= f.label "Role Name" %> <br>
-      <%= f.select :name, RankingFacilities::Application::ROLES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %>
+      <%= f.select :name, RankingFacilities::Application::ROLES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control ls-no-radius" %>
     </div>
 
     <div class="form_fancy"><%= f.label "Company Name" %><br />
-      <%= f.text_field :company_name, :required => true, class: "form-control" %></div>
+      <%= f.text_field :company_name, :required => true, class: "form-control ls-no-radius" %></div>
 
     <div class="form_fancy"><%= f.label "Company Nif" %><br />
-      <%= f.text_field :nif, :required => true, class: "form-control" %></div>
+      <%= f.text_field :nif, :required => true, class: "form-control ls-no-radius" %></div>
 
     <div class="form_fancy"><%= f.label :sector %><br />
-      <%= f.select :sector, RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %>
+      <%= f.select :sector, RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control ls-no-radius" %>
     </div>
 
     <%= f.hidden_field :user_id, :value => current_user.id %>
     
-    <div class="update_user pull-right">
-      <%= f.submit "Save", class: "btn btn-default" %>
+    <div class="form_fancy pull-right">
+      <%= f.submit " Save ", class: "ls-btn-primary ls-btn-lg ls-no-radius" %>
     </div>
   </fieldset>
-<% end %>
+<% end %>    

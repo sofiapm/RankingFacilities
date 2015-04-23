@@ -1,9 +1,6 @@
-<% content_for :verticalbar do %>
-	<%= render 'metrics/navbarVertical' %>	
-<% end %>
-<div class="form_facility col-md-12">
-<h1 class="page-header">New <%= Facility.find_by_id(params[:facility_id]).name %> Measure</h1>
+
+
+<h1 class="ls-title-intro ls-ico-plus">New Metric</h1>
 
 <% @action = {:action => 'new'} %>
 <%= render 'form', @action%>
-</div>

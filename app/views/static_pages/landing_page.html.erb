@@ -7,9 +7,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1>UpRanking</h1>
+                        <h1>FMbench</h1>
                         <h3>Sleek, intuitive, and powerful cloud infrastructure for faster and easier facility Benchmarking.</h3>
-                        <hr class="intro-divider">
+                        <!-- <hr class="intro-divider"> -->
+                        <br /><br />
                         <ul class="list-inline intro-social-buttons">
 
                             <li><%= link_to "REGISTER" do %>
@@ -32,7 +33,7 @@
                         <!-- Button trigger modal -->
                         <div class="modal custom fade" id="myModalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
-						    <div class="modal-content">
+						    <div class="modal-content clearfix">
 						      <div class="modal-body">
 						        
 						      </div>
@@ -42,7 +43,7 @@
 
 						<div class="modal custom login fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
-						    <div class="modal-content">
+						    <div class="modal-content clearfix">
 						      <div class="modal-body">
 						        
 						      </div>
@@ -128,5 +129,5 @@
 
 <%= render 'layouts/footer' %>
 <% else %>
-coisas
+    <%= render 'roles/roles_managing' %>
 <% end %>

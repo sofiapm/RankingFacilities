@@ -1,14 +1,14 @@
-<% content_for :verticalbar do %>
-  <%= render 'details/navbarVertical' %>  
-<% end %>
-<div class="form_facility col-md-12">
-  <h1 class="page-header">Edit My <%= resource_name.to_s.humanize %> Information</h1>
+
+  <h1 class="ls-title-intro ls-ico-user">Edit <%= resource_name.to_s.humanize %> Account</h1>
 
   <div class="row">
     <div class="col-xs-12 col-md-8">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "well"  }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "ls-box ls-board-box"  }) do |f| %>
+       
+        <header class="ls-info-header">
+          <h2 class="ls-title-3">User Details</h2>
+        </header>
         <%= devise_error_messages! %>
-
         <fieldset>
             <div class="form_fancy"><%= f.label :first_name %><br />
             <%= f.text_field :first_name, :required => true, class: "form-control" %></div>
@@ -41,25 +41,28 @@
               <%= f.password_field :password, autocomplete: "off", class: "form-control" %></div>
 
             <div class="form_fancy"><%= f.label :password_confirmation %><br />
-              <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %></div>
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %></div><br /><br />
 
           
-           
+
             <%= f.fields_for :roles do |a| %>
-               <h1 class="page-header"><%= a.object.name + ": " + a.object.company_name %></h1>
+              <header class="ls-info-header">
+                <h2 class="ls-title-3"><b><%= a.object.company_name + ": " %></b><%= a.object.name %></h2>
+              </header>
+               
                 <div class="form_fancy"><%= a.label :name %><br /><%= a.select :name, RankingFacilities::Application::ROLES_NAMES.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
                 <div class="form_fancy"><%= a.label :company_name %><br />
                 <%= a.text_field :company_name, :required => true, class: "form-control" %></div>
                 <div class="form_fancy"><%= a.label :nif %><br />
                 <%= a.text_field :nif, :required => true, class: "form-control" %></div>
-                <div class="form_fancy"><%= a.label :sector %><br /><%= a.select :sector, RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
+                <div class="form_fancy"><%= a.label :sector %><br /><%= a.select :sector, RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div><br /><br />
                 <%= a.hidden_field :id, :value => a.object.id %>
 
             <% end %>
             <%= f.hidden_field :id, :value => current_user.id %>
 
           <div class="update_user pull-right">
-            <%= f.submit "Update", class: "btn btn-default" %>
+            <%= f.submit "Update", class: "ls-btn-lg ls-no-radius" %>
           </div>
 
         </fieldset>
@@ -67,20 +70,23 @@
     </div>
 
     <div class="col-xs-6 col-md-4">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "well"  }) do |f| %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "ls-box ls-board-box"  }) do |f| %>
 
           <fieldset>
-              <legend>Deactivate My Account</legend>
+      
+              <header class="ls-info-header">
+                <h2 class="ls-title-3">Deactivate Account</h2>
+              </header>
               
               <div class="deactivate_useraccount">
                 <p>Deactivating your account will disable your profile and remove your name and all your organizations from RakingOrganizations. Some information may still be visible to others, such as your organizations anonymous rating.</p>
               </div>
               <div class="update_user pull-right">
-                <%= link_to "Deactivate my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-default" %>
+                <%= link_to "Deactivate my account", registration_path(resource_name), class: "ls-btn-sm ls-no-radius", data: { confirm: "Are you sure?" }, method: :delete %>
               </div>
           </fieldset>
 
         <% end %>
     </div>
   </div>
-</div>
+<br/>

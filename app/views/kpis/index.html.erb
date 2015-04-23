@@ -1,10 +1,6 @@
-<% content_for :verticalbar do %>
-	<%= render 'indicators/navbarVertical' %>	
-<% end %>
-<div class="form_facility col-md-12">
-	<h1 class="page-header"><%= @facility.name %>  Benchmark Reports</h1>
 
-	<div class="well col-md-12">
+<h1 class="ls-title-intro ls-ico-dashboard"><%= @facility.name %> Benchmark Reports </h1>
+
 
 	<%= search_form_for([@facility, @q], :url => facility_kpis_path, :method => "get") do |f| %>
 	  	
@@ -22,7 +18,9 @@
 	  <%= submit_tag "Search", class: "btn btn-default pull-right"  %>
 
 	<% end %>
-	</div>
+
+<br/><br/><br/>
+
 	<% year = params[:year] || '' %>
 	<div class="indicators_graph col-md-12 pull-left">
 	
@@ -91,5 +89,3 @@
 
 	
 	<script src="/assets/exporting.js"></script>
-
-</div>

@@ -1,11 +1,10 @@
-<% content_for :verticalbar do %>
-  <%= render 'metrics/navbarVertical' %>  
-<% end %>
-<div class="form_facility col-md-12">
 
-  <h1 class="page-header"> Import <%= Facility.find_by_id(params[:facility_id]).name %> Measures</h1>
+<h1 class="ls-title-intro ls-ico-bars"><%= @facility.name %> Metrics <%= link_to '', new_facility_measure_path(params[:facility_id]), class: "ls-ico-plus pull-right" %></h1>
 
-  <div class="row well import">
+  <div class="row ls-box ls-board-box">
+    <header class="ls-info-header">
+        <h2 class="ls-title-3 ls-ico-cloud-upload">Import Metrics</h2>
+    </header>
     <div class="import_explanation col-md-6">
       <p> A CSV or Excel file can be used to import Measures. </p>
       <p> The columns of the file should be in this order:</p>
@@ -14,24 +13,21 @@
       <p> <strong>start_date</strong> - Date Type </p>
       <p> <strong>end_date</strong> - Date Type </p>
     </div>
-    <div class="form_fancy col-md-3">
+<!--     <div class="form_fancy col-md-3">
       <%= image_tag("icon_24574.png", :class => "img-polaroid", :style => "width: 60%; height: 60%;")   %>
-    </div>
-    <div class="form_fancy col-md-3">  
+    </div> -->
+    <div class="form_fancy col-md-3 pull-right">  
       <br/>
       <br/>
       <%= form_tag import_facility_measures_path(params[:facility_id]), multipart: true do %>
 
       <div class="form_fancy"><%= file_field_tag :file %></div>
-      <div class="form_fancy"><%= submit_tag "Import" %></div>
+      <div class="form_fancy"><%= submit_tag "Import" , class: "ls-btn ls-no-radius"%></div>
     <% end %>
     </div>
 
   </div>
 
-  <h1 class="page-header">Listing <%= Facility.find_by_id(params[:facility_id]).name %> Measures</h1>
-
-  <div class="well col-md-12">
   <%= search_form_for [@facility, @q]  do |f| %>
 
     <%= f.label :name_cont %>
@@ -45,16 +41,19 @@
 
     <%= f.submit "Search", class: "btn btn-default pull-right"  %>
   <% end %>
-  </div>
 
-  <table>
+
+  <br/>
+
+  <table class="ls-table">
     <thead>
       <tr>
         <th>Name</th>
         <th>Value</th>
         <th>Start date</th>
         <th>End date</th>
-        <th colspan="10"></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -74,7 +73,4 @@
   </table>
 
   <br>
-  <div class="import pull-right">
-  <%= link_to 'New Measure', new_facility_measure_path(params[:facility_id]), class: "btn btn-default" %>
-  </div>
-</div>
+

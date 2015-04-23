@@ -1,51 +1,123 @@
 <!DOCTYPE html>
-<html>
-	<head>
-	  <title>UpRanking</title>
+<html class="ls-theme-orange">
+	<head >
+	  <title>FMbench</title>
 	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	  <%= csrf_meta_tags %>
+	  
+		<meta charset="utf-8">
+	    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	    <meta name="description" content="Insira aqui a descrição da página.">
+	    <link href="http://assets.locaweb.com.br/locastyle/3.7.2/stylesheets/locastyle.css" rel="stylesheet" type="text/css">
+	    <link rel="icon" sizes="192x192" href="/locawebstyle/assets/images/ico-boilerplate.png">
+	    <link rel="apple-touch-icon" href="/locawebstyle/assets/images/ico-boilerplate.png">
+	  </head>
+  <body>
+  	<% if user_signed_in? %>
+    <div class="ls-topbar">
 
-	</head>
-	<body data-spy="scroll" data-target=".bs-docs-sidebar" data-twttr-rendered="true">
+      <!-- Notification bar -->
+      <div class="ls-notification-topbar">
+        <!-- Nome da Role Actual -->
+        <div class="ls-alerts-list">
+          <% if current_user.current_role != 0 %>
+                <%= current_user.roles.find(current_user.current_role).company_name %><br/>
+                <small class="pull-right"><%= current_user.roles.find(current_user.current_role).name %></small> 
+          <% else %>
+                <%= "Select a Role " %>
+          <% end %>
+        </div>
 
-		<div class="row">
-			<% if user_signed_in? %>
-				<%= render 'layouts/navbar' %>	
-				<div class="container-fluid">
-					<div class="row-fluid">
-						<div class="col-md-3 verticalbar affix">
-					    	<%= yield :verticalbar %>	
-					    </div>
-					    <div class="container-conteudo col-md-9 col-md-offset-3">
-					    	<% flash.each do |type, message| %>
-					    		<div class="alert <%= flash_class type %>">
-							    	<button class="close" data-dismiss="alert" >X</button>
-							    	<%= message %>
-							    </div>
-					    	<% end %>
+        <!-- User details -->
+        <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
+          <a href="#" class="ls-ico-user">
+            <%= current_user.full_name %>
+          </a>
+          <nav class="ls-dropdown-nav ls-user-menu">
+            <ul>
+              <li><%= link_to "Edit User Account", edit_user_registration_path %></li>
+              <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
 
-					        <%= yield %>
+      <!-- <span class="ls-show-sidebar ls-ico-menu"></span> -->
 
-					        <%= render 'layouts/footer' %>
-					    </div>
+      <!-- Nome do produto/marca -->
+      <h1 class="ls-brand-name"><a class="ls-ico-earth" href="/">FMbench</a></h1>
+    </div>
 
+    <!-- Container da pagina principal: yield -->
+    <main class="ls-main ">
+    	<div class="container-fluid">
+      		<%= yield %>
+     	</div>
+    </main>
 
-				    </div>
-				</div>
-			 <% else %>
-			   		
-			   	<div class="container col-md-12">
-				   	<% flash.each do |type, message| %>
-					    <div class="alert <%= flash_class type %>">
-							<button class="close" data-dismiss="alert">X</button>
-							<%= message %>
-						</div>
-					<% end %>
-				    <%= yield %>
-			    </div>
-			<% end %>
-			
-		</div>
-	</body>
+    <!-- Barra Lateral Esquerda -->
+    <aside class="ls-sidebar">
+
+      <div class="ls-sidebar-inner">
+	    <nav class="ls-menu">
+	      <ul>
+	        <li class="ls-submenu">
+	          <a href="#" class="ls-ico-list3">Facilities Details</a>
+	          <ul role="menu">
+	            	<% if current_user.current_role != 0 && current_user.roles.find(current_user.current_role).has_facilities? %> 
+	                    
+	                        <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>         
+	                            <%= link_to f.name, edit_facility_path(f.id) %>
+	                        <% end %> 
+	                <% else %>
+	                    <li><a class="ls-submenu-item" href="#">No Facilities</a></li>
+	                <% end %>
+	          </ul>
+	        </li>
+	        <li class="ls-submenu">
+	          <a href="#" class="ls-ico-bars">Facilities Metrics</a>
+	          <ul role="menu">
+	            	<% if current_user.current_role != 0 && current_user.roles.find(current_user.current_role).has_facilities? %> 
+	                    
+	                        <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>         
+	                            <%= link_to f.name, facility_measures_path(f.id) %>
+	                        <% end %> 
+	                <% else %>
+	                    <li><a class="ls-submenu-item" href="#">No Facilities</a></li>
+	                <% end %>
+	          </ul>
+	        </li>
+	        <li class="ls-submenu">
+	          <a href="#" class="ls-ico-dashboard">Facilities Reports</a>
+	          <ul role="menu">
+		          	<% if current_user.current_role != 0 && current_user.roles.find(current_user.current_role).has_facilities? %> 
+	                    
+	                        <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>         
+	                            <%= link_to f.name, facility_kpis_path(f.id), class: "ls-submenu-item" %>
+	                        <% end %> 
+	                <% else %>
+	                    <li><a class="ls-submenu-item" href="#">No Facilities</a></li>
+	                <% end %>
+	          </ul>
+	        </li>
+
+	        <% if current_user.current_role != 0 %>
+                <li><%= link_to "Add Facility", new_role_facility_path(current_user.current_role), class: "ls-ico-plus" %></li>
+            <% end %>
+	      </ul>
+
+	    </nav>
+	  </div>
+    </aside>
+
+    <% else %>
+			   
+			<%= yield %>
+
+	<% end %>
+
+    <script src="http://assets.locaweb.com.br/locastyle/3.7.2/javascripts/locastyle.js" type="text/javascript"></script>
+  </body>
 </html>

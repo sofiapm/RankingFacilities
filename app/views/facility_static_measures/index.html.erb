@@ -1,10 +1,6 @@
-<% content_for :verticalbar do %>
-  <%= render 'details/navbarVertical' %>  
-<% end %>
-<div class="form_facility col-md-12">
-<h1 class="page-header">Listing <%= Facility.find_by_id(params[:facility_id]).name %>  Attributes</h1>
 
-  <div class="well">
+<h1 class="ls-title-intro ls-ico-list2"><%= Facility.find_by_id(params[:facility_id]).name %> Static Metrics <%= link_to "", new_facility_facility_static_measure_path(params[:facility_id]), class: "ls-ico-plus pull-right" %></h1>
+
   <%= search_form_for [@facility, @q]  do |f| %>
 
     <%= f.label :name_cont %>
@@ -16,19 +12,20 @@
     <%= f.label "Till Date" %>
     <%= f.bootstrap_date :end_date_lteq %>
 
-    <%= f.submit "Search", class: "btn btn-default pull-right"%>
+    <%= f.submit "Search", class: "ls-btn ls-no-radius pull-right"%>
   <% end %>
 
-  </div>
 
-  <table>
+
+  <table class="ls-table">
     <thead>
       <tr>
         <th>Name</th>
         <th>Value</th>
         <th>Start date</th>
         <th>End date</th>
-        <th colspan="3"></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     
@@ -50,7 +47,3 @@
 
   <br>
 
-  <div class="import pull-right">
-  <%= link_to 'New Facility Attribute', new_facility_facility_static_measure_path(params[:facility_id]), class: "btn btn-default"  %>
-  </div>
-</div>

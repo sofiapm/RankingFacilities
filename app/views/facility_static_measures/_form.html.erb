@@ -1,5 +1,8 @@
 
-  <%= form_for([@facility, @facility_static_measure], html: {class: "well"}) do |f| %>
+  <%= form_for([@facility, @facility_static_measure], html: {class: "ls-box ls-board-box"}) do |f| %>
+      <header class="ls-info-header">
+        <h2 class="ls-title-3">Static Metric Details</h2>
+      </header>
     <% if @facility_static_measure.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@facility_static_measure.errors.count, "error") %> prohibited this facility_static_measure from being saved:</h2>
@@ -31,19 +34,21 @@
         <%= f.bootstrap_date :end_date %>
       </div>
     </div>
+    
     <% if @action[:action] == 'new' %>
-    <%= f.hidden_field :facility_id, :value => @action[:facility].id %>
+      <%= f.hidden_field :facility_id, :value => @action[:facility].id %>
     <% end %>
+    
     <%= f.hidden_field :user_id, :value => current_user.id %>
-    <div class="actions pull-left">
-    <% if @action[:action] == 'new' %>
-    <td><%= link_to 'Facility Attributes List', facility_facility_static_measures_path(@facility), class: "btn btn-default" %></td>
-    <% else %>
-    <td><%= link_to 'Facility Attributes List', facility_facility_static_measures_path(@facility_static_measure.facility_id), class: "btn btn-default" %></td>
-    <% end %>
+    <div class="pull-left">
+      <% if @action[:action] == 'new' %>
+        <td><%= link_to 'Static Metrics List', facility_facility_static_measures_path(@facility), class: "ls-btn ls-no-radius" %></td>
+      <% else %>
+        <td><%= link_to 'Static Metrics List', facility_facility_static_measures_path(@facility_static_measure.facility_id), class: "ls-btn ls-no-radius" %></td>
+      <% end %>
     </div>
-    <div class="actions pull-right">
-      <%= f.submit "Save", class: "btn btn-default"  %>
+    <div class="pull-right">
+      <%= f.submit "Save", class: "ls-btn ls-no-radius"  %>
     </div>
     </fieldset>
   <% end %>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>UpRanking</title>
+	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	  <%= csrf_meta_tags %>
+	  <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.6.2/stylesheets/locastyle.css">
+	</head>
+	<!-- <body data-spy="scroll" data-target=".bs-docs-sidebar" data-twttr-rendered="true">
+
+		<div class="row">
+			<% if user_signed_in? %>
+				<%= render 'layouts/navbar' %>	
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div class="col-md-3 verticalbar affix">
+					    	<%= yield :verticalbar %>	
+					    </div>
+					    <div class="container-conteudo col-md-9 col-md-offset-3">
+					    	<% flash.each do |type, message| %>
+					    		<div class="alert <%= flash_class type %>">
+							    	<button class="close" data-dismiss="alert" >X</button>
+							    	<%= message %>
+							    </div>
+					    	<% end %>
+
+					        <%= yield %>
+
+					        <%= render 'layouts/footer' %>
+					    </div>
+
+
+				    </div>
+				</div>
+			 <% else %>
+			   		
+			   	<div class="container col-md-12">
+				   	<% flash.each do |type, message| %>
+					    <div class="alert <%= flash_class type %>">
+							<button class="close" data-dismiss="alert">X</button>
+							<%= message %>
+						</div>
+					<% end %>
+				    <%= yield %>
+			    </div>
+			<% end %>
+			
+		</div>
+	</body> -->
+
+
+	<body>
+		<!-- Navbar Superior -->
+<!-- 		<header class="navbar">
+			<div class="container-fluid expanded-panel">
+				<div class="row">
+					<div id="logo" class="col-xs-12 col-sm-2">
+						<a href="">UpRanking</a>
+					</div>
+					<div id="top-panel" class="col-xs-12 col-sm-10">
+						<div class="row">
+						
+							<div class="col-xs-4 col-sm-8 top-panel-right pull-right">
+								
+								<ul class="nav navbar-nav pull-right panel-menu">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle account" data-toggle="dropdown">
+											<i class="fa fa-angle-down pull-right"></i>
+											<div class="user-mini pull-right">
+												<span class="welcome">Welcome,</span>
+												<span><%= current_user.full_name %></span>
+											</div>
+										</a>
+										<ul class="dropdown-menu">
+			            					<li><%= link_to "Edit User Account", edit_user_registration_path %></li>
+			            					<li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+			            				</ul>
+					
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header> -->
+		<span class="ls-show-sidebar ls-ico-menu"></span>
+		<aside class="ls-sidebar">
+			<div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
+			  <a href="#" class="ls-ico-user">
+			    <span class="ls-name">João</span>
+			    (fmolina)</small>
+			  </a>
+			  <nav class="ls-dropdown-nav ls-user-menu">
+			    <ul>
+			      <li><a href="#">Meus dados</a></li>
+			      <li><a href="#">Faturas</a></li>
+			      <li><a href="#">Planos</a></li>
+			     </ul>
+			     <a href="#" class="ls-btn-logout">Sair</a>
+			  </nav>
+			</div>
+
+			<div class="ls-sidebar-inner">
+			    <a href="/locawebstyle/documentacao/exemplos/painel1/pre-painel"  class="ls-go-prev"><span class="ls-text">Voltar à lista de serviços</span></a>
+
+			    <nav class="ls-menu">
+			      <ul>
+			         <li><a href="/locawebstyle/documentacao/exemplos/painel1/home" class="ls-ico-dashboard">Dashboard</a></li>
+			         <li><a href="/locawebstyle/documentacao/exemplos/painel1/clients" class="ls-ico-users">Clientes</a></li>
+			         <li><a href="/locawebstyle/documentacao/exemplos/painel1/stats" class="ls-ico-stats">Relatórios da revenda</a></li>
+			         <li>
+			          <a href="#" class="ls-ico-cog">Configurações</a>
+			          <ul>
+			            <li><a href="/locawebstyle/documentacao/exemplos/painel1/config-domain">Domínios da Revenda</a></li>
+			            <li><a href="/locawebstyle/documentacao/exemplos/painel1/config-email">E-mail de Remetente</a></li>
+			            <li><a href="/locawebstyle/documentacao/exemplos/painel1/config-aspect">Aparência</a></li>
+			            <li><a href="/locawebstyle/documentacao/exemplos/painel1/config-answer">Atendimento</a></li>
+			            <li><a href="/locawebstyle/documentacao/exemplos/painel1/config-api">Chave de acesso para API</a></li>
+			          </ul>
+			        </li>
+			      </ul>
+			    </nav>
+
+			</div>
+		</aside>
+		<!-- Container: tudo menos navbar -->
+		<!-- <div id="main" class="container-fluid" role="navigation">
+			<div class="row"> -->
+				<!-- Side Bar Left -->
+				<!-- <div id="sidebar-left" class="col-xs-2 col-sm-2">
+					<ul class="nav main-menu"> -->
+
+						<!-- Nome da Role Actual -->
+						<!-- <li>
+							<a href="ajax/dashboard.html" class="active ajax-link">
+								<i class="fa fa-dashboard"></i>
+								<span class="hidden-xs"><% if current_user.current_role != 0 %>
+                                    <%= current_user.roles.find(current_user.current_role).name + ": " +  current_user.roles.find(current_user.current_role).company_name %> 
+                                <% else %>
+                                    <%= "Role Not Selected" %>
+                                <% end %></span>
+							</a>
+						</li>
+ -->
+						<!-- Dropdown Lista Facilities: Details -->
+						<!-- <li class="dropdown">
+							<a href="#" class="dropdown-toggle">
+								<i class="fa fa-bar-chart-o"></i>
+								<span class="hidden-xs">Facility Details</span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="ajax-link" href="ajax/charts_xcharts.html">xCharts</a></li>
+								<li><a class="ajax-link" href="ajax/charts_flot.html">Flot Charts</a></li>
+								<li><a class="ajax-link" href="ajax/charts_google.html">Google Charts</a></li>
+								<li><a class="ajax-link" href="ajax/charts_morris.html">Morris Charts</a></li>
+								<li><a class="ajax-link" href="ajax/charts_amcharts.html">AmCharts</a></li>
+								<li><a class="ajax-link" href="ajax/charts_chartist.html">Chartist</a></li>
+								<li><a class="ajax-link" href="ajax/charts_coindesk.html">CoinDesk realtime</a></li>
+							</ul>
+						</li> -->
+
+						<!-- Dropdown Lista Facilities: Metricas -->
+						<!-- <li class="dropdown">
+							<a href="#" class="dropdown-toggle">
+								<i class="fa fa-table"></i>
+								 <span class="hidden-xs">Facility Metrics</span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="ajax-link" href="ajax/tables_simple.html">Simple Tables</a></li>
+								<li><a class="ajax-link" href="ajax/tables_datatables.html">Data Tables</a></li>
+								<li><a class="ajax-link" href="ajax/tables_beauty.html">Beauty Tables</a></li>
+							</ul>
+						</li> -->
+
+						<!-- Dropdown Lista Facilities: Reports -->
+						<!-- <li class="dropdown">
+							<a href="#" class="dropdown-toggle">
+								<i class="fa fa-pencil-square-o"></i>
+								 <span class="hidden-xs">Facility Reports</span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="ajax-link" href="ajax/forms_elements.html">Elements</a></li>
+								<li><a class="ajax-link" href="ajax/forms_layouts.html">Layouts</a></li>
+								<li><a class="ajax-link" href="ajax/forms_file_uploader.html">File Uploader</a></li>
+							</ul>
+						</li>
+						<span class="ls-sidebar-toggle ls-ico-shaft-left"></span> -->
+						<!-- <li class="dropdown">
+							<a href="#" class="dropdown-toggle">
+								<i class="fa fa-picture-o"></i>
+								 <span class="hidden-xs">Multilevel menu</span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">First level menu</a></li>
+								<li><a href="#">First level menu</a></li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle">
+										<i class="fa fa-plus-square"></i>
+										<span class="hidden-xs">Second level menu group</span>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">Second level menu</a></li>
+										<li><a href="#">Second level menu</a></li>
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle">
+												<i class="fa fa-plus-square"></i>
+												<span class="hidden-xs">Three level menu group</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li> -->
+				<!-- 	</ul>
+				</div> -->
+
+
+
+
+
+
+<!-- 			</div>
+		</div> -->
+
+
+
+
+	</body>
+</html>

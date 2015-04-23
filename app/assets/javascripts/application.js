@@ -14,21 +14,19 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require bootstrap
-//= require bootstrap-datepicker
 //= require highcharts
-//= require turbolinks
+
 //= require_tree .
 
-$(document).ready( function(){
-  $('.datepicker').datepicker({
-    dateFormat: "dd-mm-yy"
-  });
+// $(document).ready( function(){
+//   $('.datepicker').datepicker({
+//     dateFormat: "dd-mm-yy"
+//   });
 
-  $('.dropdown').hover(function() {
-          $(this).find('.dropdown-menu').first().stop(true, true).delay(10).slideDown();
-      }, function() {
-          $(this).find('.dropdown-menu').first().stop(true, true).delay(10).slideUp()
-      });
+//   $('.dropdown').hover(function() {
+//           $(this).find('.dropdown-menu').first().stop(true, true).delay(10).slideDown();
+//       }, function() {
+//           $(this).find('.dropdown-menu').first().stop(true, true).delay(10).slideUp()
+//       });
 
-});
+// });
