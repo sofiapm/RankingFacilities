@@ -6,10 +6,10 @@
     <%= f.label :name_cont %>
     <%= f.search_field :name_cont %>
 
-    <%= f.label "Starting From Date" %>
+    <%= f.label "From" %>
     <%= f.bootstrap_date :start_date_gteq %>
 
-    <%= f.label "Till Date" %>
+    <%= f.label "Untill" %>
     <%= f.bootstrap_date :end_date_lteq %>
 
     <%= f.submit "Search", class: "ls-btn ls-no-radius pull-right"%>
@@ -19,7 +19,7 @@
 
   <table class="ls-table">
     <thead>
-      <tr>
+      <tr class="table-measures-head">
         <th>Name</th>
         <th>Value</th>
         <th>Start date</th>

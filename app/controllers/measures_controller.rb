@@ -71,8 +71,8 @@ class MeasuresController < ApplicationController
   end
 
   def import
-      Measure.import(params[:file], params[:facility_id].to_i, current_user.id)
-      redirect_to facility_measures_url(params[:facility_id]), notice: "Measures imported."
+      ImporterJob.new.async.perform( params[:file], params[:facility_id].to_i, current_user.id )
+      redirect_to facility_measures_url(params[:facility_id]), notice: "Importing Measures."
   end
 
   private

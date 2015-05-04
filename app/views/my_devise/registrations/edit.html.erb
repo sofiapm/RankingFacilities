@@ -16,15 +16,19 @@
             <div class="form_fancy"><%= f.label :last_name %><br />
             <%= f.text_field :last_name, :required => true, class: "form-control" %></div>
 
+            <div id="" class="form_fancy">
+              <%= "Address" %><br />
+              <input id="autocomplete" onfocus="geolocate()" type="text" class="form-control"></input>
+            </div>
             <%= f.fields_for :address do |a| %>
                 <div class="form_fancy"><%= a.label :street %><br />
-                <%= a.text_field :street, :required => true, class: "form-control" %></div>
+                <%= a.text_field :street, :required => true, class: "form-control", id: "route" %></div>
                 <div class="form_fancy"><%= a.label :city %><br />
-                <%= a.text_field :city, :required => true, class: "form-control" %></div>
+                <%= a.text_field :city, :required => true, class: "form-control", id: "locality" %></div>
                 <div class="form_fancy"><%= a.label :country %><br />
-                <%= a.text_field :country, :required => true, class: "form-control" %></div>
+                <%= a.text_field :country, :required => true, class: "form-control", id: "country" %></div>
                 <div class="form_fancy"><%= a.label :zip_code %><br />
-                <%= a.text_field :zip_code, :required => true, class: "form-control" %></div>
+                <%= a.text_field :zip_code, :required => true, class: "form-control", id: "postal_code" %></div>
             <% end %>
 
             <div class="form_fancy" ><%= f.label :email %><br />
@@ -34,18 +38,18 @@
               <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
             <% end %>
 
-            <div class="form_fancy"><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+            <div class="form_fancy"><%= f.label :current_password %> <i>(REQUIRED)</i><br />
               <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %></div>
               
-            <div class="form_fancy"><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+            <div class="form_fancy"><%= f.label :password %> <i>(ONLY if you want to change password)</i><br />
               <%= f.password_field :password, autocomplete: "off", class: "form-control" %></div>
 
-            <div class="form_fancy"><%= f.label :password_confirmation %><br />
+            <div class="form_fancy"><%= f.label :password_confirmation %><i>(ONLY if you want to change password)</i><br />
               <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %></div><br /><br />
 
           
 
-            <%= f.fields_for :roles do |a| %>
+<!--             <%= f.fields_for :roles do |a| %>
               <header class="ls-info-header">
                 <h2 class="ls-title-3"><b><%= a.object.company_name + ": " %></b><%= a.object.name %></h2>
               </header>
@@ -53,12 +57,12 @@
                 <div class="form_fancy"><%= a.label :name %><br /><%= a.select :name, RankingFacilities::Application::ROLES_NAMES.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div>
                 <div class="form_fancy"><%= a.label :company_name %><br />
                 <%= a.text_field :company_name, :required => true, class: "form-control" %></div>
-                <div class="form_fancy"><%= a.label :nif %><br />
+                <div class="form_fancy"><%= a.label "VATID" %><br />
                 <%= a.text_field :nif, :required => true, class: "form-control" %></div>
                 <div class="form_fancy"><%= a.label :sector %><br /><%= a.select :sector, RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value } ,{} ,:required => true, class: "form-control" %></div><br /><br />
                 <%= a.hidden_field :id, :value => a.object.id %>
 
-            <% end %>
+            <% end %> -->
             <%= f.hidden_field :id, :value => current_user.id %>
 
           <div class="update_user pull-right">

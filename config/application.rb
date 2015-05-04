@@ -20,7 +20,7 @@ module RankingFacilities
     ATTRIBUTES_UNITS = { nfa: 'm2', pa: 'm2'}
 
     METRIC_NAMES = { tlc: 'Total Labour Costs', tcc: 'Total Cleaning Cost', tsc: 'Total Space Cost', toc: 'Total Occupancy Cost',
-     ae: 'Actual Expenses', ec: 'Energy Consumption', wc: 'Water Consumption', wp: 'Waste Production' }
+     ae: 'Actual Expenses', ec: 'Energy Consumption', wc: 'Water Consumption' }
     METRIC_UNITS = { tlc: '€', tcc: '€', tsc: '€', toc: '€', ae: '€', fte: 'u', ec: 'kWh', wc: 'm3', wp: 'ton'}
     
     KPI_NAMES = { cc_nfa: 'Cleaning Cost per Square Meter', sc_nfa: 'Space Cost per Square Meter', oc_nfa: 'Occupancy Cost per Square Meter', 

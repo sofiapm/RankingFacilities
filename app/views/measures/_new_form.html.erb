@@ -13,13 +13,29 @@
   <% end %>
 
 
-  <td><%= f.select :name, RankingFacilities::Application::METRIC_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %></td>
-  <td><%= f.text_field :value, class: "form-control" %></td>
-  <td><%= f.bootstrap_date :start_date %></td>
-  <td><%= f.bootstrap_date :end_date %></td>
+  <div class="form_fancy">
+      <%= f.label "Name" %> <br>
+      <%= f.select :name, RankingFacilities::Application::METRIC_NAMES.values.sort , {} ,:required => true, class: "form-control" %>
+  </div>
+  <div class="form_fancy">
+    <%= f.label :value %><br>
+    <%= f.text_field :value, class: "form-control" %>
+  </div>
+  <div class="row">
+    <div class="form_fancy col-md-3">
+      <%= f.label :start_date %><br>
+      <%= f.bootstrap_date :start_date %>
+    </div>
+    <div class="form_fancy col-md-3">
+      <%= f.label :end_date %><br>
+      <%= f.bootstrap_date :end_date%>
+    </div>
+  </div>
+
   <%= f.hidden_field :facility_id, :value => params[:facility_id] %>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-  <td></td>
-  <td><%= f.submit "Save", class: "btn btn-default"  %></td>
+
+  <div class="pull-right">
+    <%= f.submit "Save", class: "btn btn-default pull-right"  %>
+  </div>
 
 <% end %>

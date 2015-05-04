@@ -15,11 +15,39 @@
 
  */
 
+ .pac-container{
+    z-index: 1051;
+ }
+
+.alerts{
+     border-radius: 0px;   
+     margin: 0 0 0 0 !important;
+     margin-left: 0px;
+}
+
 .form-control{
     border-radius: 0px;   
 }
 .btn{
      border-radius: 0px;
+}
+
+.roles-button{
+    text-align: right;
+    font-weight: bold;
+}
+
+.measure-celula{
+    text-align: center !important;
+
+}
+.table-measures-head{
+    text-align: center !important;
+    color: rgba(255, 129, 0, 0.9);
+}
+.date-celula{
+    text-align: right !important;  
+    color: rgba(255, 129, 0, 0.7); 
 }
 
 .footer {
@@ -56,3 +84,4 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
