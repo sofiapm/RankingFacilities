@@ -36,8 +36,8 @@
           <td><%= facility_static_measure.value %></td>
           <td><%= facility_static_measure.start_date %></td>
           <td><%= facility_static_measure.end_date %></td>
-          <td><%= link_to 'Edit', edit_facility_static_measure_path(facility_static_measure) %></td>
-          <td><%= link_to 'Destroy', facility_static_measure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_facility_static_measure_path(facility_static_measure), class: "titulo-azul" %></td>
+          <td><%= link_to 'Destroy', facility_static_measure, method: :delete, data: { confirm: 'Are you sure?' }, class: "titulo-azul" %></td>
 
         </tr>
       <% end %>

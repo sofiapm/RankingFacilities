@@ -21,23 +21,13 @@
 
 <br/><br/><br/>
 
-	<% year = params[:year] || '' %>
+	<% year = params[:year] || '2014' %>
 	<div class="indicators_graph col-md-12 pull-left">
 	
-	<% @v = @facility.internal_work_cost(year) %>
-	<%= render 'graph', @v %>
-	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_internal_work_cost(year, @all_facilities) %>
-		<%= render 'linecolumnchart', @v %>
-	<% end %>
+	<% @v = @facility.costs_year %>
+	<%= render 'columnbasicsgraph', @v %>
 
-	<% @v = @facility.water_consumption_fte(year) %>
-	<%= render 'graph', @v %>
-	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_water_consumption_fte(year, @all_facilities) %>
-		<%= render 'linecolumnchart', @v %>
-	<% end %>
-
+	</div>
 
 	<% @v = @facility.capacity_vs_utilization(year) %>
 	<%= render 'graph', @v %>
@@ -50,13 +40,6 @@
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
 		<% @v = @facility.best_space_experience(year, @all_facilities) %>
-		<%= render 'linecolumnchart', @v %>
-	<% end %>
-
-	<% @v = @facility.energy_consumption(year) %>
-	<%= render 'graph', @v %>
-	<% unless @all_facilities.empty? %>
-		<% @v = @facility.best_energy_consumption(year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
@@ -74,6 +57,32 @@
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
+	<% @v = @facility.internal_work_cost(year) %>
+	<%= render 'graph', @v %>
+	<% unless @all_facilities.empty? %>
+		<% @v = @facility.best_internal_work_cost(year, @all_facilities) %>
+		<%= render 'linecolumnchart', @v %>
+	<% end %>
+
+	<% @v = @facility.water_consumption_fte(year) %>
+	<%= render 'graph', @v %>
+	<% unless @all_facilities.empty? %>
+		<% @v = @facility.best_water_consumption_fte(year, @all_facilities) %>
+		<%= render 'linecolumnchart', @v %>
+	<% end %>
+
+
+	
+
+	<% @v = @facility.energy_consumption(year) %>
+	<%= render 'graph', @v %>
+	<% unless @all_facilities.empty? %>
+		<% @v = @facility.best_energy_consumption(year, @all_facilities) %>
+		<%= render 'linecolumnchart', @v %>
+	<% end %>
+
+	
+
 	<% @v = @facility.occupancy_cost_nfa(year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
@@ -81,10 +90,7 @@
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
 
-	<% @v = @facility.costs_year %>
-	<%= render 'columnbasicsgraph', @v %>
 
-	</div>
 
 
 	

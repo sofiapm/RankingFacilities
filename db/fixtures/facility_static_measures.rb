@@ -1,9 +1,46 @@
-#Facility 1 - User 1
+#Facility 1 - User 1 -jane
 
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Net Floor Area"
+# 	s.value = 377545
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 1
+# 	s.user_id = 1
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Primary Area"
+# 	s.value = 375170
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 1
+# 	s.user_id = 1
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Full Time Equivalent"
+# 	s.value = 144065280
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 1
+# 	s.user_id = 1
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Total Level Area"
+# 	s.value = 379135
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 1
+# 	s.user_id = 1
+# end
+
+# Facility A - Jane -User 1
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Net Floor Area"
-	s.value = 377545
-	s.start_date = "2014/01/01".to_date
+	s.value = 70000
+	s.start_date = "2011/01/01".to_date
 	s.end_date = "2015/12/31".to_date
 	s.facility_id = 1
 	s.user_id = 1
@@ -11,8 +48,8 @@ end
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Primary Area"
-	s.value = 375170
-	s.start_date = "2014/01/01".to_date
+	s.value = 60000
+	s.start_date = "2011/01/01".to_date
 	s.end_date = "2015/12/31".to_date
 	s.facility_id = 1
 	s.user_id = 1
@@ -20,7 +57,25 @@ end
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Full Time Equivalent"
-	s.value = 144065280
+	s.value = 195840
+	s.start_date = "2011/01/01".to_date
+	s.end_date = "2012/12/31".to_date
+	s.facility_id = 1
+	s.user_id = 1
+end
+
+FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+	s.name = "Full Time Equivalent"
+	s.value = 230400
+	s.start_date = "2013/01/01".to_date
+	s.end_date = "2013/12/31".to_date
+	s.facility_id = 1
+	s.user_id = 1
+end
+
+FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+	s.name = "Full Time Equivalent"
+	s.value = 249600
 	s.start_date = "2014/01/01".to_date
 	s.end_date = "2015/12/31".to_date
 	s.facility_id = 1
@@ -29,20 +84,94 @@ end
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Total Level Area"
-	s.value = 379135
-	s.start_date = "2014/01/01".to_date
+	s.value = 77000
+	s.start_date = "2011/01/01".to_date
 	s.end_date = "2015/12/31".to_date
 	s.facility_id = 1
 	s.user_id = 1
 end
 
+#Facility 2 - User 1 -jane
 
-#Facility 2 - User 1
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Net Floor Area"
+# 	s.value = 378755
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 2
+# 	s.user_id = 1
+# end
 
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Primary Area"
+# 	s.value = 375650
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 2
+# 	s.user_id = 1
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Full Time Equivalent"
+# 	s.value = 144249600
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 2
+# 	s.user_id = 1
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Total Level Area"
+# 	s.value = 380235
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 2
+# 	s.user_id = 1
+# end
+
+# #Facility 3 - User 2 - John
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Net Floor Area"
+# 	s.value = 63010
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 3
+# 	s.user_id = 2
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Primary Area"
+# 	s.value = 62130
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 3
+# 	s.user_id = 2
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Full Time Equivalent"
+# 	s.value = 314880
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 3
+# 	s.user_id = 2
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Total Level Area"
+# 	s.value = 64600
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 3
+# 	s.user_id = 2
+# end
+
+# Facility B - User 1 - Jane
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Net Floor Area"
-	s.value = 378755
-	s.start_date = "2014/01/01".to_date
+	s.value = 380000
+	s.start_date = "2011/01/01".to_date
 	s.end_date = "2015/12/31".to_date
 	s.facility_id = 2
 	s.user_id = 1
@@ -50,8 +179,8 @@ end
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Primary Area"
-	s.value = 375650
-	s.start_date = "2014/01/01".to_date
+	s.value = 390000
+	s.start_date = "2011/01/01".to_date
 	s.end_date = "2015/12/31".to_date
 	s.facility_id = 2
 	s.user_id = 1
@@ -59,28 +188,93 @@ end
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Full Time Equivalent"
-	s.value = 144249600
-	s.start_date = "2014/01/01".to_date
+	s.value = 2822400
+	s.start_date = "2011/01/01".to_date
 	s.end_date = "2015/12/31".to_date
+	s.facility_id = 2
+	s.user_id = 1
+end
+
+FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+	s.name = "Full Time Equivalent"
+	s.value = 2803200
+	s.start_date = "2011/01/01".to_date
+	s.end_date = "2011/12/31".to_date
+	s.facility_id = 2
+	s.user_id = 1
+end
+
+FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+	s.name = "Full Time Equivalent"
+	s.value = 2764800
+	s.start_date = "2012/01/01".to_date
+	s.end_date = "2012/12/31".to_date
+	s.facility_id = 2
+	s.user_id = 1
+end
+
+FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+	s.name = "Full Time Equivalent"
+	s.value = 2649600
+	s.start_date = "2013/01/01".to_date
+	s.end_date = "2013/12/31".to_date
 	s.facility_id = 2
 	s.user_id = 1
 end
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Total Level Area"
-	s.value = 380235
-	s.start_date = "2014/01/01".to_date
+	s.value = 400000
+	s.start_date = "2011/01/01".to_date
 	s.end_date = "2015/12/31".to_date
 	s.facility_id = 2
 	s.user_id = 1
 end
 
-#Facility 3 - User 2
+#Facility 3 - User 2 - John
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Net Floor Area"
+# 	s.value = 63010
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 3
+# 	s.user_id = 2
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Primary Area"
+# 	s.value = 62130
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 3
+# 	s.user_id = 2
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Full Time Equivalent"
+# 	s.value = 314880
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 3
+# 	s.user_id = 2
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Total Level Area"
+# 	s.value = 64600
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 3
+# 	s.user_id = 2
+# end
+
+#Facility C - User 2 - John
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Net Floor Area"
-	s.value = 63010
-	s.start_date = "2014/01/01".to_date
+	s.value = 442
+	s.start_date = "2011/01/01".to_date
 	s.end_date = "2015/12/31".to_date
 	s.facility_id = 3
 	s.user_id = 2
@@ -88,8 +282,8 @@ end
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Primary Area"
-	s.value = 62130
-	s.start_date = "2014/01/01".to_date
+	s.value = 374
+	s.start_date = "2011/01/01".to_date
 	s.end_date = "2015/12/31".to_date
 	s.facility_id = 3
 	s.user_id = 2
@@ -97,57 +291,65 @@ end
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Full Time Equivalent"
-	s.value = 314880
-	s.start_date = "2014/01/01".to_date
-	s.end_date = "2015/12/31".to_date
+	s.value = 57600
+	s.start_date = "2011/01/01".to_date
+	s.end_date = "2011/12/31".to_date
 	s.facility_id = 3
-	s.user_id = 2
-end
-
-FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
-	s.name = "Total Level Area"
-	s.value = 64600
-	s.start_date = "2014/01/01".to_date
-	s.end_date = "2015/12/31".to_date
-	s.facility_id = 3
-	s.user_id = 2
-end
-
-
-#Facility 4 - User 1
-
-FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
-	s.name = "Net Floor Area"
-	s.value = 54630
-	s.start_date = "2014/01/01".to_date
-	s.end_date = "2015/12/31".to_date
-	s.facility_id = 4
-	s.user_id = 2
-end
-
-FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
-	s.name = "Primary Area"
-	s.value = 52120
-	s.start_date = "2014/01/01".to_date
-	s.end_date = "2015/12/31".to_date
-	s.facility_id = 4
 	s.user_id = 2
 end
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Full Time Equivalent"
-	s.value = 20014080
-	s.start_date = "2014/01/01".to_date
+	s.value = 48000
+	s.start_date = "2012/01/01".to_date
 	s.end_date = "2015/12/31".to_date
-	s.facility_id = 4
+	s.facility_id = 3
 	s.user_id = 2
 end
 
 FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
 	s.name = "Total Level Area"
-	s.value = 61600
-	s.start_date = "2014/01/01".to_date
+	s.value = 522
+	s.start_date = "2011/01/01".to_date
 	s.end_date = "2015/12/31".to_date
-	s.facility_id = 4
+	s.facility_id = 3
 	s.user_id = 2
 end
+
+#Facility 4 - User 2 - John
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Net Floor Area"
+# 	s.value = 54630
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 4
+# 	s.user_id = 2
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Primary Area"
+# 	s.value = 52120
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 4
+# 	s.user_id = 2
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Full Time Equivalent"
+# 	s.value = 20014080
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 4
+# 	s.user_id = 2
+# end
+
+# FacilityStaticMeasure.seed(:name, :value, :start_date, :end_date, :facility_id, :user_id) do |s|
+# 	s.name = "Total Level Area"
+# 	s.value = 61600
+# 	s.start_date = "2014/01/01".to_date
+# 	s.end_date = "2015/12/31".to_date
+# 	s.facility_id = 4
+# 	s.user_id = 2
+# end

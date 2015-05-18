@@ -6,12 +6,12 @@
         <div class="ls-list ls-no-radius">
 		    <header class="ls-list-header">
 		      <div class="ls-list-title col-md-4">
-		        <a href="#" ><%= r.company_name %></a>
+		        <a href="#" class="titulo-azul"><%= r.company_name %></a>
 		        <small><%= r.name %></small>
 		      </div>
 		      <div class="col-md-3 col-md-offset-5 ls-txt-right ">
 		        
-		        <%= link_to "Administrar", {:controller => "/user_roles", :current_role => r.id, :action => 'update', :method => :put, :approved => true}, {class: "ls-btn-primary ls-btn-sm ls-no-radius"} %>
+		        <%= link_to "Manage", {:controller => "/user_roles", :current_role => r.id, :action => 'update', :method => :put, :approved => true}, {class: "ls-btn-primary ls-btn-sm ls-no-radius"} %>
 		        	<!-- <a >Administrar</a> -->
 		        
 		        <%= link_to 'Delete', r, class: "ls-btn-primary ls-btn-sm ls-no-radius", method: :delete, data: { confirm: 'Are you sure?' } %>

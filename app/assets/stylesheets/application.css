@@ -15,6 +15,10 @@
 
  */
 
+ h1,h2,h3,p{
+    font-family: 'Roboto', sans-serif !important;
+ }
+
  .pac-container{
     z-index: 1051;
  }
@@ -24,7 +28,6 @@
      margin: 0 0 0 0 !important;
      margin-left: 0px;
 }
-
 .form-control{
     border-radius: 0px;   
 }
@@ -41,13 +44,38 @@
     text-align: center !important;
 
 }
+.titulo-azul{
+    color: rgba(0, 210, 177, 1) !important;
+}
+.ls-list{
+
+ color: rgba(0, 210, 177, 1) !important;
+}
+.ls-info-header{
+    color: rgba(0, 210, 177, 1) !important;
+}
+.ls-title-3{
+    color: rgba(0, 210, 177, 1) !important;
+}
+.ls-topbar{
+    background: rgba(0, 210, 177, 1) !important;
+}
+.ls-brand-name{
+     background: rgba(0, 210, 177, 1) !important;
+}
+.ls-user-account{
+    background: rgba(0, 210, 177, 1) !important;
+}
+.ls-btn-primary{
+    background: rgba(0, 210, 177, 1) !important;
+}
 .table-measures-head{
     text-align: center !important;
-    color: rgba(255, 129, 0, 0.9);
+    color: rgba(0, 210, 177, 1);
 }
 .date-celula{
     text-align: right !important;  
-    color: rgba(255, 129, 0, 0.7); 
+    color: rgba(0, 210, 177, 1);
 }
 
 .footer {

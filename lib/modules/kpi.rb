@@ -548,7 +548,7 @@ module Kpi
 
 	#substituir por cleaning, space e occupancy costs
 	def self.costs_year facility
-		year = Date.current.year
+		year = Date.current.year-1
 		hash = {:first => {:name => year-2, :values => [avg(cleaning_cost_nfa(facility, (year-2).to_s)[:values]).round(2), avg(space_cost_nfa(facility, (year-2).to_s)[:values]).round(2), avg(occupancy_cost_nfa(facility, (year-2).to_s)[:values]).round(2) ]}}
 		hash[:second]={:name => year-1, :values => [avg(cleaning_cost_nfa(facility, (year-1).to_s)[:values]).round(2), avg(space_cost_nfa(facility, (year-1).to_s)[:values]).round(2), avg(occupancy_cost_nfa(facility, (year-1).to_s)[:values]).round(2) ]}
 		hash[:third]={:name => year, :values => [avg(cleaning_cost_nfa(facility, year.to_s)[:values]).round(2), avg(space_cost_nfa(facility, year.to_s)[:values]).round(2), avg(occupancy_cost_nfa(facility, year.to_s)[:values]).round(2) ]}

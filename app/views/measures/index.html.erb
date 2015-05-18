@@ -94,20 +94,36 @@
          #<Measure id: 37, name: "Actual Expenses", value: 1156559.0, start_date: "2015-01-01", end_date: "2015-01-31", facility_id: 1, user_id: 1, created_at: "2015-04-23 19:16:28", updated_at: "2015-04-23 19:16:28">,
          #<Measure id: 1, name: "Energy Consumption", value: 5287.0, start_date: "2015-01-01", end_date: "2015-01-31", facility_id: 1, user_id: 1, created_at: "2015-04-23 19:16:20", updated_at: "2015-04-23 19:16:20">]],
        [[2, 2015], -->
-      <% @measures.group_by{ |x| [x.start_date.month, x.start_date.year] }.sort.each do |measures_by_monthyear| %>
-            
+      <% @measures.group_by{ |x| [x.start_date.year, x.start_date.month] }.sort.each do |measures_by_monthyear| %>
+          <% i=0 %>
           <tr>
-          <td class="date-celula"><%=  Date::MONTHNAMES[measures_by_monthyear.first.first] %><br/><small><%= measures_by_monthyear.first.second %></small></td>
+          <td class="date-celula"><%=  Date::MONTHNAMES[measures_by_monthyear.first.second] %><br/><small><%= measures_by_monthyear.first.first %></small></td>
             <% measures_by_monthyear.last.sort_by{ |m| m[:name]}.each do |measure_alphabetically| %>
             
-              <td class="measure-celula">
-                <a href="#" class="ls-btn ls-no-radius" data-ls-module="popover" title="Edit" 
-                data-content='<%= link_to 'Edit', edit_measure_path(measure_alphabetically), class: "ls-btn-primary ls-no-radius" %><%= link_to 'Destroy', measure_alphabetically, method: :delete, data: { confirm: 'Are you sure?' }, class: "ls-btn-primary ls-no-radius" %>' >
-                <%= measure_alphabetically.value %><br/><br/>
-                <small><%= Date.parse(measure_alphabetically.start_date.to_s).strftime("%m/%d")%>-<%= Date.parse(measure_alphabetically.end_date.to_s).strftime("%m/%d") %></small></a>
-              </td>
+              <% while (measure_alphabetically.name != RankingFacilities::Application::METRIC_NAMES.values.sort[i]) %>
+                  <td class="measure-celula">
+                    
+                    <%= link_to 'Add Metric', new_facility_measure_path, class: "ls-btn ls-no-radius" %><br/><br/>
+                    
+                  </td>
+                   <% i = i+1 %>
+              <% end %>
+                <td class="measure-celula">
+                 
+                  <a href="#" class="ls-btn ls-no-radius" data-ls-module="popover" title="Edit" 
+                  data-content='<%= link_to 'Edit', edit_measure_path(measure_alphabetically), class: "ls-btn-primary ls-no-radius" %><%= link_to 'Destroy', measure_alphabetically, method: :delete, data: { confirm: 'Are you sure?' }, class: "ls-btn-primary ls-no-radius" %>' >
+                  <%= measure_alphabetically.value %><br/><br/>
+                  <small><%= Date.parse(measure_alphabetically.start_date.to_s).strftime("%m/%d")%>-<%= Date.parse(measure_alphabetically.end_date.to_s).strftime("%m/%d") %></small></a>
+                </td>
+                <% i = i+1 %>
             <% end %>
-
+            <% if i==6 %>
+            <td class="measure-celula">
+                    
+                    <%= link_to 'Add Metric', new_facility_measure_path, class: "ls-btn ls-no-radius" %><br/><br/>
+                    
+                  </td>
+            <% end %>
         </tr>
       <% end %>
 
