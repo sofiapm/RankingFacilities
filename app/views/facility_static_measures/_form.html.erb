@@ -18,11 +18,11 @@
     <fieldset>
     <div class="form_fancy">
         <%= f.label "Name" %> <br>
-        <%= f.select :name, RankingFacilities::Application::ATTRIBUTES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %>
+        <%= f.select :name, RankingFacilities::Application::ATTRIBUTES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "select big" %>
     </div>
     <div class="form_fancy">
       <%= f.label :value %><br>
-      <%= f.text_field :value, class: "form-control" %>
+      <%= f.text_field :value, class: "input-field big" %>
     </div>
     <div class="row">
       <div class="form_fancy col-md-3">
@@ -40,13 +40,13 @@
     <% end %>
     
     <%= f.hidden_field :user_id, :value => current_user.id %>
-    <div class="pull-left">
+<!--     <div class="pull-left">
       <% if @action[:action] == 'new' %>
         <td><%= link_to 'Static Metrics List', facility_facility_static_measures_path(@facility), class: "ls-btn ls-no-radius" %></td>
       <% else %>
         <td><%= link_to 'Static Metrics List', facility_facility_static_measures_path(@facility_static_measure.facility_id), class: "ls-btn ls-no-radius" %></td>
       <% end %>
-    </div>
+    </div> -->
     <div class="pull-right">
       <%= f.submit "Save", class: "ls-btn ls-no-radius"  %>
     </div>

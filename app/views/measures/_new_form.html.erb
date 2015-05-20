@@ -15,11 +15,11 @@
 
   <div class="form_fancy">
       <%= f.label "Name" %> <br>
-      <%= f.select :name, RankingFacilities::Application::METRIC_NAMES.values.sort , {} ,:required => true, class: "form-control" %>
+      <%= f.select :name, RankingFacilities::Application::METRIC_NAMES.values.sort , {} ,:required => true, class: "select big" %>
   </div>
   <div class="form_fancy">
     <%= f.label :value %><br>
-    <%= f.text_field :value, class: "form-control" %>
+    <%= f.text_field :value, class: "input-field big" %>
   </div>
   <div class="row">
     <div class="form_fancy col-md-3">
@@ -35,7 +35,7 @@
   <%= f.hidden_field :facility_id, :value => params[:facility_id] %>
 
   <div class="pull-right">
-    <%= f.submit "Save", class: "btn btn-default pull-right"  %>
+    <%= f.submit "Save", class: "ls-btn ls-no-radius pull-right"  %>
   </div>
 
 <% end %>

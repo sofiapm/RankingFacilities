@@ -13,8 +13,8 @@
     <% end %>
 
 
-    <td><%= f.select :name, RankingFacilities::Application::ATTRIBUTES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control" %></td>
-    <td><%= f.text_field :value, class: "form-control" %></td>
+    <td><%= f.select :name, RankingFacilities::Application::ATTRIBUTES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "select big" %></td>
+    <td><%= f.text_field :value, class: "input-field big" %></td>
     <td><%= f.bootstrap_date :start_date %></td>
     <td><%= f.bootstrap_date :end_date %></td>
     <%= f.hidden_field :facility_id, :value => params[:facility_id] %>

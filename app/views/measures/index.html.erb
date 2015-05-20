@@ -64,7 +64,7 @@
   
   <div class="row bottom-border">
     
-      <a href='<%= link_to '', new_facility_measure_path(params[:facility_id]) %>'><h1 class="ls-btn-primary ls-no-radius ls-ico-plus pull-right">Add</h1></a>
+      <%= link_to 'Add', new_facility_measure_path(params[:facility_id]), class: "ls-btn-primary btn-add-facility ls-no-radius ls-ico-plus pull-right white-color-font" %>
 
       <a title="Import Metrics" class=" pull-right" data-ls-module="popover" 
           data-content='<div class="row col-xs-29 col-md-18 ls-box ls-board-box">

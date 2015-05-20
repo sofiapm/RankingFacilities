@@ -90,7 +90,9 @@ h5{
      padding-top: 6px !important;
      padding-bottom: 7px !important;
 }
-
+.btn-add-facility{
+    margin-top: 20px;
+}
 .roles-list{
     padding-top: 2%;
 }
