@@ -67,7 +67,7 @@
       <a href='<%= link_to '', new_facility_measure_path(params[:facility_id]) %>'><h1 class="ls-btn-primary ls-no-radius ls-ico-plus pull-right">Add</h1></a>
 
       <a title="Import Metrics" class=" pull-right" data-ls-module="popover" 
-          data-content='<div class="row ls-box ls-board-box">
+          data-content='<div class="row col-xs-29 col-md-18 ls-box ls-board-box">
                           <header class="ls-info-header">
                               <h2 class="ls-title-3 ls-ico-cloud-upload">Import Metrics</h2>
                           </header>
@@ -84,12 +84,12 @@
                               
                               <br/>
                             </div>
-                        
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                             <div class="row">
                               <%= form_tag import_facility_measures_path(params[:facility_id]), multipart: true do %>
 
                               <div class="form_fancy col-md-6"><%= file_field_tag :file %></div>
-                              <div class="form_fancy col-md-3 pull-right"><%= submit_tag "Import" , class: "ls-btn ls-no-radius"%></div>
+                              <div class="form_fancy col-md-3" style="margin-left: 50px;"><%= submit_tag "Import" , class: "ls-btn ls-no-radius"%></div>
                               <% end %>
                             </div>
                           </div>
