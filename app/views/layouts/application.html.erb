@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ls-theme-orange">
+<html class="ls-theme-light-green">
 	<head >
 	  <title>UpRanking</title>
 	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -100,12 +100,9 @@
       <!-- Notification bar -->
       <div class="ls-notification-topbar">
         <!-- Nome da Role Actual -->
-        <div class="ls-alerts-list">
+<!--         <div class="ls-alerts-list">
           <% if current_user.current_role != 0 %>
-                
-         <!--        <a href="" class="btn roles-button" >
-	            	
-	          	</a> -->
+               
 	          	<%= link_to edit_role_path(current_user.current_role)  do %>
 	          		<%= current_user.roles.find(current_user.current_role).company_name %><br/>
                 	<small class="pull-right"><%= current_user.roles.find(current_user.current_role).name %></small> 
@@ -113,19 +110,20 @@
           <% else %>
                 <%= "Select a Role " %>
           <% end %>
-        </div>
+        </div> -->
 
         <!-- User details -->
-        <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-          <a href="#" class="ls-ico-user">
+        <div class="ls-user-account">
+<!--           <a href="#" class="ls-ico-user">
             <%= current_user.full_name %>
           </a>
           <nav class="ls-dropdown-nav ls-user-menu">
             <ul>
               <li><%= link_to "Edit User Account", edit_user_registration_path %></li>
-              <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+              
             </ul>
-          </nav>
+          </nav> -->
+          <h2 class="white-color-font"><%= link_to "LOG OUT", destroy_user_session_path, method: :delete, class: "white-color-font" %></h2>
         </div>
       </div>
 
@@ -152,22 +150,60 @@
     <aside class="ls-sidebar">
 
       <div class="ls-sidebar-inner">
+<!--       	<div class="ls-title-intro sidebar-intro">
+      		<div class="row">
+      			<div class="col-xs-8 col-md-6 tab-center ">
+				  	<h5 class="bold bottom-border">PROFILE</h5>
+				</div>
+				<a href=''><div  class="col-xs-8 col-md-6 tab-center">
+			  		<h5>RANKING</h5>
+			  	</div></a>
+      		</div>
+      	</div> -->
+      	<h1 class="ls-title-intro side-bar-title">
+      		<div class="col-xs-12 col-md-8 tab-center">
+			  	<div class="col-xs-8 col-md-6 col-md-offset-6 bottom-border profile ">
+			  		<div class="bold-circle profile"></div>
+			  		<h5 class="bold profile">PROFILE</h5>
+			  	</div>
+	  		</div>
+      	</h1>
+      	<a href="<%= edit_user_registration_path %>"><div class="ls-brand-name secundario side-bar-user-name <%= get_classes_users(params) %> ">
+
+      		<div class="circle-user user-image col-md-offset-3">
+      			<div class="bold-circle user-details"></div>
+      		</div>
+      		<h4 class="">
+      		<%= current_user.full_name %><br/><br/>
+      		<p>	
+ 	      		<% if current_user.current_role != 0 %>
+		          		<%= current_user.roles.find(current_user.current_role).company_name %><br/>
+	                	<small><%= current_user.roles.find(current_user.current_role).name %></small>
+	          	<% else %>
+	                <%= "Select a Role " %>
+	          	<% end %>
+      		</p></h4>
+      	
+      	</div></a>
+      	
+      	
 	    <nav class="ls-menu">
 	      <ul>
-	        <li class="ls-submenu">
-	          <a href="#" class="ls-ico-list3">Details</a>
-	          <ul role="menu">
+	        
+	          <!-- <a href="#" class="ls-ico-list3">Details</a> -->
+	          <ul >
 	            	<% if current_user.current_role != 0 && current_user.roles.find(current_user.current_role).has_facilities? %> 
 	                    
-	                        <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>         
-	                            <%= link_to f.name, edit_facility_path(f.id) %>
+	                        <% current_user.roles.find(current_user.current_role).facilities.each do |f| %>
+
+	                            <%= link_to f.name, edit_facility_path(f.id), {class: get_classes(params, f.id)} %>
 	                        <% end %> 
 	                <% else %>
-	                    <li><a class="ls-submenu-item" href="#">No Facilities</a></li>
+	                    <li><a class="ls-submenu" href="#">No Facilities</a></li>
 	                <% end %>
 	          </ul>
-	        </li>
-	        <li class="ls-submenu">
+	       
+	        <!-- <li class="ls-submenu">
 	          <a href="#" class="ls-ico-bars">Metrics</a>
 	          <ul role="menu">
 	            	<% if current_user.current_role != 0 && current_user.roles.find(current_user.current_role).has_facilities? %> 
@@ -192,7 +228,7 @@
 	                    <li><a class="ls-submenu-item" href="#">No Facilities</a></li>
 	                <% end %>
 	          </ul>
-	        </li>
+	        </li> -->
 
 	        <% if current_user.current_role != 0 %>
                 <li><%= link_to "Add Facility", new_role_facility_path(current_user.current_role), class: "ls-ico-plus" %></li>

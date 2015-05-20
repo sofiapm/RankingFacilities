@@ -30,7 +30,6 @@ class User < ActiveRecord::Base
 
 	def set_role_zero
 		self.current_role = 0
-		binding.pry
 	end
 end
 

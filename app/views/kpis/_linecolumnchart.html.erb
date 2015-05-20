@@ -26,16 +26,17 @@ $(function () {
             type: 'column',
             name: '<%= @v[:my_facility_results][:facility_name] %>',
             data: <%= @v[:my_facility_results][:values] %>,
-            color: Highcharts.getOptions().colors[2]
+            color: '#61d0b3'
             
         }, {
             type: 'spline',
             name: 'Best Ranked Facility',
             data: <%= @v[:best_facility_results] %>,
+            lineColor: '#3f003b',
             marker: {
-                lineWidth: 2,
-                lineColor: Highcharts.getOptions().colors[0],
-                fillColor: 'black'
+                lineWidth: 3,
+                lineColor: '#3f003b',
+                fillColor: '#fcf4f4'
             }
         }
         ]

@@ -1,19 +1,60 @@
-
-
-  <h1 class="page-header">Edit Roles</h1>
-
- 
-      <% @roles.each do |role| %>
-        <div class="row">
-          
-          <div class="col-xs-6 col-md-4">
-            <h4> <%= role.name + ": " + role.company_name %></h4>
-          </div>
-          <div class="col-xs-6 col-md-4 col-md-offset-2">
-              <%= link_to 'Delete', role, class: "btn btn-default", method: :delete, data: { confirm: 'Are you sure?' } %> 
-          </div>
-
-        </div> 
+<h1 class="ls-title-intro">
+  <div class="row">
+    <a href='<%= edit_user_registration_path %>'><div class="col-xs-12 col-md-6 tab-center ">
+      <div class="col-xs-6 col-md-4 col-md-offset-4">
         
+        <h5 class="bold tab-not-selected">USER DETAILS</h5>
+      </div>    
+    </div></a>
+    <a href='<%= roles_path %>'><div class="col-xs-12 col-md-6 tab-center">
+      <div class="col-xs-4 col-md-2 col-md-offset-5 bottom-border">
+          <div class="bold-circle roles"></div>
+          <h5 class="bold tab-selected">ROLES</h5>
+      </div>
+    </div></a>
+</h1>
+
+<% current_user.roles.each do |r| %>
+
+<%= form_for(r,  html: { class: "ls-box ls-board-box"  }) do |f| %>
+  <header class="ls-info-header">
+    <h2 class="ls-title-3"><strong><%= r.company_name %>: </strong><%= r.name %></h2>
+  </header>
+  <% if r.errors.any? %>
+
+    <div id="error_explanation">
+      <h2><%= pluralize(r.errors.count, "error") %> prohibited this role from being saved:</h2>
+
+      <ul>
+      <% r.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
- 
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="form_fancy">
+      <%= f.label "Role Name" %> <br>
+      <%= f.select :name, RankingFacilities::Application::ROLES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "select big" %>
+    </div>
+
+    <div class="form_fancy"><%= f.label "Company Name" %><br />
+      <%= f.text_field :company_name, :required => true, class: "input-field big" %></div>
+
+    <div class="form_fancy"><%= f.label "Company VATID" %><br />
+      <%= f.text_field :nif, :required => true, class: "input-field big" %></div>
+
+    <div class="form_fancy"><%= f.label :sector %><br />
+      <%= f.select :sector, RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "select big" %>
+    </div>
+
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    
+    <div class="form_fancy pull-right">
+      <%= f.submit " Save ", class: "ls-btn-primary ls-btn-lg ls-no-radius" %>
+    </div>
+  </fieldset>
+<% end %>  
+
+<% end %>  

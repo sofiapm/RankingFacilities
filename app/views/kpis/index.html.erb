@@ -1,24 +1,41 @@
+<h1 class="ls-title-intro">
+  <div class="row">
+    <a href='<%= edit_facility_path(@facility.id) %>'><div class="col-xs-6 col-md-4 tab-center ">
+      <h5 class="bold tab-not-selected">DETAILS</h5>
+    </div></a>
+    <a href='<%= facility_measures_path(@facility.id) %>'><div class="col-xs-6 col-md-4 tab-center">
+      <h5 class="bold tab-not-selected">MEASUREMENTS</h5>
+    </div></a>
+    <a href=''><div  class="col-xs-6 col-md-4 tab-center">
+      
+      <div class="col-xs-6 col-md-4 col-md-offset-4 bottom-border">
+	  		<div class="bold-circle reports"></div>
+	  		<h5 class="bold tab-selected">REPORTS</h5>
+	  	</div>
+    </div></a>
+  </div>
+</h1>
+<!-- <h1 class="ls-title-intro ls-ico-dashboard"><%= @facility.name %> Benchmark Reports </h1> -->
 
-<h1 class="ls-title-intro ls-ico-dashboard"><%= @facility.name %> Benchmark Reports </h1>
-
-
+<div class="bottom-border">
 	<%= search_form_for([@facility, @q], :url => facility_kpis_path, :method => "get") do |f| %>
 	  	
 			<%= f.label "Business Sector" %>
 			<%= f.select :role_sector_cont, options_for_select(RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value }) %>
 
 			<%= label_tag "Year" %>
-			<%= text_field_tag :year , "" %>
+			<%= text_field_tag :year , "" , class: "input-field"%>
 		  	<%= f.label "Country" %>
 	  		<%= f.select :address_country_cont, options_for_select(RankingFacilities::Application::COUNTRY.inject([]){|acum, (key, value) | acum << value }) %>
 	  		<%= f.label "City" %>
 	  		<%= f.select :address_city_cont, options_for_select(RankingFacilities::Application::CITIES.inject([]){|acum, (key, value) | acum << value })%>
 
 
-	  <%= submit_tag "Search", class: "btn btn-default pull-right"  %>
+<!-- 	  <%= submit_tag "Search", class: "btn btn-default pull-right"  %> -->
 
 	<% end %>
-
+	<br/>
+</div>
 <br/><br/><br/>
 
 	<% year = params[:year] || '2014' %>
@@ -29,67 +46,84 @@
 
 	</div>
 
+	<div class="indicators_graph col-md-12 pull-left">
+	
 	<% @v = @facility.capacity_vs_utilization(year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
 		<% @v = @facility.best_capacity_vs_utilization(year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
+	</div>
 
+	<div class="indicators_graph col-md-12 pull-left">
 	<% @v = @facility.space_experience(year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
 		<% @v = @facility.best_space_experience(year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
+	</div>
 
+	<div class="indicators_graph col-md-12 pull-left">
+	
 	<% @v = @facility.cleaning_cost_nfa(year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
 		<% @v = @facility.best_cleaning_cost_nfa(year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
+	</div>
 
+	<div class="indicators_graph col-md-12 pull-left">
+	
 	<% @v = @facility.space_cost_nfa(year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
 		<% @v = @facility.best_space_cost_nfa(year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
+	</div>
 
+	<div class="indicators_graph col-md-12 pull-left">
+	
 	<% @v = @facility.internal_work_cost(year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
 		<% @v = @facility.best_internal_work_cost(year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
+	</div>
 
+	<div class="indicators_graph col-md-12 pull-left">
+	
 	<% @v = @facility.water_consumption_fte(year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
 		<% @v = @facility.best_water_consumption_fte(year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
-
+	</div>
 
 	
-
+	<div class="indicators_graph col-md-12 pull-left">
 	<% @v = @facility.energy_consumption(year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
 		<% @v = @facility.best_energy_consumption(year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
-
+	</div>
 	
-
+	<div class="indicators_graph col-md-12 pull-left">
+	
 	<% @v = @facility.occupancy_cost_nfa(year) %>
 	<%= render 'graph', @v %>
 	<% unless @all_facilities.empty? %>
 		<% @v = @facility.best_occupancy_cost_nfa(year, @all_facilities) %>
 		<%= render 'linecolumnchart', @v %>
 	<% end %>
-
+	</div>
 
 
 

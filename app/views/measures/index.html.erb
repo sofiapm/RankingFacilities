@@ -1,5 +1,20 @@
-
-<h1 class="ls-title-intro ls-ico-bars"><%= @facility.name %> Metrics <%= link_to '', new_facility_measure_path(params[:facility_id]), class: "ls-ico-plus pull-right" %></h1>
+<h1 class="ls-title-intro">
+  <div class="row">
+    <a href='<%= edit_facility_path(@facility.id) %>'><div class="col-xs-6 col-md-4 tab-center ">
+      <h5 class="bold tab-not-selected">DETAILS</h5>
+    </div></a>
+    <a href=''><div class="col-xs-6 col-md-4 tab-center">
+      <div class="col-xs-9 col-md-7 col-md-offset-2 bottom-border">
+        <div class="bold-circle measures"></div>
+        <h5 class="bold tab-selected">MEASUREMENTS</h5>
+      </div>
+    </div></a>
+    <a href='<%= facility_kpis_path(@facility.id) %>'><div  class="col-xs-6 col-md-4 tab-center">
+      <h5 class="bold tab-not-selected">REPORTS</h5>
+    </div></a>
+  </div>
+</h1>
+<!-- <h1 class="ls-title-intro ls-ico-bars"><%= @facility.name %> Metrics <%= link_to '', new_facility_measure_path(params[:facility_id]), class: "ls-ico-plus pull-right" %></h1> -->
 
 
 <!--   <div class="row ls-box ls-board-box">
@@ -27,26 +42,31 @@
   </div>
  -->
   <%= search_form_for [@facility, @q]  do |f| %>
-
-    <%= f.label :name_cont %>
-    <%= f.search_field :name_cont %>
-
-    <%= f.label "From:  " %>
-    <%= f.bootstrap_date :start_date_gteq %>
-
-    <%= f.label "Untill:  " %>
-    <%= f.bootstrap_date :end_date_lteq %>
-
-    <%= f.submit "Search", class: "btn btn-default pull-right"  %>
+    <div class="row">
+      <div class="col-xs-6 col-md-4 tab-center">
+      <%= f.label :name_cont %>
+      <%= f.search_field :name_cont, class: "input-field" %>
+      </div>
+      <div class="col-xs-6 col-md-4 tab-center">
+      <%= f.label "From:  " %>
+      <%= f.bootstrap_date :start_date_gteq %>
+      </div>
+      <div class="col-xs-6 col-md-4 tab-center">
+      <%= f.label "Untill:  " %>
+      <%= f.bootstrap_date :end_date_lteq %>
+      </div>
+    </div>
+<!--     <%= f.submit "Search", class: "btn btn-default pull-right"  %> -->
   <% end %>
 
 
   <br/>
+  
+  <div class="row bottom-border">
+    
+      <a href='<%= link_to '', new_facility_measure_path(params[:facility_id]) %>'><h1 class="ls-btn-primary ls-no-radius ls-ico-plus pull-right">Add</h1></a>
 
-  <table class="ls-table">
-    <thead>
-      <tr>
-          <th><h1 title="Import Metrics" class="table-measures-head ls-ico-cloud-upload" data-ls-module="popover" 
+      <a title="Import Metrics" class=" pull-right" data-ls-module="popover" 
           data-content='<div class="row ls-box ls-board-box">
                           <header class="ls-info-header">
                               <h2 class="ls-title-3 ls-ico-cloud-upload">Import Metrics</h2>
@@ -74,7 +94,14 @@
                             </div>
                           </div>
 
-                        </div>' data-placement="right"></h1></th>
+                        </div>' data-placement="left"><h1 class="titulo-azul ls-btn ls-no-radius ls-ico-cloud-upload pull-right">Import</h1></a>
+                   
+  </div>                      
+  
+  <table class="ls-table table-top-border">
+    <thead>
+      <tr>
+          <th></th>
         <!-- Retorna o nome das measures por ordem alfabética -->
         <% RankingFacilities::Application::METRIC_NAMES.values.sort.each do |measure_name| %>
           <th class="table-measures-head"><%= measure_name %></th>
@@ -130,11 +157,11 @@
     </tbody>
   </table>
 
-  <div class="row ls-box ls-board-box">
+<!--   <div class="row ls-box ls-board-box">
     <header class="ls-info-header">
         <h2 class="ls-title-3 ls-ico-plus">Add New Metric</h2>
     </header>
     <%= render 'new_form' %>
-  </div>
+  </div> -->
   <br>
 

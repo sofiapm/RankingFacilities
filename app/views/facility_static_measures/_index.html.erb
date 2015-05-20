@@ -1,0 +1,35 @@
+  <div class="row bottom-border">
+
+    <%= link_to 'Add', new_facility_facility_static_measure_path(@facility_actual[:facility].id), class: "ls-btn-primary ls-no-radius ls-ico-plus pull-right white-color-font" %>
+
+    <p class="pull-left titulo-static-measures">Static Measures</p>
+  </div>
+  <table class="ls-table">
+    <thead>
+      <tr class="table-measures-head">
+        <th>Name</th>
+        <th>Value</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @facility_actual[:facility].facility_static_measures.each do |facility_static_measure| %>
+        <tr>
+          <td><%= facility_static_measure.name %></td>
+          <td><%= facility_static_measure.value %></td>
+          <td><%= facility_static_measure.start_date %></td>
+          <td><%= facility_static_measure.end_date %></td>
+          <td><%= link_to '', edit_facility_static_measure_path(facility_static_measure), class: "ls-ico-pencil2 titulo-azul" %></td>
+          <td><%= link_to '', facility_static_measure, method: :delete, data: { confirm: 'Are you sure?' }, class: "ls-ico-remove titulo-azul" %></td>
+        </tr>
+      <% end %>
+      
+    </tbody>
+  </table>
+
+  <br>
+

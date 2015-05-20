@@ -1,5 +1,21 @@
-<h1 class="ls-title-intro ls-ico-list3"><%= @facility.name %> Details</h1>
+<h1 class="ls-title-intro">
+	<div class="row">
+	  <div class="col-xs-6 col-md-4 tab-center ">
+	  	<div class="col-xs-6 col-md-4 col-md-offset-4 bottom-border">
+	  		<div class="bold-circle details"></div>
+	  		<h5 class="bold tab-selected">DETAILS</h5>
+	  	</div>
+	  </div>
+	  <a href='<%= facility_measures_path(@facility.id) %>'><div class="col-xs-6 col-md-4 tab-center">
+	  	<h5 class="bold tab-not-selected">MEASUREMENTS</h5>
+	  </div></a>
+	  <a href='<%= facility_kpis_path(@facility.id) %>'><div  class="col-xs-6 col-md-4 tab-center">
+	  	<h5 class="bold tab-not-selected">REPORTS</h5>
+	  </div></a>
+	</div>
+</h1>
 <% @action = {:action => 'edit'} %>
+
 
 <%= render 'form', @action %>
 

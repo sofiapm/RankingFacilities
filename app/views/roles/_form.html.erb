@@ -18,17 +18,17 @@
   <fieldset>
     <div class="form_fancy">
       <%= f.label "Role Name" %> <br>
-      <%= f.select :name, RankingFacilities::Application::ROLES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control ls-no-radius" %>
+      <%= f.select :name, RankingFacilities::Application::ROLES_NAMES.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "select big" %>
     </div>
 
     <div class="form_fancy"><%= f.label "Company Name" %><br />
-      <%= f.text_field :company_name, :required => true, class: "form-control ls-no-radius" %></div>
+      <%= f.text_field :company_name, :required => true, class: "input-field big" %></div>
 
     <div class="form_fancy"><%= f.label "Company VATID" %><br />
-      <%= f.text_field :nif, :required => true, class: "form-control ls-no-radius" %></div>
+      <%= f.text_field :nif, :required => true, class: "input-field big" %></div>
 
     <div class="form_fancy"><%= f.label :sector %><br />
-      <%= f.select :sector, RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "form-control ls-no-radius" %>
+      <%= f.select :sector, RankingFacilities::Application::SECTORS.inject([]){|acum, (key, value) | acum << value } , {} ,:required => true, class: "select big" %>
     </div>
 
     <%= f.hidden_field :user_id, :value => current_user.id %>

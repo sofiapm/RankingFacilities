@@ -7,7 +7,7 @@ module ApplicationHelper
     include ActionView::Helpers::AssetTagHelper
 
     def bootstrap_date *args
-      text_field *args, class: 'datepicker'
+      text_field *args, class: 'datepicker input-field'
     end
   end
 
@@ -19,6 +19,14 @@ module ApplicationHelper
       "alert-success"
     else
       "alert-info"
+    end
+  end
+
+  def get_classes_users(params)
+    if params[:controller]=="my_devise/registrations" && params[:action]=="edit" || (params[:controller]=="roles" && params[:action]=="index")
+      "active"
+    else
+      ""
     end
   end
 
